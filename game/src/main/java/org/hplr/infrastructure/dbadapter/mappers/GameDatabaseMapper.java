@@ -2,7 +2,13 @@ package org.hplr.infrastructure.dbadapter.mappers;
 
 import org.hplr.core.model.GameSide;
 import org.hplr.core.model.GameSnapshot;
+import org.hplr.core.model.vo.GameDeployment;
+import org.hplr.core.model.vo.GameMission;
+import org.hplr.core.usecases.port.dto.GameSelectDto;
+import org.hplr.core.usecases.port.dto.GameSideSelectDto;
+import org.hplr.core.usecases.port.dto.LocationSelectDto;
 import org.hplr.infrastructure.dbadapter.entities.*;
+import org.hplr.infrastructure.dbadapter.mapper.LocationMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +53,23 @@ public class GameDatabaseMapper {
                 )
 
         );
+    }
+
+    public static GameSelectDto fromEntity(GameEntity gameEntity){
+        return new GameSelectDto(
+                gameEntity.getGameId(),
+                LocationMapper.fromEntity(gameEntity.getLocationEntity()),
+                new GameMission(gameEntity.getGameMissionEntity().getName()),
+                new GameDeployment(gameEntity.getGameDeploymentEntity().getName()),
+                gameEntity.getGameTurnLength(),
+                gameEntity.getGameHoursDuration(),
+                gameEntity.getGameStartTime(),
+                gameEntity.getGameEndTime(),
+                gameEntity.getRanking(),
+                gameEntity.getStatus(),
+                new GameSideSelectDto()
+
+        )
     }
 
     private static List<GameTurnScoreEntity> mapScore(GameSide gameSide){
