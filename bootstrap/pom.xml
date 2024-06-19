@@ -76,6 +76,9 @@
                     <outputFormats>
                         <value>XML</value>
                     </outputFormats>
+                    <excludedClasses>
+                        <param>test.security.*</param>
+                    </excludedClasses>
                 </configuration>
                 <executions>
                     <execution>
@@ -83,6 +86,7 @@
                         <configuration>
                             <skip>${skipPi}</skip>
                         </configuration>
+
                         <goals>
                             <goal>report-aggregate</goal>
 

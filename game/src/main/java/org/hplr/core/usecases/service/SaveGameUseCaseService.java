@@ -15,6 +15,7 @@ import java.util.UUID;
 public class SaveGameUseCaseService implements SaveGameUseCaseInterface {
 
     GameCommandAdapter gameCommandAdapter;
+
     @Override
     public UUID saveGame(InitialGameSaveDataDto initialGameSaveDataDto) throws LocationCalculationException {
         Game game;
