@@ -6,7 +6,7 @@ Engineer Degree thesis.
 ## Mutation tests
 
 Entire functional codebase is checked via mutation tests to strengthen the unit tests.
-Current report can be found here:<br /> [Mutation test report](https://hplr.github.io/HPLR-Backend/)
+Current report can be found here:<br /> [Mutation test report]https://hplr.github.io/HPLR-Backend/index.html)
 
 ## Static code analysis
 
