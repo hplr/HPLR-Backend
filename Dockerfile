@@ -22,7 +22,7 @@ COPY location/src/main location/src/main
 COPY tournament/src/main tournament/src/main
 COPY user/src/main user/src/main
 
-RUN mvn package -DskipTests
+RUN mvn package -DskipUnitTests -DskipIT -DskipPitest -DskipPi=true
 
 FROM eclipse-temurin:22-jre-alpine
 
