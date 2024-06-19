@@ -2,5 +2,6 @@ package org.hplr.core.usecases.port.in;
 
 public interface CalculateELOChangeForGameUseCaseInterface {
 
-//    public
+    //todo: refactor
+    Integer generate_test(Integer i1);
 }
