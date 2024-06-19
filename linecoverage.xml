@@ -132,15 +132,15 @@
 <test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
 </tests>
 </block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='invoke(ILjava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;' number='18'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='invoke(ILjava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;' number='17'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
 <block classname='org.hplr.infrastructure.dbadapter.entities.LocationEntity' method='&lt;init&gt;()V' number='0'><tests>
-<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
-</tests>
-</block>
-<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='invoke(ILjava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;' number='14'><tests>
-<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
-</tests>
-</block>
-<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='invoke(ILjava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;' number='13'><tests>
 <test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
 </tests>
 </block>
