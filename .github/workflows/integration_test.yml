@@ -19,4 +19,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build and verify with Maven
-        run: mvn -Dskip.ut=true verify
+        run: mvn -B failsafe:integration-test --file pom.xml
