@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 public class GameDatabaseMapper {
 
-    public static GameEntity toEntity(GameSnapshot gameSnapshot, LocationEntity locationEntity, GameMissionEntity gameMissionEntity, GameDeploymentEntity gameDeploymentEntity, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList){
+    public static GameEntity toEntity(GameSnapshot gameSnapshot, LocationEntity locationEntity, GameMissionEntity gameMissionEntity, GameDeploymentEntity gameDeploymentEntity, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
 
         List<GameTurnScoreEntity> firstSideTurnScoreEntityList = mapScore(gameSnapshot.firstGameSide());
         List<GameTurnScoreEntity> secondSideTurnScoreEntityList = mapScore(gameSnapshot.secondGameSide());
@@ -53,7 +53,7 @@ public class GameDatabaseMapper {
         );
     }
 
-    public static GameSelectDto fromEntity(GameEntity gameEntity){
+    public static GameSelectDto fromEntity(GameEntity gameEntity) {
         return new GameSelectDto(
                 gameEntity.getGameId(),
                 LocationMapper.fromEntity(gameEntity.getLocationEntity()),
@@ -71,7 +71,7 @@ public class GameDatabaseMapper {
         );
     }
 
-    private static List<GameTurnScoreEntity> mapScore(GameSide gameSide){
+    private static List<GameTurnScoreEntity> mapScore(GameSide gameSide) {
         List<GameTurnScoreEntity> turnScoreEntityList = new ArrayList<>();
         gameSide.getScorePerTurnList().forEach(
                 score -> turnScoreEntityList.add(
@@ -86,14 +86,14 @@ public class GameDatabaseMapper {
         return turnScoreEntityList;
     }
 
-    private static List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSide gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList){
+    private static List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSide gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
         List<GamePlayerDataEntity> gamePlayerDataEntityList = new ArrayList<>();
         gameSide.getGameSidePlayerDataList().forEach(gameSidePlayerData ->
                 {
                     PlayerEntity playerEntity = playerEntityList.stream().filter(playerEntity1 -> playerEntity1.getUserId().equals(gameSidePlayerData.player().getUserId().id())).findFirst().orElseThrow(NoSuchElementException::new);
                     GameArmyTypeEntity primaryGameArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(gameSidePlayerData.armyPrimary().name())).findFirst().orElseThrow(NoSuchElementException::new);
                     List<GameArmyEntity> allyArmyEntityList = new ArrayList<>();
-                    gameSidePlayerData.allyArmyList().forEach(allyArmy ->{
+                    gameSidePlayerData.allyArmyList().forEach(allyArmy -> {
                         GameArmyTypeEntity allyArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(allyArmy.name())).findFirst().orElseThrow(NoSuchElementException::new);
                         allyArmyEntityList.add(new GameArmyEntity(
                                 null,
