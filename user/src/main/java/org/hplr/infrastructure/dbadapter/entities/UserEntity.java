@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hplr.dbadapter.entites.GeneralEntity;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -19,5 +19,8 @@ public abstract class UserEntity extends GeneralEntity {
     private UUID userId;
     private String name;
     private String email;
+    private String pwHash;
+    private LocalDateTime registrationTime;
+    private LocalDateTime lastLogin;
 
 }

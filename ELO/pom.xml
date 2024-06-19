@@ -18,4 +18,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.hplr</groupId>
+            <artifactId>library</artifactId>
+            <version>0.1</version>
+        </dependency>
+    </dependencies>
+
 </project>

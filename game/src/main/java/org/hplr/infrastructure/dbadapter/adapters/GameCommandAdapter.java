@@ -33,7 +33,13 @@ public class GameCommandAdapter implements SaveGameCommandInterface {
     @Override
     public void saveGame(GameSnapshot gameSnapshot) {
         List<PlayerEntity> allPlayerEntityList = playerRepository.findAll();
+        if(allPlayerEntityList.size()<2){
+            throw new IllegalStateException("Not enough players!");
+        }
         List<GameArmyTypeEntity> armyTypeEntityList = gameArmyTypeRepository.findAll();
+        if(armyTypeEntityList.isEmpty()){
+            throw new IllegalStateException("No army types!!");
+        }
         LocationEntity locationEntity = null;
         Optional<LocationEntity> locationEntityOptional = locationRepository.findByLocationId(gameSnapshot.gameLocation().location().getLocationId().locationId());
         if(locationEntityOptional.isPresent()){

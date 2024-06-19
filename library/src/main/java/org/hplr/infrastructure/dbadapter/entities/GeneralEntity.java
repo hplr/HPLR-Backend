@@ -1,4 +1,4 @@
-package org.hplr.dbadapter.entites;
+package org.hplr.infrastructure.dbadapter.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

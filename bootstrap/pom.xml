@@ -12,11 +12,13 @@
     <artifactId>bootstrap</artifactId>
     <packaging>war</packaging>
 
+
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        <skipPi>true</skipPi>
     </properties>
 
     <dependencies>

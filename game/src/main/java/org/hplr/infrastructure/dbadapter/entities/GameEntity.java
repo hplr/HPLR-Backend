@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hplr.core.enums.Status;
-import org.hplr.dbadapter.entites.GeneralEntity;
-import org.hplr.util.ConstDatabaseNames;
+import org.hplr.core.util.ConstDatabaseNames;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

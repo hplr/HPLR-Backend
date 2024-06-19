@@ -37,7 +37,7 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: Run Mutation Testing
-        run: mvn package -Ppitest org.pitest:pitest-maven:mutationCoverage
+        run: mvn package -Ppitest -DskipPi=false org.pitest:pitest-maven:mutationCoverage
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

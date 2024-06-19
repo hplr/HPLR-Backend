@@ -1,8 +1,7 @@
-package org.hplr.core.usecases.port.out.command;
+package org.hplr.core.usecases.port.out.query;
 
 import org.hplr.core.enums.Status;
 import org.hplr.core.usecases.port.dto.GameSelectDto;
-import org.hplr.infrastructure.dbadapter.entities.GameEntity;
 
 import java.util.List;
 

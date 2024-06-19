@@ -53,7 +53,7 @@ public class GameDatabaseMapper {
         );
     }
 
-    public static GameSelectDto fromEntity(GameEntity gameEntity) {
+    public static GameSelectDto toDto(GameEntity gameEntity) {
         return new GameSelectDto(
                 gameEntity.getGameId(),
                 LocationMapper.fromEntity(gameEntity.getLocationEntity()),
@@ -121,5 +121,9 @@ public class GameDatabaseMapper {
                 }
         );
         return gamePlayerDataEntityList;
+    }
+
+    private GameDatabaseMapper(){
+        throw new IllegalStateException("Utility class");
     }
 }

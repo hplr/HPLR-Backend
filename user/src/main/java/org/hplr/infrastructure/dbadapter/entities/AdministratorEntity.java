@@ -2,13 +2,12 @@ package org.hplr.infrastructure.dbadapter.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hplr.util.ConstDatabaseNames;
+import org.hplr.core.util.ConstDatabaseNames;
 
 import java.util.List;
 

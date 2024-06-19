@@ -5,17 +5,23 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import static org.mockito.MockitoAnnotations.openMocks;
 
-class SaveGameUseCaseServiceTest {
+class SaveGameUseCaseServiceTests {
 
     private AutoCloseable closeable;
-    private SaveGameUseCaseService saveGameUseCaseService;
+
+
 
     @Mock
     SaveGameCommandInterface saveGameCommandInterface;
+
+    @InjectMocks
+    private SaveGameUseCaseService saveGameUseCaseService;
+
 
     @BeforeEach
     public void setUp(){
@@ -27,7 +33,7 @@ class SaveGameUseCaseServiceTest {
     }
 
     @Test
-    void save_game_with_nonexistent_player_and_throw_NoSuchElementException(){
+    void save_game_when_there_is_less_then_two_players_and_throw_IllegalStateException(){
         Assertions.assertTrue(true);
     }
 }
