@@ -9,6 +9,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ public class OSMCoordinatesCalculator {
         String apiUrl = "https://nominatim.openstreetmap.org/search?q=" + URLEncoder.encode(address, StandardCharsets.UTF_8) + "&format=json";
 
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(apiUrl)).GET().build();
-        try(HttpClient httpClient =  HttpClient.newHttpClient()){
+        try (HttpClient httpClient = HttpClient.newHttpClient()) {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
             JSONArray array;

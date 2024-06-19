@@ -5,7 +5,7 @@ import org.hplr.infrastructure.dbadapter.entities.LocationEntity;
 
 public class LocationMapper {
 
-    public static LocationSelectDto fromEntity(LocationEntity locationEntity){
+    public static LocationSelectDto fromEntity(LocationEntity locationEntity) {
         //todo: mapping
         return new LocationSelectDto();
     }
