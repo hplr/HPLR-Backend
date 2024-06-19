@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage>
+<block classname='org.hplr.infrastructure.controller.TimeGameController' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.TimeGameController' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameTurnScoreEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameMissionEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Allegiance' method='&lt;clinit&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameMissionEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Allegiance' method='&lt;clinit&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Allegiance' method='&lt;clinit&gt;()V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Allegiance' method='&lt;clinit&gt;()V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameTurnScoreEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.usecases.service.SaveGameUseCaseService' method='&lt;init&gt;(Lorg/hplr/infrastructure/dbadapter/adapters/GameCommandAdapter;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameDeploymentEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.usecases.service.SaveGameUseCaseService' method='&lt;init&gt;(Lorg/hplr/infrastructure/dbadapter/adapters/GameCommandAdapter;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Allegiance' method='values()[Lorg/hplr/core/enums/Allegiance;' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Allegiance' method='values()[Lorg/hplr/core/enums/Allegiance;' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameDeploymentEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.dbadapter.entites.GeneralEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.dbadapter.entites.GeneralEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='7'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.PlayerEntity' method='&lt;init&gt;(Ljava/util/UUID;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Long;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='6'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.PlayerEntity' method='&lt;init&gt;(Ljava/util/UUID;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Long;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='9'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='get_nonexistent_user_and_get_404()V' number='8'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$STATICHOOK2()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.RoleEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.RoleEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.LocationGeoDataEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.LocationGeoDataEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='&lt;init&gt;()V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK4()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$0' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$0' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$0' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.LocationEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='invoke(ILjava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;' number='14'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='invoke(ILjava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;' number='13'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.LocationEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='6'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$0' method='&lt;init&gt;(Ljava/lang/Class;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='invoke(ILjava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Allegiance' method='&lt;init&gt;(Ljava/lang/String;I)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Allegiance' method='&lt;init&gt;(Ljava/lang/String;I)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$0' method='&lt;init&gt;(Ljava/lang/Class;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.UserRESTControllerIT' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$SET_STATIC_CALLBACKS([Lorg/springframework/cglib/proxy/Callback;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GamePlayerDataEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GamePlayerDataEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameArmyTypeEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.UserEntity' method='&lt;init&gt;(Ljava/util/UUID;Ljava/lang/String;Ljava/lang/String;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameArmyTypeEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='securityFilterChain(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='securityFilterChain(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='securityFilterChain(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.UserEntity' method='&lt;init&gt;(Ljava/util/UUID;Ljava/lang/String;Ljava/lang/String;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='securityFilterChain(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='8'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='7'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='10'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='securityFilterChain(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='9'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='6'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$0' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$0' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$BIND_CALLBACKS(Ljava/lang/Object;)V' number='6'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$0' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$STATICHOOK3()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.AdministratorEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.AdministratorEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.RESTGameController' method='&lt;init&gt;(Lorg/hplr/core/usecases/port/in/SaveGameUseCaseInterface;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.RESTGameController' method='&lt;init&gt;(Lorg/hplr/core/usecases/port/in/SaveGameUseCaseInterface;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='6'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$SET_STATIC_CALLBACKS([Lorg/springframework/cglib/proxy/Callback;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.adapters.GameCommandAdapter' method='&lt;init&gt;(Lorg/hplr/infrastructure/dbadapter/repositories/LocationRepository;Lorg/hplr/infrastructure/dbadapter/repositories/PlayerRepository;Lorg/hplr/infrastructure/dbadapter/repositories/GameRepository;Lorg/hplr/infrastructure/dbadapter/repositories/GameMissionRepository;Lorg/hplr/infrastructure/dbadapter/repositories/GameDeploymentRepository;Lorg/hplr/infrastructure/dbadapter/repositories/GameArmyTypeRepository;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.adapters.GameCommandAdapter' method='&lt;init&gt;(Lorg/hplr/infrastructure/dbadapter/repositories/LocationRepository;Lorg/hplr/infrastructure/dbadapter/repositories/PlayerRepository;Lorg/hplr/infrastructure/dbadapter/repositories/GameRepository;Lorg/hplr/infrastructure/dbadapter/repositories/GameMissionRepository;Lorg/hplr/infrastructure/dbadapter/repositories/GameDeploymentRepository;Lorg/hplr/infrastructure/dbadapter/repositories/GameArmyTypeRepository;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='&lt;clinit&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.RESTDebugController' method='&lt;init&gt;(Lorg/hplr/infrastructure/dbadapter/repositories/PlayerRepository;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='&lt;clinit&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.RESTDebugController' method='&lt;init&gt;(Lorg/hplr/infrastructure/dbadapter/repositories/PlayerRepository;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='&lt;clinit&gt;()V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameSideEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameSideEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='setBeanFactory(Lorg/springframework/beans/factory/BeanFactory;)V' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='&lt;clinit&gt;()V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='values()[Lorg/hplr/core/enums/Status;' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='&lt;clinit&gt;()V' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='&lt;clinit&gt;()V' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='&lt;clinit&gt;()V' number='6'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='values()[Lorg/hplr/core/enums/Status;' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$1(Lorg/springframework/security/config/annotation/web/configurers/AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry;)V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$1(Lorg/springframework/security/config/annotation/web/configurers/AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$1(Lorg/springframework/security/config/annotation/web/configurers/AuthorizeHttpRequestsConfigurer$AuthorizationManagerRequestMatcherRegistry;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='securityFilterChain(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='securityFilterChain(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.UserEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='securityFilterChain(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='securityFilterChain(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameArmyEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='CGLIB$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/builders/HttpSecurity;)Lorg/springframework/security/web/SecurityFilterChain;' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.GameArmyEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.UserEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.PlayerEntity' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.RESTPlayerController' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.RESTPlayerController' method='&lt;init&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.dbadapter.entities.PlayerEntity' method='&lt;init&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='&lt;init&gt;(Ljava/lang/String;I)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.RESTGameController' method='debug()Lorg/springframework/http/ResponseEntity;' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='13'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.infrastructure.controller.RESTGameController' method='debug()Lorg/springframework/http/ResponseEntity;' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='12'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='15'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='14'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.core.enums.Status' method='&lt;init&gt;(Ljava/lang/String;I)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$0' method='&lt;clinit&gt;()V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='16'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.RankingApplication$$SpringCGLIB$$0' method='CGLIB$STATICHOOK1()V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='5'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='4'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='7'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='6'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='9'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='8'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='26'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='11'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='25'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='10'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='getIndex(Lorg/springframework/cglib/core/Signature;)I' number='24'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='&lt;init&gt;(Ljava/lang/Class;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration$$SpringCGLIB$$FastClass$$1' method='&lt;init&gt;(Ljava/lang/Class;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='1'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='0'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='3'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+<block classname='org.hplr.config.SecurityConfiguration' method='lambda$securityFilterChain$0(Lorg/springframework/security/config/annotation/web/configurers/CorsConfigurer;)V' number='2'><tests>
+<test name='org.hplr.infrastructure.controller.UserRESTControllerIT.[engine:junit-vintage]/[runner:org.hplr.infrastructure.controller.UserRESTControllerIT]/[test:get_nonexistent_user_and_get_404(org.hplr.infrastructure.controller.UserRESTControllerIT)]'/>
+</tests>
+</block>
+</coverage>
