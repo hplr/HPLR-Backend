@@ -11,4 +11,4 @@ Current report can be found here: [Mutation test report](https://hplr.github.io/
 ## Static code analysis
 
 To ensure the maintainability and cleanliness of the code, SonarQube has been integrated with the project.
-Current report can be found here:\ [Static code analysis](https://sonarcloud.io/project/overview?id=hplr_HPLR-Backend)
+Current report can be found here:<br /> [Static code analysis](https://sonarcloud.io/project/overview?id=hplr_HPLR-Backend)
