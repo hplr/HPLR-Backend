@@ -1,4 +1,4 @@
-name: pitest
+name: Pitest mutation test workflow
 on:
   push:
     branches:
