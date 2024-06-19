@@ -5,6 +5,7 @@ import org.hplr.core.model.vo.UserData;
 import org.hplr.core.model.vo.UserId;
 import org.hplr.core.model.vo.PlayerRanking;
 import org.hplr.core.model.vo.PlayerSecurity;
+import org.hplr.core.usecases.service.dto.PlayerSelectDto;
 
 @Getter
 public class Player extends User{
@@ -18,5 +19,15 @@ public class Player extends User{
         super(userId, userData);
         this.ranking = ranking;
         this.security = security;
+    }
+
+    public static Player fromDto(PlayerSelectDto playerSelectDto){
+        //todo: refactor this method
+        return new Player(
+                new UserId(playerSelectDto.playerId()),
+                new PlayerRanking(0L,1L),
+                new PlayerSecurity("email"),
+                new UserData(playerSelectDto.name())
+        );
     }
 }

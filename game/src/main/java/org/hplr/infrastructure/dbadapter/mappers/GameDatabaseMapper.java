@@ -5,8 +5,6 @@ import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.model.vo.GameDeployment;
 import org.hplr.core.model.vo.GameMission;
 import org.hplr.core.usecases.port.dto.GameSelectDto;
-import org.hplr.core.usecases.port.dto.GameSideSelectDto;
-import org.hplr.core.usecases.port.dto.LocationSelectDto;
 import org.hplr.infrastructure.dbadapter.entities.*;
 import org.hplr.infrastructure.dbadapter.mapper.LocationMapper;
 
@@ -67,9 +65,10 @@ public class GameDatabaseMapper {
                 gameEntity.getGameEndTime(),
                 gameEntity.getRanking(),
                 gameEntity.getStatus(),
-                new GameSideSelectDto()
+                GameSideDatabaseMapper.fromEntity(gameEntity.getFirstGameSide()),
+                GameSideDatabaseMapper.fromEntity(gameEntity.getSecondGameSide())
 
-        )
+        );
     }
 
     private static List<GameTurnScoreEntity> mapScore(GameSide gameSide){
