@@ -77,7 +77,10 @@
                         <value>XML</value>
                     </outputFormats>
                     <excludedClasses>
-                        <param>test.security.*</param>
+                        <param>org.hplr.core.model.*</param>
+                        <param>org.hplr.core.util.*</param>
+                        <param>org.hplr.infrastructure.dbadapter.entities</param>
+                        <param>org.hplr.infrastructure.controller.*</param>
                     </excludedClasses>
                 </configuration>
                 <executions>
