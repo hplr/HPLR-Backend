@@ -3,8 +3,18 @@ name: Integration test workflow
 on:
   push:
     branches: [ "master" ]
+    paths-ignore:
+      - '**.md'
+      - '**.yml'
+      - '**.yaml'
+
   pull_request:
     branches: [ "master" ]
+    paths-ignore:
+      - '**.md'
+      - '**.yml'
+      - '**.yaml'
+
 
 jobs:
   test:
