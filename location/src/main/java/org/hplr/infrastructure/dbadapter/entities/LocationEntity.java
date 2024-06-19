@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name= ConstDatabaseNames.LOCATION_TABLE)
+@Table(name = ConstDatabaseNames.LOCATION_TABLE)
 
 public class LocationEntity {
     @Id
