@@ -303,9 +303,8 @@
                         <artifactId>pitest-maven</artifactId>
                         <version>1.16.1</version>
                         <configuration>
-                            <excludedTestClasses>
-                                <excludedTestClass>*ArchitectureTest</excludedTestClass>
-                            </excludedTestClasses>
+                            <exportLineCoverage>true</exportLineCoverage>
+                            <outputFormats><value>XML</value></outputFormats>
                         </configuration>
                         <dependencies>
                             <dependency>
