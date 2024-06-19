@@ -80,8 +80,12 @@
                 <executions>
                     <execution>
                         <id>put-it-together</id>
+                        <configuration>
+                            <skip>${skipPi}</skip>
+                        </configuration>
                         <goals>
                             <goal>report-aggregate</goal>
+
                         </goals>
                     </execution>
                 </executions>

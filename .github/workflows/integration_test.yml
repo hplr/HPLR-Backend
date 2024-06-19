@@ -19,4 +19,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build and verify with Maven
-        run: mvn -B clean install -DskipUnitTests -DskipPitest --file pom.xml
+        run: mvn -B clean install -DskipUnitTests -DskipPitest -DskipPi=true --file pom.xml
