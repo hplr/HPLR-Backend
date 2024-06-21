@@ -11,10 +11,11 @@ import org.hplr.infrastructure.dbadapter.mapper.LocationMapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class GameDatabaseMapper {
 
-    public static GameEntity toEntity(GameSnapshot gameSnapshot, LocationEntity locationEntity, GameMissionEntity gameMissionEntity, GameDeploymentEntity gameDeploymentEntity, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
+    public static GameEntity fromSnapshot(GameSnapshot gameSnapshot, LocationEntity locationEntity, GameMissionEntity gameMissionEntity, GameDeploymentEntity gameDeploymentEntity, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
 
         List<GameTurnScoreEntity> firstSideTurnScoreEntityList = mapScore(gameSnapshot.firstGameSide());
         List<GameTurnScoreEntity> secondSideTurnScoreEntityList = mapScore(gameSnapshot.secondGameSide());
@@ -91,18 +92,23 @@ public class GameDatabaseMapper {
         gameSide.getGameSidePlayerDataList().forEach(gameSidePlayerData ->
                 {
                     PlayerEntity playerEntity = playerEntityList.stream().filter(playerEntity1 -> playerEntity1.getUserId().equals(gameSidePlayerData.player().getUserId().id())).findFirst().orElseThrow(NoSuchElementException::new);
-                    GameArmyTypeEntity primaryGameArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(gameSidePlayerData.armyPrimary().name())).findFirst().orElseThrow(NoSuchElementException::new);
-                    List<GameArmyEntity> allyArmyEntityList = new ArrayList<>();
-                    gameSidePlayerData.allyArmyList().forEach(allyArmy -> {
-                        GameArmyTypeEntity allyArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(allyArmy.name())).findFirst().orElseThrow(NoSuchElementException::new);
-                        allyArmyEntityList.add(new GameArmyEntity(
-                                null,
-                                allyArmyTypeEntity,
-                                allyArmy.name(),
-                                allyArmy.pointValue()
+                    GameArmyTypeEntity primaryGameArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(gameSidePlayerData.armyPrimary().army().name())).findFirst().orElseThrow(NoSuchElementException::new);
+                    List<GameArmyEntity> allyArmyEntityList;
+                    if(Objects.nonNull(gameSidePlayerData.allyArmyList())){
+                        allyArmyEntityList = new ArrayList<>();
+                        gameSidePlayerData.allyArmyList().forEach(allyArmy -> {
+                            GameArmyTypeEntity allyArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(allyArmy.name())).findFirst().orElseThrow(NoSuchElementException::new);
+                            allyArmyEntityList.add(new GameArmyEntity(
+                                    null,
+                                    allyArmyTypeEntity,
+                                    allyArmy.name(),
+                                    allyArmy.pointValue()
 
-                        ));
-                    });
+                            ));
+                        });
+                    } else {
+                        allyArmyEntityList = null;
+                    }
                     gamePlayerDataEntityList.add(
                             new GamePlayerDataEntity(
                                     null,

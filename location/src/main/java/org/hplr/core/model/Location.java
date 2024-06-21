@@ -32,18 +32,24 @@ public class Location {
 
     public static Location fromDto(LocationSaveDto locationSaveDto) throws LocationCalculationException {
         if (locationSaveDto.isPrivate()) {
-            Location location = new Location(
+            return new Location(
                     locationSaveDto.name(),
                     true,
                     null
             );
+
+        } else {
+            Location location = new Location(
+                    locationSaveDto.name(),
+                    false,
+                    null);
             location.setLocationId(new LocationId(UUID.randomUUID()));
             try {
                 Map<String, Double> apiResponse = OSMCoordinatesCalculator.getCoordinatesFromAddress(
-                        location.getLocationGeoData().country(),
-                        location.getLocationGeoData().city(),
-                        location.getLocationGeoData().street(),
-                        location.getLocationGeoData().houseNumber());
+                         locationSaveDto.country(),
+                         locationSaveDto.city(),
+                         locationSaveDto.street(),
+                         locationSaveDto.houseNumber());
                 location.setLocationGeoData(new LocationGeoData(
                         locationSaveDto.country(),
                         locationSaveDto.city(),
@@ -55,13 +61,7 @@ public class Location {
                 throw new LocationCalculationException("Error during location calculation!");
             }
             validateLocation(location);
-
             return location;
-        } else {
-            return new Location(
-                    locationSaveDto.name(),
-                    false,
-                    null);
         }
     }
 
@@ -70,5 +70,9 @@ public class Location {
             throw new IllegalArgumentException();
 
         }
+    }
+
+    public LocationSnapshot toSnapshot(){
+        return new LocationSnapshot(this);
     }
 }

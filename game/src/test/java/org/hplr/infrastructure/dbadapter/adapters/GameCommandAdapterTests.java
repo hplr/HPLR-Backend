@@ -104,7 +104,39 @@ class GameCommandAdapterTests {
     }
 
     @Test
-    void save_game_get_no_location_and_succeed() throws LocationCalculationException, HPLRValidationException {
+    void save_game_and_succeed() throws LocationCalculationException, HPLRValidationException {
+        UUID test_player1Id = UUID.randomUUID();
+        UUID test_player2Id = UUID.randomUUID();
+        PlayerEntity test_playerEntity1 = new PlayerEntity(
+                test_player1Id,
+                test_player_name,
+                test_email,
+                test_pwHash,
+                test_registrationTime,
+                test_lastLogin,
+                test_nickname,
+                test_motto,
+                test_score
+        );
+        PlayerEntity test_playerEntity2 = new PlayerEntity(
+                test_player2Id,
+                test_player_name,
+                test_email,
+                test_pwHash,
+                test_registrationTime,
+                test_lastLogin,
+                test_nickname,
+                test_motto,
+                test_score
+        );
+        GameArmyTypeEntity test_gameArmyTypeEntity = new GameArmyTypeEntity(
+                1L,
+                "IH"
+        );
+        GameArmyTypeEntity test_gameArmyType2Entity = new GameArmyTypeEntity(
+                2L,
+                "IH"
+        );
         gameSnapshot = new GameSnapshot(
                 new GameId(test_gameId),
                 new GameLocation(Location.fromDto(new LocationSaveDto(
@@ -134,7 +166,7 @@ class GameCommandAdapterTests {
                                 new GameSidePlayerData(
                                         Player.fromDto(
                                                 new PlayerSelectDto(
-                                                        UUID.randomUUID(),
+                                                        test_player1Id,
                                                         test_player_name,
                                                         test_nickname,
                                                         test_email,
@@ -149,7 +181,7 @@ class GameCommandAdapterTests {
                                         new ELO(100L),
                                         new GameArmy(
                                                 new GameArmyType("IH"),
-                                                test_city,
+                                                test_nickname,
                                                 1250L
                                         ),
                                         null
@@ -164,7 +196,7 @@ class GameCommandAdapterTests {
                                 new GameSidePlayerData(
                                         Player.fromDto(
                                                 new PlayerSelectDto(
-                                                        UUID.randomUUID(),
+                                                        test_player2Id,
                                                         test_player_name,
                                                         test_nickname,
                                                         test_email,
@@ -179,7 +211,7 @@ class GameCommandAdapterTests {
                                         new ELO(100L),
                                         new GameArmy(
                                                 new GameArmyType("IH"),
-                                                test_city,
+                                                test_nickname,
                                                 1250L
                                         ),
                                         null
@@ -191,10 +223,10 @@ class GameCommandAdapterTests {
         );
 
         when(playerRepository.findAll()).thenReturn(List.of(
-                new PlayerEntity(), new PlayerEntity()
+                test_playerEntity1, test_playerEntity2
         ));
         when(gameArmyTypeRepository.findAll()).thenReturn(
-                List.of(new GameArmyTypeEntity(), new GameArmyTypeEntity())
+                List.of(test_gameArmyTypeEntity, test_gameArmyType2Entity)
         );
         Assertions.assertDoesNotThrow(
                 () -> gameCommandAdapter.saveGame(gameSnapshot)
