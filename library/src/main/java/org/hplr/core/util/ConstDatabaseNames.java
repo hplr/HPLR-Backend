@@ -1,4 +1,4 @@
-package org.hplr.util;
+package org.hplr.core.util;
 
 public class ConstDatabaseNames {
 
@@ -15,6 +15,11 @@ public class ConstDatabaseNames {
     public static final String LOCATION_GEO_DATA_TABLE = "location_geo_data";
     public static final String ADMINISTRATOR_TABLE = "administrator";
     public static final String ROLE_TABLE = "role";
+    public static final String SCORE_TABLE = "score";
 
     public static final String PLAYER_RANKING_VIEW = "PlayerRanking_v";
+
+    private ConstDatabaseNames() {
+        throw new IllegalStateException("Utility class");
+    }
 }

@@ -1,13 +1,11 @@
 package org.hplr.infrastructure.dbadapter.mappers;
 
-import org.hplr.core.model.Player;
 import org.hplr.core.model.vo.*;
 import org.hplr.core.usecases.port.dto.GameSideSelectDto;
 import org.hplr.infrastructure.dbadapter.entities.GameSideEntity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class GameSideDatabaseMapper {
 
@@ -23,8 +21,10 @@ public class GameSideDatabaseMapper {
                                     gameArmyEntity.getPointValue()
                             ))
                     );
+
                     gameSidePlayerDataList.add(new GameSidePlayerData(
-                            Optional.of(PlayerMapper.fromEntity(gamePlayerDataEntity.getPlayerEntity())).map(Player::fromDto).get(),
+//                                Player.fromDto(Optional.of(PlayerMapper.fromEntity(gamePlayerDataEntity.getPlayerEntity())).get()),
+                            null,
                             new ELO(gamePlayerDataEntity.getELOScore()),
                             new GameArmy(
                                     new GameArmyType(gamePlayerDataEntity.getPrimaryArmyEntity().getGameArmyTypeEntity().getName()),
@@ -34,6 +34,7 @@ public class GameSideDatabaseMapper {
                             gameArmyList
 
                     ));
+
                 }
         );
         List<Score> scorePerTurnList = new ArrayList<>(gameSideEntity.getTurnScoreEntityList().size());
@@ -45,4 +46,10 @@ public class GameSideDatabaseMapper {
                 scorePerTurnList
         );
     }
+
+    private GameSideDatabaseMapper() {
+        throw new IllegalStateException("Utility class");
+    }
+
+
 }

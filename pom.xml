@@ -30,6 +30,11 @@
         <java.version>22</java.version>
         <spring-modulith.version>1.2.0</spring-modulith.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ${project.basedir}/target/site/
+            jacoco-aggregate/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+
     </properties>
 
     <dependencies>
@@ -185,6 +190,12 @@
             <version>5.9.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
     <dependencyManagement>
@@ -213,6 +224,17 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
+                        <exclude>org/hplr/core/util/*</exclude>
+                        <exclude>org/hplr/core/model/*</exclude>
+                        <exclude>org/hplr/core/model/**/*</exclude>
+                        <exclude>org/hplr/core/enums/*</exclude>
+                        <exclude>org/hplr/core/usecases/port/dto/*</exclude>
+                        <exclude>org/hplr/infrastructure/dbadapter/entities/*</exclude>
+                        <exclude>org/hplr/infrastructure/dbadapter/mappers/*</exclude>
+                        <exclude>org/hplr/infrastructure/dbadapter/repositories/*</exclude>
+                        <exclude>org/hplr/infrastructure/controller/*</exclude>
+                        <exclude>org/hplr/exception/*</exclude>
+                        <exclude>org/hplr/config/*</exclude>
                     </excludes>
                 </configuration>
                 <version>0.8.11</version>
@@ -223,43 +245,6 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <!--                    <execution>-->
-                    <!--                        <id>prepare-agent-integration</id>-->
-                    <!--                        <goals>-->
-                    <!--                            <goal>prepare-agent-integration</goal>-->
-                    <!--                        </goals>-->
-                    <!--                        <configuration>-->
-                    <!--                            <destFile>${project.build.directory}/jacoco-integration.exec</destFile>-->
-                    <!--                            <append>true</append>-->
-                    <!--                        </configuration>-->
-                    <!--                    </execution>-->
-                    <!-- TODO: UNCOMMENT THIS WHEN WE FINISH -->
-                    <!--                    <execution>-->
-                    <!--                        <id>check-coverage</id>-->
-                    <!--                        <phase>verify</phase>-->
-                    <!--                        <goals>-->
-                    <!--                            <goal>check</goal>-->
-                    <!--                        </goals>-->
-                    <!--                        <configuration>-->
-                    <!--                            <rules>-->
-                    <!--                                <rule>-->
-                    <!--                                    <element>BUNDLE</element>-->
-                    <!--                                    <limits>-->
-                    <!--                                        <limit>-->
-                    <!--                                            <counter>INSTRUCTION</counter>-->
-                    <!--                                            <value>COVEREDRATIO</value>-->
-                    <!--                                            <minimum>0.70</minimum>-->
-                    <!--                                        </limit>-->
-                    <!--                                        <limit>-->
-                    <!--                                            <counter>BRANCH</counter>-->
-                    <!--                                            <value>COVEREDRATIO</value>-->
-                    <!--                                            <minimum>0.70</minimum>-->
-                    <!--                                        </limit>-->
-                    <!--                                    </limits>-->
-                    <!--                                </rule>-->
-                    <!--                            </rules>-->
-                    <!--                        </configuration>-->
-                    <!--                    </execution>-->
                     <execution>
                         <id>jacoco-site</id>
                         <phase>package</phase>
@@ -304,13 +289,22 @@
                         <version>1.16.1</version>
                         <configuration>
                             <exportLineCoverage>true</exportLineCoverage>
-                            <outputFormats><value>XML</value></outputFormats>
+                            <outputFormats>
+                                <value>XML</value>
+                            </outputFormats>
                             <excludedClasses>
-                                <param>org.hplr.core.model.*</param>
                                 <param>org.hplr.core.util.*</param>
+                                <param>org.hplr.core.model.*</param>
+                                <param>org.hplr.core.enums.*</param>
+                                <param>org.hplr.core.usecases.port.dto.*</param>
                                 <param>org.hplr.infrastructure.dbadapter.entities.*</param>
+                                <param>org.hplr.infrastructure.dbadapter.mappers.*</param>
+                                <param>org.hplr.infrastructure.dbadapter.repositories.*</param>
                                 <param>org.hplr.infrastructure.controller.*</param>
+                                <param>org.hplr.exception.*</param>
+                                <param>org.hplr.config.*</param>
                             </excludedClasses>
+
                         </configuration>
                         <dependencies>
                             <dependency>

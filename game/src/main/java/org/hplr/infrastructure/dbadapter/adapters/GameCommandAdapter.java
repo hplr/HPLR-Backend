@@ -3,11 +3,13 @@ package org.hplr.infrastructure.dbadapter.adapters;
 import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
 import org.hplr.infrastructure.dbadapter.entities.*;
+import org.hplr.infrastructure.dbadapter.mapper.LocationMapper;
 import org.hplr.infrastructure.dbadapter.mappers.GameDatabaseMapper;
 import org.hplr.infrastructure.dbadapter.repositories.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -33,11 +35,17 @@ public class GameCommandAdapter implements SaveGameCommandInterface {
     @Override
     public void saveGame(GameSnapshot gameSnapshot) {
         List<PlayerEntity> allPlayerEntityList = playerRepository.findAll();
+        if(allPlayerEntityList.size()<2){
+            throw new IllegalStateException("Not enough players!");
+        }
         List<GameArmyTypeEntity> armyTypeEntityList = gameArmyTypeRepository.findAll();
+        if(armyTypeEntityList.isEmpty()){
+            throw new IllegalStateException("No army types!!");
+        }
         LocationEntity locationEntity = null;
-        Optional<LocationEntity> locationEntityOptional = locationRepository.findByLocationId(gameSnapshot.gameLocation().location().getLocationId().locationId());
-        if(locationEntityOptional.isPresent()){
-            locationEntity = locationEntityOptional.get();
+        if(Objects.nonNull(gameSnapshot.gameLocation())){
+            Optional<LocationEntity> locationEntityOptional = locationRepository.findByLocationId(gameSnapshot.gameLocation().location().getLocationId().locationId());
+            locationEntity = locationEntityOptional.orElseGet(() -> LocationMapper.fromSnapshot(gameSnapshot.gameLocation().location().toSnapshot()));
         }
         GameMissionEntity gameMissionEntity;
         Optional<GameMissionEntity> gameMissionEntityOptional = gameMissionRepository.findByName(gameSnapshot.gameData().gameMission().name());
@@ -52,6 +60,6 @@ public class GameCommandAdapter implements SaveGameCommandInterface {
                 gameSnapshot.gameData().gameDeployment().name()
         ));
 
-        gameRepository.save(GameDatabaseMapper.toEntity(gameSnapshot, locationEntity, gameMissionEntity, gameDeploymentEntity, allPlayerEntityList, armyTypeEntityList));
+        gameRepository.save(GameDatabaseMapper.fromSnapshot(gameSnapshot, locationEntity, gameMissionEntity, gameDeploymentEntity, allPlayerEntityList, armyTypeEntityList));
     }
 }

@@ -1,6 +1,12 @@
 package org.hplr.core.model.vo;
 
 
-public record PlayerSecurity(String email) {
+import java.time.LocalDateTime;
+
+public record PlayerSecurity(
+        String pwHash,
+        LocalDateTime registrationTime,
+        LocalDateTime lastLogin
+) {
 
 }

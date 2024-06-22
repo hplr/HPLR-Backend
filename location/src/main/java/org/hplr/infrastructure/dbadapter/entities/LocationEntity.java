@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hplr.util.ConstDatabaseNames;
+import org.hplr.core.util.ConstDatabaseNames;
 
 import java.util.UUID;
 
