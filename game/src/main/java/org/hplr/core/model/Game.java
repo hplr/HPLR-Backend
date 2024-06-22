@@ -9,10 +9,7 @@ import org.hplr.core.usecases.port.dto.InitialGameSidePlayerDataDto;
 import org.hplr.exception.LocationCalculationException;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 public class Game {
@@ -105,16 +102,22 @@ public class Game {
             throw new IllegalArgumentException("Could not retrieve player!");
         }
         Player player = playerOptional.get();
-        List<GameArmy> allyArmyList = new ArrayList<>();
-        initialGameSidePlayerDataDto.allyArmyList().forEach(
-                allyArmy -> allyArmyList.add(
-                        new GameArmy(
-                                new GameArmyType(allyArmy.armyType()),
-                                allyArmy.armyName(),
-                                allyArmy.pointValue()
-                        )
-                )
-        );
+        List<GameArmy> allyArmyList;
+        if(Objects.nonNull(initialGameSidePlayerDataDto.allyArmyList())){
+            allyArmyList = new ArrayList<>();
+            initialGameSidePlayerDataDto.allyArmyList().forEach(
+                    allyArmy -> allyArmyList.add(
+                            new GameArmy(
+                                    new GameArmyType(allyArmy.armyType()),
+                                    allyArmy.armyName(),
+                                    allyArmy.pointValue()
+                            )
+                    )
+            );
+        } else {
+            allyArmyList = null;
+        }
+
         gameSidePlayerDataList.add(
                 new GameSidePlayerData(
                         player,

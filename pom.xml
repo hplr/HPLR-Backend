@@ -270,26 +270,26 @@
                                 <rule>
                                     <element>BUNDLE</element>
                                     <limits>
-<!--                                        <limit>-->
-<!--                                            <counter>INSTRUCTION</counter>-->
-<!--                                            <value>COVEREDRATIO</value>-->
-<!--                                            <minimum>0.90</minimum>-->
-<!--                                        </limit>-->
-<!--                                        <limit>-->
-<!--                                            <counter>BRANCH</counter>-->
-<!--                                            <value>COVEREDRATIO</value>-->
-<!--                                            <minimum>0.90</minimum>-->
-<!--                                        </limit>-->
-<!--                                        <limit>-->
-<!--                                            <counter>INSTRUCTION</counter>-->
-<!--                                            <value>COVEREDRATIO</value>-->
-<!--                                            <minimum>0.10</minimum>-->
-<!--                                        </limit>-->
-<!--                                        <limit>-->
-<!--                                            <counter>BRANCH</counter>-->
-<!--                                            <value>COVEREDRATIO</value>-->
-<!--                                            <minimum>0.10</minimum>-->
-<!--                                        </limit>-->
+                                        <limit>
+                                            <counter>INSTRUCTION</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.90</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.90</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>INSTRUCTION</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.90</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.90</minimum>
+                                        </limit>
                                     </limits>
                                 </rule>
                             </rules>
@@ -347,7 +347,7 @@
                                 <param>org.hplr.core.model.*</param>
                                 <param>org.hplr.core.enums.*</param>
                                 <param>org.hplr.core.usecases.port.dto.*</param>
-                                <param>org.hplr.infrastructure.dbadapter.entites.*</param>
+                                <param>org.hplr.infrastructure.dbadapter.entities.*</param>
                                 <param>org.hplr.infrastructure.dbadapter.mappers.*</param>
                                 <param>org.hplr.infrastructure.dbadapter.repositories.*</param>
                                 <param>org.hplr.infrastructure.controller.*</param>

@@ -12,12 +12,15 @@ import org.hplr.core.usecases.port.dto.PlayerSelectDto;
 import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
 import org.hplr.infrastructure.dbadapter.entities.GameArmyTypeEntity;
+import org.hplr.infrastructure.dbadapter.entities.GameEntity;
 import org.hplr.infrastructure.dbadapter.entities.PlayerEntity;
 import org.hplr.infrastructure.dbadapter.repositories.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
@@ -57,22 +60,25 @@ class GameCommandAdapterTests {
     static final Long test_score = 25L;
 
     @Mock
-    private LocationRepository locationRepository;
+    private LocationRepository mock_locationRepository;
     @Mock
-    private PlayerRepository playerRepository;
+    private PlayerRepository mock_playerRepository;
     @Mock
-    private GameRepository gameRepository;
+    private GameRepository mock_gameRepository;
     @Mock
-    private GameMissionRepository gameMissionRepository;
+    private GameMissionRepository mock_gameMissionRepository;
     @Mock
-    private GameDeploymentRepository gameDeploymentRepository;
+    private GameDeploymentRepository mock_gameDeploymentRepository;
     @Mock
-    private GameArmyTypeRepository gameArmyTypeRepository;
+    private GameArmyTypeRepository mock_gameArmyTypeRepository;
     @Mock
-    private GameSnapshot gameSnapshot;
+    private GameSnapshot mock_gameSnapshot;
 
     @InjectMocks
     private GameCommandAdapter gameCommandAdapter;
+
+    @Captor
+    private ArgumentCaptor<GameEntity> captor_GameEntity;
 
     @BeforeEach
     public void setUp() {
@@ -86,20 +92,20 @@ class GameCommandAdapterTests {
 
     @Test
     void save_game_fetch_not_enough_players_and_throw_IllegalStateException() {
-        when(playerRepository.findAll()).thenReturn(new ArrayList<>());
+        when(mock_playerRepository.findAll()).thenReturn(new ArrayList<>());
         Assertions.assertThrows(IllegalStateException.class,
-                () -> gameCommandAdapter.saveGame(gameSnapshot)
+                () -> gameCommandAdapter.saveGame(mock_gameSnapshot)
         );
     }
 
     @Test
     void save_game_fetch_no_army_types_and_throw_IllegalStateException() {
-        when(playerRepository.findAll()).thenReturn(List.of(
+        when(mock_playerRepository.findAll()).thenReturn(List.of(
                 new PlayerEntity(), new PlayerEntity()
         ));
-        when(gameArmyTypeRepository.findAll()).thenReturn(new ArrayList<>());
+        when(mock_gameArmyTypeRepository.findAll()).thenReturn(new ArrayList<>());
         Assertions.assertThrows(IllegalStateException.class,
-                () -> gameCommandAdapter.saveGame(gameSnapshot)
+                () -> gameCommandAdapter.saveGame(mock_gameSnapshot)
         );
     }
 
@@ -137,7 +143,7 @@ class GameCommandAdapterTests {
                 2L,
                 "IH"
         );
-        gameSnapshot = new GameSnapshot(
+        mock_gameSnapshot = new GameSnapshot(
                 new GameId(test_gameId),
                 new GameLocation(Location.fromDto(new LocationSaveDto(
                         test_name,
@@ -222,17 +228,22 @@ class GameCommandAdapterTests {
                         test_turnLength)
         );
 
-        when(playerRepository.findAll()).thenReturn(List.of(
+        when(mock_playerRepository.findAll()).thenReturn(List.of(
                 test_playerEntity1, test_playerEntity2
         ));
-        when(gameArmyTypeRepository.findAll()).thenReturn(
+        when(mock_gameArmyTypeRepository.findAll()).thenReturn(
                 List.of(test_gameArmyTypeEntity, test_gameArmyType2Entity)
         );
         Assertions.assertDoesNotThrow(
-                () -> gameCommandAdapter.saveGame(gameSnapshot)
+                () -> gameCommandAdapter.saveGame(mock_gameSnapshot)
         );
-        verify(locationRepository, atLeastOnce()).findByLocationId(any());
-
+        verify(mock_locationRepository, times(1)).findByLocationId(any());
+        verify(mock_gameMissionRepository, times(1)).findByName(any());
+        verify(mock_gameDeploymentRepository, times(1)).findByName(any());
+        verify(mock_gameRepository).save(captor_GameEntity.capture());
+        Assertions.assertNotNull(captor_GameEntity.getValue().getLocationEntity());
+        Assertions.assertNotNull(captor_GameEntity.getValue().getGameDeploymentEntity());
+        Assertions.assertNotNull(captor_GameEntity.getValue().getGameMissionEntity());
     }
 
 

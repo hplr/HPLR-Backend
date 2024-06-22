@@ -13,4 +13,6 @@ public interface PlayerRepository extends CrudRepository<PlayerEntity, Long> {
     List<PlayerEntity> findAll();
 
     Optional<PlayerEntity> findByUserId(UUID userId);
+
+    List<PlayerEntity> findAllByUserIdIn(List<UUID> userIdList);
 }

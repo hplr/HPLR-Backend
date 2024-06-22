@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class PlayerValidator {
 
-    static void validatePlayer(Player player) throws HPLRValidationException {
+    public static void validatePlayer(Player player) throws HPLRValidationException {
         validateUserData(player);
         validatePlayerRanking(player);
         validatePlayerSecurity(player);

@@ -1,5 +1,6 @@
 package org.hplr.infrastructure.dbadapter.adapters;
 
+import org.hplr.core.usecases.port.dto.PlayerSelectDto;
 import org.hplr.infrastructure.dbadapter.entities.PlayerEntity;
 import org.hplr.infrastructure.dbadapter.repositories.PlayerRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -10,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
@@ -49,6 +51,7 @@ class PlayerQueryAdapterTests {
         closeable.close();
     }
 
+
     @Test
     void get_nonexistent_player_and_throw_NoSuchElementException() {
         UUID failedUserId = UUID.randomUUID();
@@ -71,13 +74,55 @@ class PlayerQueryAdapterTests {
                 test_nickname,
                 test_motto,
                 test_score);
-        UUID successUserId = UUID.randomUUID();
-        when(playerRepository.findByUserId(successUserId))
+        when(playerRepository.findByUserId(test_playerId))
                 .thenReturn(Optional.of(player));
-        Assertions.assertDoesNotThrow(
-                () -> playerQueryAdapter.selectPlayerByUserId(successUserId));
+        Optional<PlayerSelectDto> playerSelectDto =  Assertions.assertDoesNotThrow(
+                () -> playerQueryAdapter.selectPlayerByUserId(test_playerId));
         verify(playerRepository,atLeastOnce()).findByUserId(any());
+        Assertions.assertNotNull(playerSelectDto);
+        Assertions.assertTrue(playerSelectDto.isPresent());
+    }
 
+    @Test
+    void get_all_existent_players_and_succeed() {
+        PlayerEntity player = new PlayerEntity(
+                test_playerId,
+                test_name,
+                test_email,
+                test_pwHash,
+                test_registrationTime,
+                test_lastLogin,
+                test_nickname,
+                test_motto,
+                test_score);
+        when(playerRepository.findAll())
+                .thenReturn(List.of(player));
+        List<PlayerSelectDto> playerSelectDtoList =  Assertions.assertDoesNotThrow(
+                () -> playerQueryAdapter.selectAllPlayerList());
+        verify(playerRepository,atLeastOnce()).findAll();
+        Assertions.assertNotNull(playerSelectDtoList);
+        Assertions.assertEquals(1, playerSelectDtoList.size());
+    }
+
+    @Test
+    void get_all_existent_players_from_given_list_and_succeed() {
+        PlayerEntity player = new PlayerEntity(
+                test_playerId,
+                test_name,
+                test_email,
+                test_pwHash,
+                test_registrationTime,
+                test_lastLogin,
+                test_nickname,
+                test_motto,
+                test_score);
+        when(playerRepository.findAllByUserIdIn(List.of(test_playerId)))
+                .thenReturn(List.of(player));
+        List<PlayerSelectDto> playerSelectDtoList =  Assertions.assertDoesNotThrow(
+                () -> playerQueryAdapter.selectAllPlayerByIdList(List.of(test_playerId)));
+        verify(playerRepository,atLeastOnce()).findAllByUserIdIn(List.of(test_playerId));
+        Assertions.assertNotNull(playerSelectDtoList);
+        Assertions.assertEquals(1, playerSelectDtoList.size());
     }
 
 

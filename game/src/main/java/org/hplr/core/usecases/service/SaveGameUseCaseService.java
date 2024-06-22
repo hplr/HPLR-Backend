@@ -9,17 +9,13 @@ import org.hplr.core.usecases.port.dto.InitialGameSidePlayerDataDto;
 import org.hplr.core.usecases.port.dto.PlayerSelectDto;
 import org.hplr.core.usecases.port.in.SaveGameUseCaseInterface;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
-import org.hplr.core.usecases.port.out.query.SelectAllPlayerListQueryInterface;
-import org.hplr.core.usecases.port.out.query.SelectPlayerByUserIdQueryInterface;
+import org.hplr.core.usecases.port.out.query.SelectAllPlayerByIdListQueryInterface;
 import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -27,52 +23,41 @@ import java.util.UUID;
 @AllArgsConstructor
 public class SaveGameUseCaseService implements SaveGameUseCaseInterface {
 
-    SelectPlayerByUserIdQueryInterface selectPlayerByUserIdQueryInterface;
-    SelectAllPlayerListQueryInterface selectAllPlayerListQueryInterface;
+    SelectAllPlayerByIdListQueryInterface selectAllPlayerByIdListQueryInterface;
     SaveGameCommandInterface saveGameCommandInterface;
 
     @Override
     public UUID saveGame(InitialGameSaveDataDto initialGameSaveDataDto) throws LocationCalculationException {
         Game game;
         try {
-            List<Player> firstSidePlayerList = new ArrayList<>();
-            List<Player> secondSidePlayerList = new ArrayList<>();
-            List<UUID> firstSidePlayerUserIdList = initialGameSaveDataDto.firstSide().playerDataList()
-                    .stream()
-                    .map(InitialGameSidePlayerDataDto::playerId)
-                    .toList();
-            List<UUID> secondSidePlayerUserIdList = initialGameSaveDataDto.secondSide().playerDataList()
-                    .stream()
-                    .map(InitialGameSidePlayerDataDto::playerId)
-                    .toList();
-            List<PlayerSelectDto> playerSelectDtoList = selectAllPlayerListQueryInterface.selectAllPlayerList();
-            try{
-                playerSelectDtoList.forEach(playerSelectDto -> {
+            List<Player> firstSidePlayerList = getPlayerListForSide(initialGameSaveDataDto.firstSide().playerDataList());
+            List<Player> secondSidePlayerList  = getPlayerListForSide(initialGameSaveDataDto.secondSide().playerDataList());
 
-                    if (firstSidePlayerUserIdList.contains(playerSelectDto.playerId())) {
-                        try {
-                            firstSidePlayerList.add(Player.fromDto(playerSelectDto));
-                        } catch (HPLRValidationException e) {
-                            throw new RuntimeException(e.getMessage());
-                        }
-                    }
-                    if (secondSidePlayerUserIdList.contains(playerSelectDto.playerId())) {
-                        try {
-                            secondSidePlayerList.add(Player.fromDto(playerSelectDto));
-                        } catch (HPLRValidationException e) {
-                            throw new RuntimeException(e.getMessage());
-                        }
-                    }
-
-
-                });
-            } catch (LocationCalculationException e)
-
-            game = Game.fromDto(initialGameSaveDataDto, null, null);
+            game = Game.fromDto(initialGameSaveDataDto, firstSidePlayerList, secondSidePlayerList);
             saveGameCommandInterface.saveGame(game.toSnapshot());
         } catch (LocationCalculationException e) {
             throw new LocationCalculationException(e.getMessage());
         }
         return game.getGameId().gameId();
+    }
+
+    private List<Player> getPlayerListForSide(List<InitialGameSidePlayerDataDto> initialGameSidePlayerDataDtoList){
+        List<Player> playerList = new ArrayList<>();
+        List<UUID> selectedSidePlayerUserIdList =  initialGameSidePlayerDataDtoList
+                .stream()
+                .map(InitialGameSidePlayerDataDto::playerId)
+                .toList();
+        List<PlayerSelectDto> selectedSidePlayerSelectDtoList = selectAllPlayerByIdListQueryInterface
+                .selectAllPlayerByIdList(selectedSidePlayerUserIdList);
+        selectedSidePlayerSelectDtoList.forEach(player -> {
+            try {
+                Player playerCreated = Player.fromDto(player);
+                playerList.add(playerCreated);
+            }
+            catch(HPLRValidationException e) {
+                log.error("Validation Error for user: {}", player.playerId());
+            }
+        });
+        return playerList;
     }
 }
