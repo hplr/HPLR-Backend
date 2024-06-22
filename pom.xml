@@ -30,6 +30,11 @@
         <java.version>22</java.version>
         <spring-modulith.version>1.2.0</spring-modulith.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ${project.basedir}/target/site/
+            jacoco-aggregate/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+
     </properties>
 
     <dependencies>
@@ -240,61 +245,6 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-
-                    <execution>
-                        <id>check-coverage</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <excludes>
-                                <exclude>org.hplr.core.util.*</exclude>
-                                <exclude>org.hplr.core.model.*</exclude>
-                                <exclude>org.hplr.core.enums.*</exclude>
-                                <exclude>org.hplr.core.usecases.port.dto.*</exclude>
-                                <exclude>org.hplr.infrastructure.dbadapter.entites.*</exclude>
-                                <exclude>org.hplr.infrastructure.dbadapter.mappers.*</exclude>
-                                <exclude>org.hplr.infrastructure.dbadapter.repositories.*</exclude>
-                                <exclude>org.hplr.infrastructure.controller.*</exclude>
-                                <exclude>org.hplr.exception.*</exclude>
-                                <exclude>org.hplr.config.*</exclude>
-
-
-
-
-                                <exclude>org.hplr.core.enums.*</exclude>
-
-                            </excludes>
-                            <rules>
-                                <rule>
-                                    <element>BUNDLE</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>INSTRUCTION</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.90</minimum>
-                                        </limit>
-                                        <limit>
-                                            <counter>BRANCH</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.90</minimum>
-                                        </limit>
-                                        <limit>
-                                            <counter>INSTRUCTION</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.90</minimum>
-                                        </limit>
-                                        <limit>
-                                            <counter>BRANCH</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.90</minimum>
-                                        </limit>
-                                    </limits>
-                                </rule>
-                            </rules>
-                        </configuration>
-                    </execution>
                     <execution>
                         <id>jacoco-site</id>
                         <phase>package</phase>
@@ -354,7 +304,7 @@
                                 <param>org.hplr.exception.*</param>
                                 <param>org.hplr.config.*</param>
                             </excludedClasses>
-                            
+
                         </configuration>
                         <dependencies>
                             <dependency>
