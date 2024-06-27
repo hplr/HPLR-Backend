@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hplr.core.enums.Status;
 import org.hplr.core.util.ConstDatabaseNames;
 
@@ -17,8 +19,20 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name= ConstDatabaseNames.GAME_TABLE)
-public class GameEntity extends GeneralEntity {
-    
+public class GameEntity{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
+    private Long id;
+
+    @CreationTimestamp
+    @Column(updatable = false, name = "created_at")
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
     private UUID gameId;
     @OneToOne
     private LocationEntity locationEntity;
@@ -34,9 +48,9 @@ public class GameEntity extends GeneralEntity {
     private Boolean ranking;
     @Enumerated
     private Status status;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private GameSideEntity firstGameSide;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private GameSideEntity secondGameSide;
 
 }

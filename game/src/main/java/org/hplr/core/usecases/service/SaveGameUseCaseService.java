@@ -10,12 +10,14 @@ import org.hplr.core.usecases.port.dto.PlayerSelectDto;
 import org.hplr.core.usecases.port.in.SaveGameUseCaseInterface;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
 import org.hplr.core.usecases.port.out.query.SelectAllPlayerByIdListQueryInterface;
+import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -27,16 +29,20 @@ public class SaveGameUseCaseService implements SaveGameUseCaseInterface {
     SaveGameCommandInterface saveGameCommandInterface;
 
     @Override
-    public UUID saveGame(InitialGameSaveDataDto initialGameSaveDataDto) throws LocationCalculationException {
+    public UUID saveGame(InitialGameSaveDataDto initialGameSaveDataDto) throws LocationCalculationException, IllegalArgumentException, HPLRIllegalStateException {
         Game game;
         try {
             List<Player> firstSidePlayerList = getPlayerListForSide(initialGameSaveDataDto.firstSide().playerDataList());
-            List<Player> secondSidePlayerList  = getPlayerListForSide(initialGameSaveDataDto.secondSide().playerDataList());
-
+            List<Player> secondSidePlayerList = null;
+            if(Objects.nonNull(initialGameSaveDataDto.secondSide())){
+                secondSidePlayerList = getPlayerListForSide(initialGameSaveDataDto.secondSide().playerDataList());
+            }
             game = Game.fromDto(initialGameSaveDataDto, firstSidePlayerList, secondSidePlayerList);
             saveGameCommandInterface.saveGame(game.toSnapshot());
         } catch (LocationCalculationException e) {
             throw new LocationCalculationException(e.getMessage());
+        } catch (HPLRIllegalStateException e) {
+            throw new HPLRIllegalStateException(e.getMessage());
         }
         return game.getGameId().gameId();
     }

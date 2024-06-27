@@ -5,6 +5,7 @@ import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.model.vo.GameDeployment;
 import org.hplr.core.model.vo.GameMission;
 import org.hplr.core.usecases.port.dto.GameSelectDto;
+import org.hplr.core.usecases.port.dto.GameSideSelectDto;
 import org.hplr.infrastructure.dbadapter.entities.*;
 import org.hplr.infrastructure.dbadapter.mapper.LocationMapper;
 
@@ -17,12 +18,13 @@ public class GameDatabaseMapper {
 
     public static GameEntity fromSnapshot(GameSnapshot gameSnapshot, LocationEntity locationEntity, GameMissionEntity gameMissionEntity, GameDeploymentEntity gameDeploymentEntity, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
 
-        List<GameTurnScoreEntity> firstSideTurnScoreEntityList = mapScore(gameSnapshot.firstGameSide());
-        List<GameTurnScoreEntity> secondSideTurnScoreEntityList = mapScore(gameSnapshot.secondGameSide());
-        List<GamePlayerDataEntity> firstSideGamePlayerDataEntityList = mapGamePlayerDataEntityList(gameSnapshot.firstGameSide(), playerEntityList, gameArmyTypeEntityList);
-        List<GamePlayerDataEntity> secondSideGamePlayerDataEntityList = mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), playerEntityList, gameArmyTypeEntityList);
 
-        return new GameEntity(
+        List<GameTurnScoreEntity> firstSideTurnScoreEntityList = mapScore(gameSnapshot.firstGameSide());
+        List<GamePlayerDataEntity> firstSideGamePlayerDataEntityList = mapGamePlayerDataEntityList(gameSnapshot.firstGameSide(), playerEntityList, gameArmyTypeEntityList);
+        GameEntity gameEntity = new GameEntity(
+                null,
+                null,
+                null,
                 gameSnapshot.gameId().gameId(),
                 locationEntity,
                 gameMissionEntity,
@@ -42,19 +44,32 @@ public class GameDatabaseMapper {
                         gameSnapshot.firstGameSide().getIsFirst(),
                         firstSideTurnScoreEntityList
                 ),
-                new GameSideEntity(
-                        null,
-                        gameSnapshot.secondGameSide().getSideId().sideId(),
-                        gameSnapshot.secondGameSide().getAllegiance(),
-                        secondSideGamePlayerDataEntityList,
-                        gameSnapshot.secondGameSide().getIsFirst(),
-                        secondSideTurnScoreEntityList
-                )
-
+                null
         );
+        if (Objects.nonNull(gameSnapshot.secondGameSide())) {
+            List<GameTurnScoreEntity> secondSideTurnScoreEntityList = mapScore(gameSnapshot.secondGameSide());
+            List<GamePlayerDataEntity> secondSideGamePlayerDataEntityList = mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), playerEntityList, gameArmyTypeEntityList);
+            GameSideEntity secondGameSideEntity = new GameSideEntity(
+                    null,
+                    gameSnapshot.secondGameSide().getSideId().sideId(),
+                    gameSnapshot.secondGameSide().getAllegiance(),
+                    secondSideGamePlayerDataEntityList,
+                    gameSnapshot.secondGameSide().getIsFirst(),
+                    secondSideTurnScoreEntityList
+            );
+            gameEntity.setSecondGameSide(secondGameSideEntity);
+        }
+        return gameEntity;
+
+
     }
 
     public static GameSelectDto toDto(GameEntity gameEntity) {
+        GameSideSelectDto secondSide = null;
+        if (Objects.nonNull(gameEntity.getSecondGameSide())) {
+            secondSide = GameSideDatabaseMapper.fromEntity(gameEntity.getSecondGameSide());
+
+        }
         return new GameSelectDto(
                 gameEntity.getGameId(),
                 LocationMapper.fromEntity(gameEntity.getLocationEntity()),
@@ -67,9 +82,8 @@ public class GameDatabaseMapper {
                 gameEntity.getRanking(),
                 gameEntity.getStatus(),
                 GameSideDatabaseMapper.fromEntity(gameEntity.getFirstGameSide()),
-                GameSideDatabaseMapper.fromEntity(gameEntity.getSecondGameSide())
-
-        );
+                secondSide
+                );
     }
 
     private static List<GameTurnScoreEntity> mapScore(GameSide gameSide) {
@@ -94,7 +108,7 @@ public class GameDatabaseMapper {
                     PlayerEntity playerEntity = playerEntityList.stream().filter(playerEntity1 -> playerEntity1.getUserId().equals(gameSidePlayerData.player().getUserId().id())).findFirst().orElseThrow(NoSuchElementException::new);
                     GameArmyTypeEntity primaryGameArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(gameSidePlayerData.armyPrimary().army().name())).findFirst().orElseThrow(NoSuchElementException::new);
                     List<GameArmyEntity> allyArmyEntityList;
-                    if(Objects.nonNull(gameSidePlayerData.allyArmyList())){
+                    if (Objects.nonNull(gameSidePlayerData.allyArmyList())) {
                         allyArmyEntityList = new ArrayList<>();
                         gameSidePlayerData.allyArmyList().forEach(allyArmy -> {
                             GameArmyTypeEntity allyArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(allyArmy.name())).findFirst().orElseThrow(NoSuchElementException::new);
@@ -129,7 +143,7 @@ public class GameDatabaseMapper {
         return gamePlayerDataEntityList;
     }
 
-    private GameDatabaseMapper(){
+    private GameDatabaseMapper() {
         throw new IllegalStateException("Utility class");
     }
 }

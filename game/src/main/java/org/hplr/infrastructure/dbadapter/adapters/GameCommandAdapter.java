@@ -2,6 +2,7 @@ package org.hplr.infrastructure.dbadapter.adapters;
 
 import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
+import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.infrastructure.dbadapter.entities.*;
 import org.hplr.infrastructure.dbadapter.mapper.LocationMapper;
 import org.hplr.infrastructure.dbadapter.mappers.GameDatabaseMapper;
@@ -35,15 +36,15 @@ public class GameCommandAdapter implements SaveGameCommandInterface {
     @Override
     public void saveGame(GameSnapshot gameSnapshot) {
         List<PlayerEntity> allPlayerEntityList = playerRepository.findAll();
-        if(allPlayerEntityList.size()<2){
-            throw new IllegalStateException("Not enough players!");
+        if(allPlayerEntityList.isEmpty()){
+            throw new HPLRIllegalStateException("Not enough players!");
         }
         List<GameArmyTypeEntity> armyTypeEntityList = gameArmyTypeRepository.findAll();
         if(armyTypeEntityList.isEmpty()){
-            throw new IllegalStateException("No army types!!");
+            throw new HPLRIllegalStateException("No army types!");
         }
         LocationEntity locationEntity = null;
-        if(Objects.nonNull(gameSnapshot.gameLocation())){
+        if(Objects.nonNull(gameSnapshot.gameLocation().location().getLocationId())){
             Optional<LocationEntity> locationEntityOptional = locationRepository.findByLocationId(gameSnapshot.gameLocation().location().getLocationId().locationId());
             locationEntity = locationEntityOptional.orElseGet(() -> LocationMapper.fromSnapshot(gameSnapshot.gameLocation().location().toSnapshot()));
         }

@@ -6,6 +6,7 @@ import org.hplr.core.model.PlayerValidator;
 import org.hplr.core.usecases.port.dto.*;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
 import org.hplr.core.usecases.port.out.query.SelectAllPlayerByIdListQueryInterface;
+import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
 import org.hplr.infrastructure.dbadapter.entities.PlayerEntity;
@@ -267,7 +268,7 @@ class SaveGameUseCaseServiceTests {
                     "TEST",
                     "TEST"
             );
-            Assertions.assertThrows(IllegalArgumentException.class,
+            Assertions.assertThrows(HPLRIllegalStateException.class,
                     () -> saveGameUseCaseService.saveGame(test_initialGameSaveDataDto)
             );
 
