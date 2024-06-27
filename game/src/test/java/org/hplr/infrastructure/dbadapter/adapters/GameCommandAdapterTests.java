@@ -9,6 +9,7 @@ import org.hplr.core.model.Player;
 import org.hplr.core.model.vo.*;
 import org.hplr.core.usecases.port.dto.LocationSaveDto;
 import org.hplr.core.usecases.port.dto.PlayerSelectDto;
+import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
 import org.hplr.infrastructure.dbadapter.entities.GameArmyTypeEntity;
@@ -93,7 +94,7 @@ class GameCommandAdapterTests {
     @Test
     void save_game_fetch_not_enough_players_and_throw_IllegalStateException() {
         when(mock_playerRepository.findAll()).thenReturn(new ArrayList<>());
-        Assertions.assertThrows(IllegalStateException.class,
+        Assertions.assertThrows(HPLRIllegalStateException.class,
                 () -> gameCommandAdapter.saveGame(mock_gameSnapshot)
         );
     }
@@ -104,7 +105,7 @@ class GameCommandAdapterTests {
                 new PlayerEntity(), new PlayerEntity()
         ));
         when(mock_gameArmyTypeRepository.findAll()).thenReturn(new ArrayList<>());
-        Assertions.assertThrows(IllegalStateException.class,
+        Assertions.assertThrows(HPLRIllegalStateException.class,
                 () -> gameCommandAdapter.saveGame(mock_gameSnapshot)
         );
     }

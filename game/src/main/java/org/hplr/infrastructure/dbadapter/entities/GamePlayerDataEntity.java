@@ -22,9 +22,9 @@ public class GamePlayerDataEntity {
     @ManyToOne
     private PlayerEntity playerEntity;
     private Long ELOScore;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private GameArmyEntity primaryArmyEntity;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<GameArmyEntity> allyArmyEntityList;
 
 }

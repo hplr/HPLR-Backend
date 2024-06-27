@@ -24,9 +24,9 @@ public class GameSideEntity {
     private UUID sideId;
     @Enumerated
     private Allegiance allegiance;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<GamePlayerDataEntity> gamePlayerDataEntityList;
     private Boolean first;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<GameTurnScoreEntity> turnScoreEntityList;
 }

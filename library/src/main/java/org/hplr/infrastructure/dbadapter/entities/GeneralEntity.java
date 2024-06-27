@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 public abstract class GeneralEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(unique = true, nullable = false)
     private Long id;
 
     @CreationTimestamp
