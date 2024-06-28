@@ -1,7 +1,5 @@
 package org.hplr.core.usecases.port.dto;
 
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.OneToOne;
 import org.hplr.core.enums.Status;
 import org.hplr.core.model.vo.GameDeployment;
 import org.hplr.core.model.vo.GameMission;
@@ -14,6 +12,7 @@ public record GameSelectDto(
         LocationSelectDto locationSelectDto,
         GameMission gameMission,
         GameDeployment gameDeployment,
+        Long gamePointSize,
         Integer gameTurnLength,
         Integer gameHoursDuration,
         LocalDateTime gameStartTime,

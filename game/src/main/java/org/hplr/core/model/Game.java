@@ -5,10 +5,12 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.hplr.core.enums.Status;
 import org.hplr.core.model.vo.*;
+import org.hplr.core.usecases.port.dto.GameSelectDto;
 import org.hplr.core.usecases.port.dto.InitialGameSaveDataDto;
 import org.hplr.core.usecases.port.dto.InitialGameSidePlayerDataDto;
 import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.exception.LocationCalculationException;
+import org.hplr.infrastructure.dbadapter.mappers.GameSideDatabaseMapper;
 
 import java.time.Duration;
 import java.util.*;
@@ -58,10 +60,9 @@ public class Game {
             );
             checkPlayers(secondSidePlayerList, initialGameSaveDataDto.secondSide().playerDataList());
 
-            secondSide = new GameSide(
-                    initialGameSaveDataDto.secondSide().allegiance(),
+            secondSide = GameSide.fromDto(
+                    initialGameSaveDataDto.secondSide(),
                     secondGameSidePlayerDataList,
-                    null,
                     initialGameSaveDataDto.gameTurnLength());
             status = Status.AWAITING;
         }
@@ -89,15 +90,41 @@ public class Game {
                         initialGameSaveDataDto.ranking()
                 ),
                 status,
-                new GameSide(
-                        initialGameSaveDataDto.firstSide().allegiance(),
+               GameSide.fromDto(
+                        initialGameSaveDataDto.firstSide(),
                         firstGameSidePlayerDataList,
-                        null,
                         initialGameSaveDataDto.gameTurnLength()
                 ),
                 secondSide);
 
-                GameValidator.validateCreatedStandaloneGame(game);
+        GameValidator.validateCreatedStandaloneGame(game);
+        return game;
+    }
+
+    public static Game fromDto(GameSelectDto gameSelectDto) {
+        Location location = Location.fromDto(gameSelectDto.locationSelectDto());
+        GameSide firstGameSide = GameSide.fromDto(gameSelectDto.firstGameSideSelectDto(), gameSelectDto.firstGameSideSelectDto().gameSidePlayerDataList(), gameSelectDto.gameTurnLength());
+        GameSide secondGameSide = null;
+        if(Objects.nonNull(gameSelectDto.secondGameSideSelectDto())){
+            secondGameSide = GameSide.fromDto(gameSelectDto.secondGameSideSelectDto(), gameSelectDto.secondGameSideSelectDto().gameSidePlayerDataList(), gameSelectDto.gameTurnLength());
+        }
+        Game game = new Game(
+                new GameId(gameSelectDto.gameId()),
+                new GameLocation(location),
+                new GameData(
+                        gameSelectDto.gameMission(),
+                        gameSelectDto.gameDeployment(),
+                        gameSelectDto.gamePointSize(),
+                        gameSelectDto.gameTurnLength(),
+                        Duration.ofHours(gameSelectDto.gameHoursDuration()),
+                        gameSelectDto.gameStartTime(),
+                        gameSelectDto.gameEndTime(),
+                        gameSelectDto.ranking()
+                        ),
+                gameSelectDto.status(),
+                firstGameSide,
+                secondGameSide
+        );
         return game;
     }
 
@@ -109,8 +136,7 @@ public class Game {
         Optional<Player> playerOptional = playerList.stream().filter(playerLambda -> playerLambda.getUserId().id().equals(initialGameSidePlayerDataDto.playerId())).findFirst();
         if (playerOptional.isEmpty()) {
             log.error("Could not retrieve player!");
-        }
-        else {
+        } else {
             Player player = playerOptional.get();
             List<GameArmy> allyArmyList;
             if (Objects.nonNull(initialGameSidePlayerDataDto.allyArmyList())) {
@@ -144,7 +170,7 @@ public class Game {
     }
 
     private static void checkPlayers(List<Player> sidePlayerList, List<InitialGameSidePlayerDataDto> dtoPlayerList) throws HPLRIllegalStateException {
-        if(sidePlayerList.size()!=dtoPlayerList.size()){
+        if (sidePlayerList.size() != dtoPlayerList.size()) {
             throw new HPLRIllegalStateException("Player retrieval failed!");
         }
     }

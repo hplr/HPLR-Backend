@@ -1,7 +1,7 @@
 package org.hplr.infrastructure.dbadapter.mappers;
 
 import org.hplr.core.model.vo.*;
-import org.hplr.core.usecases.port.dto.GameSideSelectDto;
+import org.hplr.core.usecases.port.dto.*;
 import org.hplr.infrastructure.dbadapter.entities.GameSideEntity;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 public class GameSideDatabaseMapper {
 
     public static GameSideSelectDto fromEntity(GameSideEntity gameSideEntity) {
-        List<GameSidePlayerData> gameSidePlayerDataList = new ArrayList<>();
+        List<GameSidePlayerDataDto> gameSidePlayerDataList = new ArrayList<>();
 
         gameSideEntity.getGamePlayerDataEntityList().forEach(gamePlayerDataEntity -> {
                     List<GameArmy> gameArmyList = new ArrayList<>();
@@ -22,10 +22,10 @@ public class GameSideDatabaseMapper {
                             ))
                     );
 
-                    gameSidePlayerDataList.add(new GameSidePlayerData(
+                    gameSidePlayerDataList.add(new GameSidePlayerDataDto(
 //                                Player.fromDto(Optional.of(PlayerMapper.fromEntity(gamePlayerDataEntity.getPlayerEntity())).get()),
-                            null,
-                            new ELO(gamePlayerDataEntity.getELOScore()),
+                            PlayerMapper.fromEntity(gamePlayerDataEntity.getPlayerEntity()),
+                            new ELODto(gamePlayerDataEntity.getELOScore()),
                             new GameArmy(
                                     new GameArmyType(gamePlayerDataEntity.getPrimaryArmyEntity().getGameArmyTypeEntity().getName()),
                                     gamePlayerDataEntity.getPrimaryArmyEntity().getName(),
@@ -37,7 +37,7 @@ public class GameSideDatabaseMapper {
 
                 }
         );
-        List<Score> scorePerTurnList = new ArrayList<>(gameSideEntity.getTurnScoreEntityList().size());
+        List<ScoreDto> scorePerTurnList = new ArrayList<>(gameSideEntity.getTurnScoreEntityList().size());
         return new GameSideSelectDto(
                 gameSideEntity.getSideId(),
                 gameSideEntity.getAllegiance(),

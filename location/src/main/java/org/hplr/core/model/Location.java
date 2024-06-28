@@ -7,6 +7,7 @@ import org.hplr.core.model.vo.LocationGeoData;
 import org.hplr.core.model.vo.LocationId;
 import org.hplr.core.model.vo.LocationMapPoint;
 import org.hplr.core.usecases.port.dto.LocationSaveDto;
+import org.hplr.core.usecases.port.dto.LocationSelectDto;
 import org.hplr.exception.LocationCalculationException;
 import org.hplr.infrastructure.external.OSMCoordinatesCalculator;
 
@@ -24,7 +25,8 @@ public class Location {
     @Setter(AccessLevel.PRIVATE)
     private LocationGeoData locationGeoData;
 
-    private Location(String name, Boolean privateLocation, LocationGeoData locationGeoData) {
+    private Location(LocationId locationId, String name, Boolean privateLocation, LocationGeoData locationGeoData) {
+        this.locationId = locationId;
         this.name = name;
         this.privateLocation = privateLocation;
         this.locationGeoData = locationGeoData;
@@ -33,6 +35,7 @@ public class Location {
     public static Location fromDto(LocationSaveDto locationSaveDto) throws LocationCalculationException {
         if (locationSaveDto.isPrivate()) {
             return new Location(
+                    null,
                     locationSaveDto.name(),
                     true,
                     null
@@ -40,6 +43,7 @@ public class Location {
 
         } else {
             Location location = new Location(
+                    null,
                     locationSaveDto.name(),
                     false,
                     null);
@@ -65,6 +69,27 @@ public class Location {
         }
     }
 
+    public static Location fromDto(LocationSelectDto locationSelectDto){
+        Location location = new Location(
+                new LocationId(locationSelectDto.locationId()),
+                locationSelectDto.name(),
+                locationSelectDto.privateLocation(),
+                new LocationGeoData(
+                        locationSelectDto.country(),
+                        locationSelectDto.city(),
+                        locationSelectDto.street(),
+                        locationSelectDto.houseNumber(),
+                        new LocationMapPoint(
+                                locationSelectDto.longitude(),
+                                locationSelectDto.latitude()
+                        )
+                )
+
+        );
+        //todo: validate
+        return location;
+    }
+    //todo: move it to class
     private static void validateLocation(Location location) {
         if (!location.getPrivateLocation() && Objects.isNull(location.getLocationGeoData())) {
             throw new IllegalArgumentException();
