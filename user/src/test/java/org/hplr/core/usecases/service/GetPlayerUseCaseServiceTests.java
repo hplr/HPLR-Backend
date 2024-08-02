@@ -69,9 +69,10 @@ class GetPlayerUseCaseServiceTests {
     @MethodSource("incorrectPlayerEntityGenerator")
     void get_existent_invalid_player_and_throw_HPLRValidationException(PlayerEntity playerEntity) throws HPLRValidationException {
         when(selectPlayerByUserIdQueryInterface.selectPlayerByUserId(test_playerId))
-                .thenReturn(Optional.of(PlayerMapper.fromEntity(playerEntity)));
+                .thenReturn(Optional.of(PlayerMapper.toDto(playerEntity)));
+        UUID userId = playerEntity.getUserId();
         Assertions.assertThrows(HPLRValidationException.class,
-                () -> getPlayerUseCaseService.getPlayerByUserId(playerEntity.getUserId())
+                () -> getPlayerUseCaseService.getPlayerByUserId(userId)
         );
     }
 
@@ -88,7 +89,7 @@ class GetPlayerUseCaseServiceTests {
                 test_motto,
                 test_score);
         when(selectPlayerByUserIdQueryInterface.selectPlayerByUserId(test_playerId))
-                .thenReturn(Optional.of(PlayerMapper.fromEntity(player)));
+                .thenReturn(Optional.of(PlayerMapper.toDto(player)));
         PlayerSnapshot playerSnapshot = Assertions.assertDoesNotThrow(
                 () -> getPlayerUseCaseService.getPlayerByUserId(test_playerId)
         );

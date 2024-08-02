@@ -25,18 +25,18 @@ public class PlayerQueryAdapter implements SelectPlayerByUserIdQueryInterface, S
     @Override
     public Optional<PlayerSelectDto> selectPlayerByUserId(UUID userId) throws NoSuchElementException {
         PlayerEntity playerEntity = playerRepository.findByUserId(userId).orElseThrow(NoSuchElementException::new);
-        return Optional.of(PlayerMapper.fromEntity(playerEntity));
+        return Optional.of(PlayerMapper.toDto(playerEntity));
     }
 
     @Override
     public List<PlayerSelectDto> selectAllPlayerList() {
         List<PlayerEntity> playerEntityList = playerRepository.findAll();
-        return playerEntityList.stream().map(PlayerMapper::fromEntity).toList();
+        return playerEntityList.stream().map(PlayerMapper::toDto).toList();
     }
 
     @Override
     public List<PlayerSelectDto> selectAllPlayerByIdList(List<UUID> idList) {
         List<PlayerEntity> playerEntityList = playerRepository.findAllByUserIdIn(idList);
-        return playerEntityList.stream().map(PlayerMapper::fromEntity).toList();
+        return playerEntityList.stream().map(PlayerMapper::toDto).toList();
     }
 }

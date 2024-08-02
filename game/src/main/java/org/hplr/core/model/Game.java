@@ -9,8 +9,8 @@ import org.hplr.core.usecases.port.dto.GameSelectDto;
 import org.hplr.core.usecases.port.dto.InitialGameSaveDataDto;
 import org.hplr.core.usecases.port.dto.InitialGameSidePlayerDataDto;
 import org.hplr.exception.HPLRIllegalStateException;
+import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
-import org.hplr.infrastructure.dbadapter.mappers.GameSideDatabaseMapper;
 
 import java.time.Duration;
 import java.util.*;
@@ -18,7 +18,7 @@ import java.util.*;
 @Slf4j
 @Getter
 public class Game {
-    private GameId gameId;
+    private final GameId gameId;
     private GameLocation gameLocation;
     private GameData gameData;
     @Setter
@@ -43,7 +43,7 @@ public class Game {
     }
 
 
-    public static Game fromDto(InitialGameSaveDataDto initialGameSaveDataDto, List<Player> firstSidePlayerList, List<Player> secondSidePlayerList) throws LocationCalculationException, HPLRIllegalStateException {
+    public static Game fromDto(InitialGameSaveDataDto initialGameSaveDataDto, List<Player> firstSidePlayerList, List<Player> secondSidePlayerList) throws LocationCalculationException, HPLRValidationException {
         Location location = Location.fromDto(initialGameSaveDataDto.locationSaveDto());
         Duration gameDuration = Duration.ofHours(initialGameSaveDataDto.gameTime());
         List<GameSidePlayerData> firstGameSidePlayerDataList = new ArrayList<>();
@@ -101,14 +101,14 @@ public class Game {
         return game;
     }
 
-    public static Game fromDto(GameSelectDto gameSelectDto) {
+    public static Game fromDto(GameSelectDto gameSelectDto) throws HPLRValidationException {
         Location location = Location.fromDto(gameSelectDto.locationSelectDto());
         GameSide firstGameSide = GameSide.fromDto(gameSelectDto.firstGameSideSelectDto(), gameSelectDto.firstGameSideSelectDto().gameSidePlayerDataList(), gameSelectDto.gameTurnLength());
         GameSide secondGameSide = null;
         if(Objects.nonNull(gameSelectDto.secondGameSideSelectDto())){
             secondGameSide = GameSide.fromDto(gameSelectDto.secondGameSideSelectDto(), gameSelectDto.secondGameSideSelectDto().gameSidePlayerDataList(), gameSelectDto.gameTurnLength());
         }
-        Game game = new Game(
+        Game game =  new Game(
                 new GameId(gameSelectDto.gameId()),
                 new GameLocation(location),
                 new GameData(
@@ -120,11 +120,12 @@ public class Game {
                         gameSelectDto.gameStartTime(),
                         gameSelectDto.gameEndTime(),
                         gameSelectDto.ranking()
-                        ),
+                ),
                 gameSelectDto.status(),
                 firstGameSide,
                 secondGameSide
         );
+        GameValidator.validateSelectedGame(game);
         return game;
     }
 

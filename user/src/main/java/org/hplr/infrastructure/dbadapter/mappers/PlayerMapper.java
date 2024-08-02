@@ -4,7 +4,7 @@ import org.hplr.core.usecases.port.dto.PlayerSelectDto;
 import org.hplr.infrastructure.dbadapter.entities.PlayerEntity;
 
 public class PlayerMapper {
-    public static PlayerSelectDto fromEntity(PlayerEntity playerEntity){
+    public static PlayerSelectDto toDto(PlayerEntity playerEntity){
         return new PlayerSelectDto(
                 playerEntity.getUserId(),
                 playerEntity.getName(),

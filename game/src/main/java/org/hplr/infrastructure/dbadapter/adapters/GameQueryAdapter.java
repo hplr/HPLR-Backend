@@ -21,10 +21,7 @@ public class GameQueryAdapter implements SelectGameByGameIdQueryInterface {
 
     @Override
     public Optional<GameSelectDto> selectGameByGameId(UUID gameId) {
-        Optional<GameEntity> gameEntityOptional = gameRepository.findByGameId(gameId);
-        if(gameEntityOptional.isEmpty()){
-            throw new NoSuchElementException("Game not found");
-        }
-        return gameEntityOptional.map(GameDatabaseMapper::toDto);
+        GameEntity gameEntity = gameRepository.findByGameId(gameId).orElseThrow(NoSuchElementException::new);
+        return Optional.of(GameDatabaseMapper.toDto(gameEntity));
     }
 }

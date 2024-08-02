@@ -6,8 +6,11 @@ import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.usecases.port.dto.GameSelectDto;
 import org.hplr.core.usecases.port.in.GetGameByIDUseCaseInterface;
 import org.hplr.core.usecases.port.out.query.SelectGameByGameIdQueryInterface;
+import org.hplr.exception.HPLRIllegalArgumentException;
+import org.hplr.exception.HPLRIllegalStateException;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,17 +21,12 @@ public class GetGameByIDUseCaseService implements GetGameByIDUseCaseInterface {
     SelectGameByGameIdQueryInterface selectGameByGameIdQueryInterface;
 
     @Override
-    public GameSnapshot getGameByID(UUID gameId) {
-        Optional<GameSelectDto> gameSelectDtoOptional = selectGameByGameIdQueryInterface.selectGameByGameId(gameId);
-        //todo: secure
-        Game game = null;
-        try{
-            game = Game.fromDto(gameSelectDtoOptional.get());
-        }
-        catch (Exception e){
+    public GameSnapshot getGameByID(UUID gameId) throws NoSuchElementException, HPLRIllegalStateException, HPLRIllegalArgumentException {
+        Optional<GameSelectDto> gameSelectDtoOptional =
+                selectGameByGameIdQueryInterface.selectGameByGameId(gameId);
 
-        }
-        //todo catch validation error
+        Game game = Game.fromDto(gameSelectDtoOptional.orElseThrow(NoSuchElementException::new));
+
         return game.toSnapshot();
     }
 }

@@ -6,6 +6,7 @@ import org.hplr.infrastructure.dbadapter.entities.GameSideEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GameSideDatabaseMapper {
 
@@ -14,17 +15,18 @@ public class GameSideDatabaseMapper {
 
         gameSideEntity.getGamePlayerDataEntityList().forEach(gamePlayerDataEntity -> {
                     List<GameArmy> gameArmyList = new ArrayList<>();
-                    gamePlayerDataEntity.getAllyArmyEntityList().forEach(gameArmyEntity ->
-                            gameArmyList.add(new GameArmy(
-                                    new GameArmyType(gameArmyEntity.getGameArmyTypeEntity().getName()),
-                                    gameArmyEntity.getName(),
-                                    gameArmyEntity.getPointValue()
-                            ))
-                    );
+                    if(Objects.nonNull(gamePlayerDataEntity.getAllyArmyEntityList())) {
+                        gamePlayerDataEntity.getAllyArmyEntityList().forEach(gameArmyEntity ->
+                                gameArmyList.add(new GameArmy(
+                                        new GameArmyType(gameArmyEntity.getGameArmyTypeEntity().getName()),
+                                        gameArmyEntity.getName(),
+                                        gameArmyEntity.getPointValue()
+                                ))
+                        );
+                    }
 
                     gameSidePlayerDataList.add(new GameSidePlayerDataDto(
-//                                Player.fromDto(Optional.of(PlayerMapper.fromEntity(gamePlayerDataEntity.getPlayerEntity())).get()),
-                            PlayerMapper.fromEntity(gamePlayerDataEntity.getPlayerEntity()),
+                            PlayerMapper.toDto(gamePlayerDataEntity.getPlayerEntity()),
                             new ELODto(gamePlayerDataEntity.getELOScore()),
                             new GameArmy(
                                     new GameArmyType(gamePlayerDataEntity.getPrimaryArmyEntity().getGameArmyTypeEntity().getName()),
