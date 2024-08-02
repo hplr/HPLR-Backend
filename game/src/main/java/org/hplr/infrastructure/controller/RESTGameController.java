@@ -7,6 +7,7 @@ import org.hplr.core.usecases.port.in.GetGameByIDUseCaseInterface;
 import org.hplr.core.usecases.port.in.SaveGameUseCaseInterface;
 import org.hplr.exception.HPLRIllegalArgumentException;
 import org.hplr.exception.HPLRIllegalStateException;
+import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,10 +29,8 @@ public class RESTGameController {
             gameId = saveGameUseCaseInterface.saveGame(initialGameSaveDataDto);
         } catch (LocationCalculationException e) {
             throw new LocationCalculationException(e.getMessage());
-        } catch (HPLRIllegalStateException e) {
-            throw new HPLRIllegalStateException(e.getMessage());
-        } catch (HPLRIllegalArgumentException e) {
-            throw new HPLRIllegalArgumentException(e.getMessage());
+        } catch (HPLRValidationException e) {
+            throw new HPLRValidationException(e.getMessage());
         }
         return new ResponseEntity<>(gameId, HttpStatus.OK);
     }

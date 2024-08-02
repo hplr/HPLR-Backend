@@ -33,9 +33,9 @@ public class Location {
     }
 
     public static Location fromDto(LocationSaveDto locationSaveDto) throws LocationCalculationException {
-        if (locationSaveDto.isPrivate()) {
+        if (Boolean.TRUE.equals(locationSaveDto.isPrivate())) {
             return new Location(
-                    null,
+                    new LocationId(UUID.randomUUID()),
                     locationSaveDto.name(),
                     true,
                     null
@@ -43,7 +43,7 @@ public class Location {
 
         } else {
             Location location = new Location(
-                    null,
+                    new LocationId(UUID.randomUUID()),
                     locationSaveDto.name(),
                     false,
                     null);
@@ -70,7 +70,7 @@ public class Location {
     }
 
     public static Location fromDto(LocationSelectDto locationSelectDto){
-        Location location = new Location(
+        return new Location(
                 new LocationId(locationSelectDto.locationId()),
                 locationSelectDto.name(),
                 locationSelectDto.privateLocation(),
@@ -86,8 +86,6 @@ public class Location {
                 )
 
         );
-        //todo: validate
-        return location;
     }
     //todo: move it to class
     private static void validateLocation(Location location) {

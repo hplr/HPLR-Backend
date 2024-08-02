@@ -10,7 +10,6 @@ import org.hplr.core.usecases.port.dto.PlayerSelectDto;
 import org.hplr.core.usecases.port.in.SaveGameUseCaseInterface;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
 import org.hplr.core.usecases.port.out.query.SelectAllPlayerByIdListQueryInterface;
-import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ public class SaveGameUseCaseService implements SaveGameUseCaseInterface {
     SaveGameCommandInterface saveGameCommandInterface;
 
     @Override
-    public UUID saveGame(InitialGameSaveDataDto initialGameSaveDataDto) throws LocationCalculationException, IllegalArgumentException, HPLRIllegalStateException {
+    public UUID saveGame(InitialGameSaveDataDto initialGameSaveDataDto) throws LocationCalculationException, HPLRValidationException {
         Game game;
         try {
             List<Player> firstSidePlayerList = getPlayerListForSide(initialGameSaveDataDto.firstSide().playerDataList());
@@ -41,8 +40,8 @@ public class SaveGameUseCaseService implements SaveGameUseCaseInterface {
             saveGameCommandInterface.saveGame(game.toSnapshot());
         } catch (LocationCalculationException e) {
             throw new LocationCalculationException(e.getMessage());
-        } catch (HPLRIllegalStateException e) {
-            throw new HPLRIllegalStateException(e.getMessage());
+        } catch (HPLRValidationException e) {
+            throw new HPLRValidationException(e.getMessage());
         }
         return game.getGameId().gameId();
     }
