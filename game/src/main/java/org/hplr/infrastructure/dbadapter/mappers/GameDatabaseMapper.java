@@ -75,6 +75,7 @@ public class GameDatabaseMapper {
                 LocationMapper.fromEntity(gameEntity.getLocationEntity()),
                 new GameMission(gameEntity.getGameMissionEntity().getName()),
                 new GameDeployment(gameEntity.getGameDeploymentEntity().getName()),
+                gameEntity.getGamePointSize(),
                 gameEntity.getGameTurnLength(),
                 gameEntity.getGameHoursDuration(),
                 gameEntity.getGameStartTime(),

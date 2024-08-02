@@ -23,6 +23,7 @@ public class LocationEntity {
     private Long id;
     private UUID locationId;
     private String name;
-    @OneToOne
+    private Boolean privateLocation;
+    @OneToOne(cascade = CascadeType.ALL)
     private LocationGeoDataEntity locationGeoData;
 }

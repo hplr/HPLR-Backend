@@ -10,6 +10,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -22,14 +23,14 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> {
                     CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
+                    configuration.setAllowedOrigins(List.of("http://localhost:8080"));
                     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
                     configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
 
-                    configuration.setAllowedHeaders(Arrays.asList("*"));
+                    configuration.setAllowedHeaders(List.of("*"));
 
-                    configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
+                    configuration.setExposedHeaders(List.of("x-auth-token"));
                     configuration.setAllowCredentials(true);
 
                     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -38,8 +39,6 @@ public class SecurityConfiguration {
                     cors.configurationSource(source);
                 })
 
-
-//                .cors(AbstractHttpConfigurer::disable)
 
                 .authorizeHttpRequests(request -> request.requestMatchers("/**").permitAll());
         return http.build();

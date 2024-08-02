@@ -87,9 +87,9 @@ class SaveGameUseCaseServiceTests {
         );
 
         when(mock_selectAllPlayerByIdListQueryInterface.selectAllPlayerByIdList(List.of(test_firstPlayerId)))
-                .thenReturn(List.of(PlayerMapper.fromEntity(first_player)));
+                .thenReturn(List.of(PlayerMapper.toDto(first_player)));
         when(mock_selectAllPlayerByIdListQueryInterface.selectAllPlayerByIdList(List.of(test_secondPlayerId)))
-                .thenReturn(List.of(PlayerMapper.fromEntity(second_player)));
+                .thenReturn(List.of(PlayerMapper.toDto(second_player)));
         InitialGameSaveDataDto test_initialGameSaveDataDto = new InitialGameSaveDataDto(
                 new InitialGameSaveSideDto(
                         Allegiance.LOYALIST,
@@ -223,9 +223,9 @@ class SaveGameUseCaseServiceTests {
             );
 
             when(mock_selectAllPlayerByIdListQueryInterface.selectAllPlayerByIdList(List.of(test_firstPlayerId)))
-                    .thenReturn(List.of(PlayerMapper.fromEntity(first_player)));
+                    .thenReturn(List.of(PlayerMapper.toDto(first_player)));
             when(mock_selectAllPlayerByIdListQueryInterface.selectAllPlayerByIdList(List.of(test_secondPlayerId)))
-                    .thenReturn(List.of(PlayerMapper.fromEntity(second_player)));
+                    .thenReturn(List.of(PlayerMapper.toDto(second_player)));
             InitialGameSaveDataDto test_initialGameSaveDataDto = new InitialGameSaveDataDto(
                     new InitialGameSaveSideDto(
                             Allegiance.LOYALIST,

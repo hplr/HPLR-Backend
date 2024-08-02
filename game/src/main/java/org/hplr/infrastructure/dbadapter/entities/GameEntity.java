@@ -34,7 +34,7 @@ public class GameEntity{
     private LocalDateTime updatedAt;
 
     private UUID gameId;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private LocationEntity locationEntity;
     @ManyToOne
     private GameMissionEntity gameMissionEntity;

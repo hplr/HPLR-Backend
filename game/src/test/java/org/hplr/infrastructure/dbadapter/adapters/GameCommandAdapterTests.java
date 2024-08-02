@@ -7,8 +7,7 @@ import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.model.Location;
 import org.hplr.core.model.Player;
 import org.hplr.core.model.vo.*;
-import org.hplr.core.usecases.port.dto.LocationSaveDto;
-import org.hplr.core.usecases.port.dto.PlayerSelectDto;
+import org.hplr.core.usecases.port.dto.*;
 import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
@@ -167,8 +166,20 @@ class GameCommandAdapterTests {
                 ),
                 0L,
                 Status.AWAITING,
-                new GameSide(
-                        Allegiance.LOYALIST,
+                GameSide.fromDto(
+                        new InitialGameSaveSideDto(
+                                Allegiance.LOYALIST,
+                                List.of(
+                                        new InitialGameSidePlayerDataDto(
+                                                test_player1Id,
+                                                new InitialGameSidePlayerArmyDto(
+                                                        "IH",
+                                                        test_nickname,
+                                                        1250L
+                                                ),
+                                                null)
+                                )
+                        ),
                         List.of(
                                 new GameSidePlayerData(
                                         Player.fromDto(
@@ -184,7 +195,6 @@ class GameCommandAdapterTests {
                                                         test_lastLogin
                                                 )
                                         ),
-
                                         new ELO(100L),
                                         new GameArmy(
                                                 new GameArmyType("IH"),
@@ -192,13 +202,25 @@ class GameCommandAdapterTests {
                                                 1250L
                                         ),
                                         null
-
                                 )
                         ),
-                        false,
-                        test_turnLength),
-                new GameSide(
-                        Allegiance.LOYALIST,
+                        test_turnLength
+                ),
+                GameSide.fromDto(
+                        new InitialGameSaveSideDto(
+                                Allegiance.LOYALIST,
+                                List.of(
+                                        new InitialGameSidePlayerDataDto(
+                                                test_player2Id,
+                                                new InitialGameSidePlayerArmyDto(
+                                                        "IH",
+                                                        test_nickname,
+                                                        1250L
+                                                ),
+                                                null
+                                        )
+                                )
+                        ),
                         List.of(
                                 new GameSidePlayerData(
                                         Player.fromDto(
@@ -214,7 +236,6 @@ class GameCommandAdapterTests {
                                                         test_lastLogin
                                                 )
                                         ),
-
                                         new ELO(100L),
                                         new GameArmy(
                                                 new GameArmyType("IH"),
@@ -222,10 +243,8 @@ class GameCommandAdapterTests {
                                                 1250L
                                         ),
                                         null
-
                                 )
                         ),
-                        true,
                         test_turnLength)
         );
 

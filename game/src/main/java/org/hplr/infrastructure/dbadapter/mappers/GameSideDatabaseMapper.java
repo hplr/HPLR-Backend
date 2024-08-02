@@ -1,31 +1,33 @@
 package org.hplr.infrastructure.dbadapter.mappers;
 
 import org.hplr.core.model.vo.*;
-import org.hplr.core.usecases.port.dto.GameSideSelectDto;
+import org.hplr.core.usecases.port.dto.*;
 import org.hplr.infrastructure.dbadapter.entities.GameSideEntity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GameSideDatabaseMapper {
 
     public static GameSideSelectDto fromEntity(GameSideEntity gameSideEntity) {
-        List<GameSidePlayerData> gameSidePlayerDataList = new ArrayList<>();
+        List<GameSidePlayerDataDto> gameSidePlayerDataList = new ArrayList<>();
 
         gameSideEntity.getGamePlayerDataEntityList().forEach(gamePlayerDataEntity -> {
                     List<GameArmy> gameArmyList = new ArrayList<>();
-                    gamePlayerDataEntity.getAllyArmyEntityList().forEach(gameArmyEntity ->
-                            gameArmyList.add(new GameArmy(
-                                    new GameArmyType(gameArmyEntity.getGameArmyTypeEntity().getName()),
-                                    gameArmyEntity.getName(),
-                                    gameArmyEntity.getPointValue()
-                            ))
-                    );
+                    if(Objects.nonNull(gamePlayerDataEntity.getAllyArmyEntityList())) {
+                        gamePlayerDataEntity.getAllyArmyEntityList().forEach(gameArmyEntity ->
+                                gameArmyList.add(new GameArmy(
+                                        new GameArmyType(gameArmyEntity.getGameArmyTypeEntity().getName()),
+                                        gameArmyEntity.getName(),
+                                        gameArmyEntity.getPointValue()
+                                ))
+                        );
+                    }
 
-                    gameSidePlayerDataList.add(new GameSidePlayerData(
-//                                Player.fromDto(Optional.of(PlayerMapper.fromEntity(gamePlayerDataEntity.getPlayerEntity())).get()),
-                            null,
-                            new ELO(gamePlayerDataEntity.getELOScore()),
+                    gameSidePlayerDataList.add(new GameSidePlayerDataDto(
+                            PlayerMapper.toDto(gamePlayerDataEntity.getPlayerEntity()),
+                            new ELODto(gamePlayerDataEntity.getELOScore()),
                             new GameArmy(
                                     new GameArmyType(gamePlayerDataEntity.getPrimaryArmyEntity().getGameArmyTypeEntity().getName()),
                                     gamePlayerDataEntity.getPrimaryArmyEntity().getName(),
@@ -37,7 +39,7 @@ public class GameSideDatabaseMapper {
 
                 }
         );
-        List<Score> scorePerTurnList = new ArrayList<>(gameSideEntity.getTurnScoreEntityList().size());
+        List<ScoreDto> scorePerTurnList = new ArrayList<>(gameSideEntity.getTurnScoreEntityList().size());
         return new GameSideSelectDto(
                 gameSideEntity.getSideId(),
                 gameSideEntity.getAllegiance(),
