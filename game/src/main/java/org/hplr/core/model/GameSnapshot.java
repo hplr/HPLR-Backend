@@ -4,6 +4,9 @@ import org.hplr.core.enums.Status;
 import org.hplr.core.model.vo.GameData;
 import org.hplr.core.model.vo.GameId;
 import org.hplr.core.model.vo.GameLocation;
+import org.hplr.core.model.vo.GameSideSnapshot;
+
+import java.util.Objects;
 
 
 public record GameSnapshot(
@@ -12,8 +15,8 @@ public record GameSnapshot(
         GameData gameData,
         Long gameELOChangeValue,
         Status gameStatus,
-        GameSide firstGameSide,
-        GameSide secondGameSide
+        GameSideSnapshot firstGameSide,
+        GameSideSnapshot secondGameSide
 ) {
     public GameSnapshot(Game game) {
         this(
@@ -22,8 +25,8 @@ public record GameSnapshot(
                 game.getGameData(),
                 game.getGameELOChangeValue(),
                 game.getGameStatus(),
-                game.getFirstGameSide(),
-                game.getSecondGameSide()
+                new GameSideSnapshot(game.getFirstGameSide()),
+                Objects.isNull(game.getSecondGameSide()) ? null : new GameSideSnapshot(game.getSecondGameSide())
         );
     }
 }

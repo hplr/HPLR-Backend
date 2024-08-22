@@ -1,7 +1,5 @@
 package org.hplr.core.usecases.port.dto;
 
-import java.time.LocalDateTime;
-
 public record InitialGameSaveDataDto(
     InitialGameSaveSideDto firstSide,
     InitialGameSaveSideDto secondSide,
@@ -9,7 +7,7 @@ public record InitialGameSaveDataDto(
     Long gamePointSize,
     Integer gameTurnLength,
     Integer gameTime,
-    LocalDateTime gameStartTime,
+    String gameStartTime,
     LocationSaveDto locationSaveDto,
     String gameMission,
     String gameDeployment

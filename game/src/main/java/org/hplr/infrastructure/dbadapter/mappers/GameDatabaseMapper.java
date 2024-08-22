@@ -1,9 +1,9 @@
 package org.hplr.infrastructure.dbadapter.mappers;
 
-import org.hplr.core.model.GameSide;
 import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.model.vo.GameDeployment;
 import org.hplr.core.model.vo.GameMission;
+import org.hplr.core.model.vo.GameSideSnapshot;
 import org.hplr.core.usecases.port.dto.GameSelectDto;
 import org.hplr.core.usecases.port.dto.GameSideSelectDto;
 import org.hplr.infrastructure.dbadapter.entities.*;
@@ -38,10 +38,10 @@ public class GameDatabaseMapper {
                 gameSnapshot.gameStatus(),
                 new GameSideEntity(
                         null,
-                        gameSnapshot.firstGameSide().getSideId().sideId(),
-                        gameSnapshot.firstGameSide().getAllegiance(),
+                        gameSnapshot.firstGameSide().sideId().sideId(),
+                        gameSnapshot.firstGameSide().allegiance(),
                         firstSideGamePlayerDataEntityList,
-                        gameSnapshot.firstGameSide().getIsFirst(),
+                        gameSnapshot.firstGameSide().isFirst(),
                         firstSideTurnScoreEntityList
                 ),
                 null
@@ -51,10 +51,10 @@ public class GameDatabaseMapper {
             List<GamePlayerDataEntity> secondSideGamePlayerDataEntityList = mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), playerEntityList, gameArmyTypeEntityList);
             GameSideEntity secondGameSideEntity = new GameSideEntity(
                     null,
-                    gameSnapshot.secondGameSide().getSideId().sideId(),
-                    gameSnapshot.secondGameSide().getAllegiance(),
+                    gameSnapshot.secondGameSide().sideId().sideId(),
+                    gameSnapshot.secondGameSide().allegiance(),
                     secondSideGamePlayerDataEntityList,
-                    gameSnapshot.secondGameSide().getIsFirst(),
+                    gameSnapshot.secondGameSide().isFirst(),
                     secondSideTurnScoreEntityList
             );
             gameEntity.setSecondGameSide(secondGameSideEntity);
@@ -87,9 +87,9 @@ public class GameDatabaseMapper {
                 );
     }
 
-    private static List<GameTurnScoreEntity> mapScore(GameSide gameSide) {
+    private static List<GameTurnScoreEntity> mapScore(GameSideSnapshot gameSide) {
         List<GameTurnScoreEntity> turnScoreEntityList = new ArrayList<>();
-        gameSide.getScorePerTurnList().forEach(
+        gameSide.scorePerTurnList().forEach(
                 score -> turnScoreEntityList.add(
                         new GameTurnScoreEntity(
                                 null,
@@ -102,11 +102,11 @@ public class GameDatabaseMapper {
         return turnScoreEntityList;
     }
 
-    private static List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSide gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
+    private static List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSideSnapshot gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
         List<GamePlayerDataEntity> gamePlayerDataEntityList = new ArrayList<>();
-        gameSide.getGameSidePlayerDataList().forEach(gameSidePlayerData ->
+        gameSide.gameSidePlayerDataList().forEach(gameSidePlayerData ->
                 {
-                    PlayerEntity playerEntity = playerEntityList.stream().filter(playerEntity1 -> playerEntity1.getUserId().equals(gameSidePlayerData.player().getUserId().id())).findFirst().orElseThrow(NoSuchElementException::new);
+                    PlayerEntity playerEntity = playerEntityList.stream().filter(playerEntity1 -> playerEntity1.getUserId().equals(gameSidePlayerData.player().userId().id())).findFirst().orElseThrow(NoSuchElementException::new);
                     GameArmyTypeEntity primaryGameArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(gameSidePlayerData.armyPrimary().army().name())).findFirst().orElseThrow(NoSuchElementException::new);
                     List<GameArmyEntity> allyArmyEntityList;
                     if (Objects.nonNull(gameSidePlayerData.allyArmyList())) {

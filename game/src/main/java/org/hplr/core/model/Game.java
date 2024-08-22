@@ -13,6 +13,8 @@ import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Slf4j
@@ -85,12 +87,12 @@ public class Game {
                         initialGameSaveDataDto.gamePointSize(),
                         initialGameSaveDataDto.gameTurnLength(),
                         gameDuration,
-                        initialGameSaveDataDto.gameStartTime(),
-                        initialGameSaveDataDto.gameStartTime().plus(gameDuration),
+                        LocalDateTime.parse(initialGameSaveDataDto.gameStartTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                        LocalDateTime.parse(initialGameSaveDataDto.gameStartTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).plus(gameDuration),
                         initialGameSaveDataDto.ranking()
                 ),
                 status,
-               GameSide.fromDto(
+                GameSide.fromDto(
                         initialGameSaveDataDto.firstSide(),
                         firstGameSidePlayerDataList,
                         initialGameSaveDataDto.gameTurnLength()
@@ -105,10 +107,10 @@ public class Game {
         Location location = Location.fromDto(gameSelectDto.locationSelectDto());
         GameSide firstGameSide = GameSide.fromDto(gameSelectDto.firstGameSideSelectDto(), gameSelectDto.firstGameSideSelectDto().gameSidePlayerDataList(), gameSelectDto.gameTurnLength());
         GameSide secondGameSide = null;
-        if(Objects.nonNull(gameSelectDto.secondGameSideSelectDto())){
+        if (Objects.nonNull(gameSelectDto.secondGameSideSelectDto())) {
             secondGameSide = GameSide.fromDto(gameSelectDto.secondGameSideSelectDto(), gameSelectDto.secondGameSideSelectDto().gameSidePlayerDataList(), gameSelectDto.gameTurnLength());
         }
-        Game game =  new Game(
+        Game game = new Game(
                 new GameId(gameSelectDto.gameId()),
                 new GameLocation(location),
                 new GameData(
