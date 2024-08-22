@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -119,7 +120,7 @@ class SaveGameUseCaseServiceTests {
                 1250L,
                 6,
                 3,
-                LocalDateTime.now(),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                 new LocationSaveDto(
                         "test",
                         "test",
@@ -137,7 +138,7 @@ class SaveGameUseCaseServiceTests {
         );
         Assertions.assertNotNull(gameId);
         verify(mock_saveGameCommandInterface).saveGame(captor_GameSnapshot.capture());
-        Assertions.assertNotNull(captor_GameSnapshot.getValue().secondGameSide().getGameSidePlayerDataList());
+        Assertions.assertNotNull(captor_GameSnapshot.getValue().secondGameSide().gameSidePlayerDataList());
         verify(mock_saveGameCommandInterface, times(1)).saveGame(any());
     }
 
@@ -201,7 +202,7 @@ class SaveGameUseCaseServiceTests {
                 1250L,
                 0,
                 3,
-                LocalDateTime.now(),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                 new LocationSaveDto(
                         "test",
                         "test",
@@ -254,7 +255,7 @@ class SaveGameUseCaseServiceTests {
                     1250L,
                     6,
                     3,
-                    LocalDateTime.now(),
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                     new LocationSaveDto(
                             "test",
                             "test",
@@ -337,7 +338,7 @@ class SaveGameUseCaseServiceTests {
                     1250L,
                     6,
                     3,
-                    LocalDateTime.now(),
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                     new LocationSaveDto(
                             "test",
                             "test",
