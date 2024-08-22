@@ -2,6 +2,7 @@ package org.hplr.core.usecases.service;
 
 import org.hplr.core.enums.Allegiance;
 import org.hplr.core.model.Game;
+import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.model.PlayerValidator;
 import org.hplr.core.usecases.port.dto.*;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
@@ -15,12 +16,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
+import org.mockito.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,6 +48,8 @@ class SaveGameUseCaseServiceTests {
     @InjectMocks
     private SaveGameUseCaseService saveGameUseCaseService;
 
+    @Captor
+    private ArgumentCaptor<GameSnapshot> captor_GameSnapshot;
 
     @BeforeEach
     public void setUp() {
@@ -119,7 +120,7 @@ class SaveGameUseCaseServiceTests {
                 1250L,
                 6,
                 3,
-                LocalDateTime.now(),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                 new LocationSaveDto(
                         "test",
                         "test",
@@ -136,7 +137,89 @@ class SaveGameUseCaseServiceTests {
                 () -> saveGameUseCaseService.saveGame(test_initialGameSaveDataDto)
         );
         Assertions.assertNotNull(gameId);
+        verify(mock_saveGameCommandInterface).saveGame(captor_GameSnapshot.capture());
+        Assertions.assertNotNull(captor_GameSnapshot.getValue().secondGameSide().gameSidePlayerDataList());
         verify(mock_saveGameCommandInterface, times(1)).saveGame(any());
+    }
+
+    //todo: possibly parametrize to check all options for validation error
+    @Test
+    void save_game_and_throw_HPLRValidationException() {
+        UUID test_firstPlayerId = UUID.randomUUID();
+        UUID test_secondPlayerId = UUID.randomUUID();
+        PlayerEntity first_player = new PlayerEntity(
+                test_firstPlayerId,
+                test_name,
+                test_email,
+                test_pwHash,
+                test_registrationTime,
+                test_lastLogin,
+                test_nickname,
+                test_motto,
+                test_score);
+        PlayerEntity second_player = new PlayerEntity(
+                test_secondPlayerId,
+                test_name,
+                test_email,
+                test_pwHash,
+                test_registrationTime,
+                test_lastLogin,
+                test_nickname,
+                test_motto,
+                test_score
+        );
+
+        when(mock_selectAllPlayerByIdListQueryInterface.selectAllPlayerByIdList(List.of(test_firstPlayerId)))
+                .thenReturn(List.of(PlayerMapper.toDto(first_player)));
+        when(mock_selectAllPlayerByIdListQueryInterface.selectAllPlayerByIdList(List.of(test_secondPlayerId)))
+                .thenReturn(List.of(PlayerMapper.toDto(second_player)));
+        InitialGameSaveDataDto test_initialGameSaveDataDto = new InitialGameSaveDataDto(
+                new InitialGameSaveSideDto(
+                        Allegiance.LOYALIST,
+                        List.of(new InitialGameSidePlayerDataDto(
+                                test_firstPlayerId,
+                                new InitialGameSidePlayerArmyDto(
+                                        "IH",
+                                        "TEST",
+                                        1250L
+                                ),
+                                null
+                        ))
+                ),
+                new InitialGameSaveSideDto(
+                        Allegiance.TRAITOR,
+                        List.of(new InitialGameSidePlayerDataDto(
+                                test_secondPlayerId,
+                                new InitialGameSidePlayerArmyDto(
+                                        "IH",
+                                        "TEST",
+                                        1250L
+                                ),
+                                null
+                        ))
+                ),
+                false,
+                1250L,
+                0,
+                3,
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+                new LocationSaveDto(
+                        "test",
+                        "test",
+                        "test",
+                        "test",
+                        "1",
+                        false
+
+                ),
+                "TEST",
+                "TEST"
+        );
+        Assertions.assertThrows(HPLRValidationException.class,
+                () -> saveGameUseCaseService.saveGame(test_initialGameSaveDataDto)
+        );
+
+        verify(mock_saveGameCommandInterface, times(0)).saveGame(any());
     }
 
     @Test
@@ -172,7 +255,7 @@ class SaveGameUseCaseServiceTests {
                     1250L,
                     6,
                     3,
-                    LocalDateTime.now(),
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                     new LocationSaveDto(
                             "test",
                             "test",
@@ -195,7 +278,7 @@ class SaveGameUseCaseServiceTests {
     }
 
     @Test
-    void save_game_and_throw_IllegalArgumentException() {
+    void save_game_and_throw_HPLRIllegalStateException() {
         try (MockedStatic<PlayerValidator> utilities = Mockito.mockStatic(PlayerValidator.class)) {
             utilities.when(() -> PlayerValidator.validatePlayer(any())).thenThrow(HPLRValidationException.class);
             UUID test_firstPlayerId = UUID.randomUUID();
@@ -255,7 +338,7 @@ class SaveGameUseCaseServiceTests {
                     1250L,
                     6,
                     3,
-                    LocalDateTime.now(),
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                     new LocationSaveDto(
                             "test",
                             "test",

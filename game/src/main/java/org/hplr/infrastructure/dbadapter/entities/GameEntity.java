@@ -46,7 +46,7 @@ public class GameEntity{
     private LocalDateTime gameStartTime;
     private LocalDateTime gameEndTime;
     private Boolean ranking;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status;
     @OneToOne(cascade = CascadeType.ALL)
     private GameSideEntity firstGameSide;

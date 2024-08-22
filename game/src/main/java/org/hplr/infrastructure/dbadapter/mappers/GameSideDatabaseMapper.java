@@ -27,7 +27,7 @@ public class GameSideDatabaseMapper {
 
                     gameSidePlayerDataList.add(new GameSidePlayerDataDto(
                             PlayerMapper.toDto(gamePlayerDataEntity.getPlayerEntity()),
-                            new ELODto(gamePlayerDataEntity.getELOScore()),
+                            new ELODto(gamePlayerDataEntity.getEloScore()),
                             new GameArmy(
                                     new GameArmyType(gamePlayerDataEntity.getPrimaryArmyEntity().getGameArmyTypeEntity().getName()),
                                     gamePlayerDataEntity.getPrimaryArmyEntity().getName(),

@@ -1,7 +1,9 @@
 package org.hplr.infrastructure.dbadapter.adapters;
 
+import lombok.extern.slf4j.Slf4j;
 import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
+import org.hplr.core.usecases.port.out.command.StartAllDueGamesCommandInterface;
 import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.infrastructure.dbadapter.entities.*;
 import org.hplr.infrastructure.dbadapter.mapper.LocationMapper;
@@ -12,9 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
+@Slf4j
 @Service
-public class GameCommandAdapter implements SaveGameCommandInterface {
+public class GameCommandAdapter implements SaveGameCommandInterface, StartAllDueGamesCommandInterface {
 
     final LocationRepository locationRepository;
     final PlayerRepository playerRepository;
@@ -36,15 +40,15 @@ public class GameCommandAdapter implements SaveGameCommandInterface {
     @Override
     public void saveGame(GameSnapshot gameSnapshot) {
         List<PlayerEntity> allPlayerEntityList = playerRepository.findAll();
-        if(allPlayerEntityList.isEmpty()){
+        if (allPlayerEntityList.isEmpty()) {
             throw new HPLRIllegalStateException("Not enough players!");
         }
         List<GameArmyTypeEntity> armyTypeEntityList = gameArmyTypeRepository.findAll();
-        if(armyTypeEntityList.isEmpty()){
+        if (armyTypeEntityList.isEmpty()) {
             throw new HPLRIllegalStateException("No army types!");
         }
         LocationEntity locationEntity = null;
-        if(Objects.nonNull(gameSnapshot.gameLocation().location().getLocationId())){
+        if (Objects.nonNull(gameSnapshot.gameLocation().location().getLocationId())) {
             Optional<LocationEntity> locationEntityOptional = locationRepository.findByLocationId(gameSnapshot.gameLocation().location().getLocationId().locationId());
             locationEntity = locationEntityOptional.orElseGet(() -> LocationMapper.fromSnapshot(gameSnapshot.gameLocation().location().toSnapshot()));
         }
@@ -62,5 +66,19 @@ public class GameCommandAdapter implements SaveGameCommandInterface {
         ));
 
         gameRepository.save(GameDatabaseMapper.fromSnapshot(gameSnapshot, locationEntity, gameMissionEntity, gameDeploymentEntity, allPlayerEntityList, armyTypeEntityList));
+    }
+
+    @Override
+    public void startAllDueGames(List<GameSnapshot> gameToStartList) {
+        List<UUID> gameToStartIdList = gameToStartList
+                .stream()
+                .map(game -> game.gameId().gameId())
+                .toList();
+        gameToStartIdList.forEach(
+             id -> log.info("Games started: {}",id)
+        );
+        if(!gameToStartIdList.isEmpty()){
+            gameRepository.startAllDueGames(gameToStartIdList);
+        }
     }
 }

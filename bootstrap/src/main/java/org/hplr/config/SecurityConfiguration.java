@@ -23,7 +23,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> {
                     CorsConfiguration configuration = new CorsConfiguration();
-                    configuration.setAllowedOrigins(List.of("http://localhost:8080"));
+                    configuration.setAllowedOrigins(List.of("http://localhost:9000"));
                     configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
                     configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));

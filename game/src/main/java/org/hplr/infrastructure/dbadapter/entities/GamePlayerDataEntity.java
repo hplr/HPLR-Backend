@@ -21,10 +21,10 @@ public class GamePlayerDataEntity {
     private Long id;
     @ManyToOne
     private PlayerEntity playerEntity;
-    private Long ELOScore;
+    private Long eloScore;
     @OneToOne(cascade = CascadeType.ALL)
     private GameArmyEntity primaryArmyEntity;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<GameArmyEntity> allyArmyEntityList;
 
 }

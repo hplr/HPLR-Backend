@@ -166,7 +166,7 @@ class GameCommandAdapterTests {
                 ),
                 0L,
                 Status.AWAITING,
-                GameSide.fromDto(
+                new GameSideSnapshot(GameSide.fromDto(
                         new InitialGameSaveSideDto(
                                 Allegiance.LOYALIST,
                                 List.of(
@@ -205,8 +205,8 @@ class GameCommandAdapterTests {
                                 )
                         ),
                         test_turnLength
-                ),
-                GameSide.fromDto(
+                )),
+                new GameSideSnapshot(GameSide.fromDto(
                         new InitialGameSaveSideDto(
                                 Allegiance.LOYALIST,
                                 List.of(
@@ -246,7 +246,7 @@ class GameCommandAdapterTests {
                                 )
                         ),
                         test_turnLength)
-        );
+        ));
 
         when(mock_playerRepository.findAll()).thenReturn(List.of(
                 test_playerEntity1, test_playerEntity2
