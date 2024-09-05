@@ -21,15 +21,15 @@ import java.util.UUID;
 public class GameCommandAdapter implements SaveGameCommandInterface, StartAllDueGamesCommandInterface {
 
     final LocationRepository locationRepository;
-    final PlayerRepository playerRepository;
+    final PlayerQueryRepository playerQueryRepository;
     final GameRepository gameRepository;
     final GameMissionRepository gameMissionRepository;
     final GameDeploymentRepository gameDeploymentRepository;
     final GameArmyTypeRepository gameArmyTypeRepository;
 
-    public GameCommandAdapter(LocationRepository locationRepository, PlayerRepository playerRepository, GameRepository gameRepository, GameMissionRepository gameMissionRepository, GameDeploymentRepository gameDeploymentRepository, GameArmyTypeRepository gameArmyTypeRepository) {
+    public GameCommandAdapter(LocationRepository locationRepository, PlayerQueryRepository playerQueryRepository, GameRepository gameRepository, GameMissionRepository gameMissionRepository, GameDeploymentRepository gameDeploymentRepository, GameArmyTypeRepository gameArmyTypeRepository) {
         this.locationRepository = locationRepository;
-        this.playerRepository = playerRepository;
+        this.playerQueryRepository = playerQueryRepository;
         this.gameRepository = gameRepository;
         this.gameMissionRepository = gameMissionRepository;
         this.gameDeploymentRepository = gameDeploymentRepository;
@@ -39,7 +39,7 @@ public class GameCommandAdapter implements SaveGameCommandInterface, StartAllDue
 
     @Override
     public void saveGame(GameSnapshot gameSnapshot) {
-        List<PlayerEntity> allPlayerEntityList = playerRepository.findAll();
+        List<PlayerEntity> allPlayerEntityList = playerQueryRepository.findAll();
         if (allPlayerEntityList.isEmpty()) {
             throw new HPLRIllegalStateException("Not enough players!");
         }

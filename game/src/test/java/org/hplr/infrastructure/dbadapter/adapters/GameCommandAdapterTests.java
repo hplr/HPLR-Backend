@@ -62,7 +62,7 @@ class GameCommandAdapterTests {
     @Mock
     private LocationRepository mock_locationRepository;
     @Mock
-    private PlayerRepository mock_playerRepository;
+    private PlayerQueryRepository mock_playerQueryRepository;
     @Mock
     private GameRepository mock_gameRepository;
     @Mock
@@ -92,7 +92,7 @@ class GameCommandAdapterTests {
 
     @Test
     void save_game_fetch_not_enough_players_and_throw_IllegalStateException() {
-        when(mock_playerRepository.findAll()).thenReturn(new ArrayList<>());
+        when(mock_playerQueryRepository.findAll()).thenReturn(new ArrayList<>());
         Assertions.assertThrows(HPLRIllegalStateException.class,
                 () -> gameCommandAdapter.saveGame(mock_gameSnapshot)
         );
@@ -100,7 +100,7 @@ class GameCommandAdapterTests {
 
     @Test
     void save_game_fetch_no_army_types_and_throw_IllegalStateException() {
-        when(mock_playerRepository.findAll()).thenReturn(List.of(
+        when(mock_playerQueryRepository.findAll()).thenReturn(List.of(
                 new PlayerEntity(), new PlayerEntity()
         ));
         when(mock_gameArmyTypeRepository.findAll()).thenReturn(new ArrayList<>());
@@ -248,7 +248,7 @@ class GameCommandAdapterTests {
                         test_turnLength)
         ));
 
-        when(mock_playerRepository.findAll()).thenReturn(List.of(
+        when(mock_playerQueryRepository.findAll()).thenReturn(List.of(
                 test_playerEntity1, test_playerEntity2
         ));
         when(mock_gameArmyTypeRepository.findAll()).thenReturn(

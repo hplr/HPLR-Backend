@@ -1,9 +1,11 @@
 package org.hplr.infrastructure.dbadapter.adapters;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hplr.core.enums.Status;
 import org.hplr.core.usecases.port.dto.GameSelectDto;
 import org.hplr.core.usecases.port.out.query.SelectAllGamesQueryInterface;
 import org.hplr.core.usecases.port.out.query.SelectGameByGameIdQueryInterface;
+import org.hplr.core.usecases.port.out.query.SelectGamesByStatusAndPlayerIdQueryInterface;
 import org.hplr.infrastructure.dbadapter.entities.GameEntity;
 import org.hplr.infrastructure.dbadapter.mappers.GameDatabaseMapper;
 import org.hplr.infrastructure.dbadapter.repositories.GameRepository;
@@ -13,7 +15,10 @@ import java.util.*;
 
 @Service
 @Slf4j
-public class GameQueryAdapter implements SelectGameByGameIdQueryInterface, SelectAllGamesQueryInterface {
+public class GameQueryAdapter implements
+        SelectGameByGameIdQueryInterface,
+        SelectAllGamesQueryInterface,
+        SelectGamesByStatusAndPlayerIdQueryInterface {
     final GameRepository gameRepository;
 
     public GameQueryAdapter(GameRepository gameRepository) {
@@ -41,5 +46,27 @@ public class GameQueryAdapter implements SelectGameByGameIdQueryInterface, Selec
                 });
         return  gameSelectDtoList;
 
+    }
+
+    @Override
+    public List<GameSelectDto> selectGamesByStatusAndPlayerId(Status status, UUID playerId) {
+        List<GameEntity> gameEntityList = gameRepository.findAllByStatus(status);
+        gameEntityList = gameEntityList.stream().filter(gameEntity -> gameEntity
+                .getFirstGameSide()
+                .getGamePlayerDataEntityList()
+                .stream()
+                .anyMatch(playerData -> Objects.equals(playerId, playerData.getPlayerEntity().getUserId())))
+                .toList();
+        List<GameSelectDto> gameSelectDtoList = new ArrayList<>();
+        gameEntityList.forEach(
+                game -> {
+                    try{
+                        gameSelectDtoList.add(GameDatabaseMapper.toDto(game));
+
+                    } catch (Exception e){
+                        log.error("Game with id {} is not valid", game.getGameId());
+                    }
+                });
+        return  gameSelectDtoList;
     }
 }

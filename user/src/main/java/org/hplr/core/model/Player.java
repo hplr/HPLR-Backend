@@ -6,7 +6,11 @@ import org.hplr.core.model.vo.UserId;
 import org.hplr.core.model.vo.PlayerRanking;
 import org.hplr.core.model.vo.PlayerSecurity;
 import org.hplr.core.usecases.port.dto.PlayerSelectDto;
+import org.hplr.core.usecases.service.dto.InitialPlayerSaveDto;
 import org.hplr.exception.HPLRValidationException;
+
+
+import static org.hplr.core.util.ConstValues.INITIAL_ELO_VALUE;
 
 @Getter
 public class Player extends User {
@@ -42,7 +46,29 @@ public class Player extends User {
         return player;
     }
 
+    public static Player fromDto(InitialPlayerSaveDto initialPlayerSaveDto){
+        Player player =  new Player(
+                initialPlayerSaveDto.userId(),
+                new PlayerRanking(
+                        INITIAL_ELO_VALUE
+                ),
+                initialPlayerSaveDto.playerSecurity(),
+                new UserData(
+                        initialPlayerSaveDto.initialPlayerSaveDataDto().name(),
+                        initialPlayerSaveDto.initialPlayerSaveDataDto().nickname(),
+                        initialPlayerSaveDto.initialPlayerSaveDataDto().email(),
+                        initialPlayerSaveDto.initialPlayerSaveDataDto().motto()
+                )
+        );
+        PlayerValidator.validatePlayer(player);
+        return player;
+    }
+
     public PlayerSnapshot toSnapshot(){
         return new PlayerSnapshot(this);
     }
+    public PlayerFullDataSnapshot toFullSnapshot(){
+        return new PlayerFullDataSnapshot(this);
+    }
+
 }

@@ -10,11 +10,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface PlayerRepository extends CrudRepository<PlayerEntity, Long> {
+public interface PlayerQueryRepository extends CrudRepository<PlayerEntity, Long> {
     @NonNull
     List<PlayerEntity> findAll();
 
     Optional<PlayerEntity> findByUserId(UUID userId);
+
+    Optional<PlayerEntity> findByEmail(String email);
 
     List<PlayerEntity> findAllByUserIdIn(List<UUID> userIdList);
 }

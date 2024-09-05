@@ -1,6 +1,7 @@
 package org.hplr.infrastructure.controller;
 
 import lombok.AllArgsConstructor;
+import org.hplr.core.enums.Status;
 import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.model.vo.GameArmyType;
 import org.hplr.core.model.vo.GameDeployment;
@@ -26,6 +27,7 @@ public class RESTGameController {
     GetAllGameArmyTypesUseCaseInterface getAllGameArmyTypesUseCaseInterface;
     GetAllGameMissionsUseCaseInterface getAllGameMissionsUseCaseInterface;
     GetAllGameDeploymentsUseCaseInterface getAllGameDeploymentsUseCaseInterface;
+    GetAllGamesByStatusAndPlayerIdUseCaseInterface getAllGamesByStatusAndPlayerIdUseCaseInterface;
 
     @PostMapping(path = "/save")
     public ResponseEntity<UUID> saveGame(@RequestBody InitialGameSaveDataDto initialGameSaveDataDto) {
@@ -61,5 +63,11 @@ public class RESTGameController {
     @GetMapping(path = "/deployment", produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<GameDeployment>> getAllGameDeployments() {
         return new ResponseEntity<>(getAllGameDeploymentsUseCaseInterface.getAllGameDeployments(),HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/{status}/{playerId}", produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<GameSnapshot>> getAllGamesByStatusAndPlayerId(@PathVariable Status status, @PathVariable UUID playerId) {
+        return new ResponseEntity<>(getAllGamesByStatusAndPlayerIdUseCaseInterface
+                .getAllGamesByStatusAndPlayerId(status,playerId),HttpStatus.OK);
     }
 }

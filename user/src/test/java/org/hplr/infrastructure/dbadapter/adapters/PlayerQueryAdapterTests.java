@@ -2,7 +2,7 @@ package org.hplr.infrastructure.dbadapter.adapters;
 
 import org.hplr.core.usecases.port.dto.PlayerSelectDto;
 import org.hplr.infrastructure.dbadapter.entities.PlayerEntity;
-import org.hplr.infrastructure.dbadapter.repositories.PlayerRepository;
+import org.hplr.infrastructure.dbadapter.repositories.PlayerQueryRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +35,7 @@ class PlayerQueryAdapterTests {
     static final Long test_score = 25L;
 
     @Mock
-    private PlayerRepository playerRepository;
+    private PlayerQueryRepository playerQueryRepository;
 
     @InjectMocks
     private PlayerQueryAdapter playerQueryAdapter;
@@ -55,11 +55,11 @@ class PlayerQueryAdapterTests {
     @Test
     void get_nonexistent_player_and_throw_NoSuchElementException() {
         UUID failedUserId = UUID.randomUUID();
-        when(playerRepository.findByUserId(failedUserId))
+        when(playerQueryRepository.findByUserId(failedUserId))
                 .thenReturn(Optional.empty());
         Assertions.assertThrows(NoSuchElementException.class,
                 () -> playerQueryAdapter.selectPlayerByUserId(failedUserId));
-        verify(playerRepository,atLeastOnce()).findByUserId(any());
+        verify(playerQueryRepository,atLeastOnce()).findByUserId(any());
     }
 
     @Test
@@ -74,11 +74,11 @@ class PlayerQueryAdapterTests {
                 test_nickname,
                 test_motto,
                 test_score);
-        when(playerRepository.findByUserId(test_playerId))
+        when(playerQueryRepository.findByUserId(test_playerId))
                 .thenReturn(Optional.of(player));
         Optional<PlayerSelectDto> playerSelectDto =  Assertions.assertDoesNotThrow(
                 () -> playerQueryAdapter.selectPlayerByUserId(test_playerId));
-        verify(playerRepository,atLeastOnce()).findByUserId(any());
+        verify(playerQueryRepository,atLeastOnce()).findByUserId(any());
         Assertions.assertNotNull(playerSelectDto);
         Assertions.assertTrue(playerSelectDto.isPresent());
     }
@@ -95,11 +95,11 @@ class PlayerQueryAdapterTests {
                 test_nickname,
                 test_motto,
                 test_score);
-        when(playerRepository.findAll())
+        when(playerQueryRepository.findAll())
                 .thenReturn(List.of(player));
         List<PlayerSelectDto> playerSelectDtoList =  Assertions.assertDoesNotThrow(
                 () -> playerQueryAdapter.selectAllPlayerList());
-        verify(playerRepository,atLeastOnce()).findAll();
+        verify(playerQueryRepository,atLeastOnce()).findAll();
         Assertions.assertNotNull(playerSelectDtoList);
         Assertions.assertEquals(1, playerSelectDtoList.size());
     }
@@ -116,11 +116,11 @@ class PlayerQueryAdapterTests {
                 test_nickname,
                 test_motto,
                 test_score);
-        when(playerRepository.findAllByUserIdIn(List.of(test_playerId)))
+        when(playerQueryRepository.findAllByUserIdIn(List.of(test_playerId)))
                 .thenReturn(List.of(player));
         List<PlayerSelectDto> playerSelectDtoList =  Assertions.assertDoesNotThrow(
                 () -> playerQueryAdapter.selectAllPlayerByIdList(List.of(test_playerId)));
-        verify(playerRepository,atLeastOnce()).findAllByUserIdIn(List.of(test_playerId));
+        verify(playerQueryRepository,atLeastOnce()).findAllByUserIdIn(List.of(test_playerId));
         Assertions.assertNotNull(playerSelectDtoList);
         Assertions.assertEquals(1, playerSelectDtoList.size());
     }
