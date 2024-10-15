@@ -131,7 +131,7 @@ public class GameValidator {
         Boolean emptyScore = gameSide.getScorePerTurnList()
                 .stream()
                 .anyMatch(
-                        score -> Objects.isNull(score.scoreValue())
+                        score -> Objects.isNull(score.turnScore())
                 );
         if (Boolean.TRUE.equals(emptyScore)) {
             throw new HPLRIllegalStateException("Side does not have points for every turn");

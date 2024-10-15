@@ -19,5 +19,6 @@ public class GameTurnScoreEntity {
     private Long id;
     private Long turnNumber;
     private Long turnScore;
+    private Boolean tabled;
 
 }

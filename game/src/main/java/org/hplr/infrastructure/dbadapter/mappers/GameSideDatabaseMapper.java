@@ -2,11 +2,14 @@ package org.hplr.infrastructure.dbadapter.mappers;
 
 import org.hplr.core.model.vo.*;
 import org.hplr.core.usecases.port.dto.*;
-import org.hplr.infrastructure.dbadapter.entities.GameSideEntity;
+import org.hplr.infrastructure.dbadapter.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static org.hplr.infrastructure.dbadapter.mappers.GameDatabaseMapper.mapGamePlayerDataEntityList;
+import static org.hplr.infrastructure.dbadapter.mappers.GameDatabaseMapper.mapScore;
 
 public class GameSideDatabaseMapper {
 
@@ -39,7 +42,9 @@ public class GameSideDatabaseMapper {
 
                 }
         );
-        List<ScoreDto> scorePerTurnList = new ArrayList<>(gameSideEntity.getTurnScoreEntityList().size());
+        //todo: implement this actually xddddddd
+        List<ScoreDto> scorePerTurnList = gameSideEntity.getTurnScoreEntityList().stream().map(ScoreMapper::fromEntity).toList();
+
         return new GameSideSelectDto(
                 gameSideEntity.getSideId(),
                 gameSideEntity.getAllegiance(),
@@ -48,6 +53,27 @@ public class GameSideDatabaseMapper {
                 scorePerTurnList
         );
     }
+
+    public static GameSideEntity fromSnapshot(GameSideSnapshot gameSideSnapshot, Integer turnNumber, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList){
+        List<GameTurnScoreEntity> gameTurnScoreEntityList = new ArrayList<>();
+        for(int i = 0; i< turnNumber; i++){
+            gameTurnScoreEntityList.add(new GameTurnScoreEntity(
+                    null,
+                    (long) (i + 1),
+                    0L,
+                    false
+            ));
+        }
+        return new GameSideEntity(
+                null,
+                gameSideSnapshot.sideId().sideId(),
+                gameSideSnapshot.allegiance(),
+                mapGamePlayerDataEntityList(gameSideSnapshot, playerEntityList, gameArmyTypeEntityList),
+                gameSideSnapshot.isFirst(),
+                mapScore(gameSideSnapshot)
+        );
+    }
+
 
     private GameSideDatabaseMapper() {
         throw new IllegalStateException("Utility class");

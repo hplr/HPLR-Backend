@@ -2,6 +2,7 @@ package org.hplr.infrastructure.dbadapter.adapters;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hplr.core.model.GameSnapshot;
+import org.hplr.core.usecases.port.out.command.SaveFinishedGameCommandInterface;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
 import org.hplr.core.usecases.port.out.command.StartAllDueGamesCommandInterface;
 import org.hplr.exception.HPLRIllegalStateException;
@@ -11,14 +12,13 @@ import org.hplr.infrastructure.dbadapter.mappers.GameDatabaseMapper;
 import org.hplr.infrastructure.dbadapter.repositories.*;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Service
-public class GameCommandAdapter implements SaveGameCommandInterface, StartAllDueGamesCommandInterface {
+public class GameCommandAdapter implements SaveGameCommandInterface,
+        StartAllDueGamesCommandInterface,
+        SaveFinishedGameCommandInterface {
 
     final LocationRepository locationRepository;
     final PlayerQueryRepository playerQueryRepository;
@@ -80,5 +80,12 @@ public class GameCommandAdapter implements SaveGameCommandInterface, StartAllDue
         if(!gameToStartIdList.isEmpty()){
             gameRepository.startAllDueGames(gameToStartIdList);
         }
+    }
+
+    @Override
+    public void saveFinishedGame(GameSnapshot gameSnapshot) {
+        GameEntity gameEntity = gameRepository.findByGameId(gameSnapshot.gameId().gameId()).orElseThrow(() -> new NoSuchElementException("Game not found!"));
+        gameEntity.setStatus(gameSnapshot.gameStatus());
+        gameRepository.save(gameEntity);
     }
 }

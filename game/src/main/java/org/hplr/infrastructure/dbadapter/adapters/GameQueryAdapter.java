@@ -50,15 +50,24 @@ public class GameQueryAdapter implements
 
     @Override
     public List<GameSelectDto> selectGamesByStatusAndPlayerId(Status status, UUID playerId) {
+        ArrayList<GameEntity> gameEntityFilteredList;
         List<GameEntity> gameEntityList = gameRepository.findAllByStatus(status);
-        gameEntityList = gameEntityList.stream().filter(gameEntity -> gameEntity
+        List<GameEntity> gameEntityListFirstSide = gameEntityList.stream().filter(gameEntity -> gameEntity
                 .getFirstGameSide()
                 .getGamePlayerDataEntityList()
                 .stream()
                 .anyMatch(playerData -> Objects.equals(playerId, playerData.getPlayerEntity().getUserId())))
                 .toList();
+        List<GameEntity> gameEntityListSecondSide = gameEntityList.stream().filter(gameEntity -> gameEntity
+                        .getSecondGameSide()
+                        .getGamePlayerDataEntityList()
+                        .stream()
+                        .anyMatch(playerData -> Objects.equals(playerId, playerData.getPlayerEntity().getUserId())))
+                .toList();
+        gameEntityFilteredList = new ArrayList<>(gameEntityListFirstSide);
+        gameEntityFilteredList.addAll(gameEntityListSecondSide);
         List<GameSelectDto> gameSelectDtoList = new ArrayList<>();
-        gameEntityList.forEach(
+        gameEntityFilteredList.forEach(
                 game -> {
                     try{
                         gameSelectDtoList.add(GameDatabaseMapper.toDto(game));

@@ -7,8 +7,6 @@ import org.hplr.core.enums.Status;
 import org.hplr.core.model.vo.*;
 import org.hplr.core.usecases.port.dto.GameSelectDto;
 import org.hplr.core.usecases.port.dto.InitialGameSaveDataDto;
-import org.hplr.core.usecases.port.dto.InitialGameSidePlayerDataDto;
-import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
 
@@ -16,6 +14,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+import static org.hplr.core.mappers.GameSideMapper.createPlayerListForSide;
 
 @Slf4j
 @Getter
@@ -25,8 +25,10 @@ public class Game {
     private GameData gameData;
     @Setter
     private Long gameELOChangeValue;
+    @Setter
     private Status gameStatus;
     private GameSide firstGameSide;
+    @Setter
     private GameSide secondGameSide;
 
     private Game(GameId gameId,
@@ -48,19 +50,11 @@ public class Game {
     public static Game fromDto(InitialGameSaveDataDto initialGameSaveDataDto, List<Player> firstSidePlayerList, List<Player> secondSidePlayerList) throws LocationCalculationException, HPLRValidationException {
         Location location = Location.fromDto(initialGameSaveDataDto.locationSaveDto());
         Duration gameDuration = Duration.ofHours(initialGameSaveDataDto.gameTime());
-        List<GameSidePlayerData> firstGameSidePlayerDataList = new ArrayList<>();
         GameSide secondSide = null;
         Status status = Status.CREATED;
         if (Objects.nonNull(secondSidePlayerList)) {
-            List<GameSidePlayerData> secondGameSidePlayerDataList = new ArrayList<>();
-            initialGameSaveDataDto.secondSide().playerDataList().forEach(
-                    initialGameSidePlayerDataDto -> populateSide(
-                            secondSidePlayerList,
-                            initialGameSidePlayerDataDto,
-                            secondGameSidePlayerDataList
-                    )
-            );
-            checkPlayers(secondSidePlayerList, initialGameSaveDataDto.secondSide().playerDataList());
+            List<GameSidePlayerData> secondGameSidePlayerDataList = createPlayerListForSide(secondSidePlayerList,
+                    initialGameSaveDataDto.secondSide().playerDataList());
 
             secondSide = GameSide.fromDto(
                     initialGameSaveDataDto.secondSide(),
@@ -69,14 +63,8 @@ public class Game {
             status = Status.AWAITING;
         }
 
-        initialGameSaveDataDto.firstSide().playerDataList().forEach(
-                initialGameSidePlayerDataDto -> populateSide(
-                        firstSidePlayerList,
-                        initialGameSidePlayerDataDto,
-                        firstGameSidePlayerDataList
-                )
-        );
-        checkPlayers(firstSidePlayerList, initialGameSaveDataDto.firstSide().playerDataList());
+        List<GameSidePlayerData> firstGameSidePlayerDataList = createPlayerListForSide(firstSidePlayerList,
+                initialGameSaveDataDto.firstSide().playerDataList());
 
         Game game = new Game(
                 new GameId(UUID.randomUUID()),
@@ -105,10 +93,10 @@ public class Game {
 
     public static Game fromDto(GameSelectDto gameSelectDto) throws HPLRValidationException {
         Location location = Location.fromDto(gameSelectDto.locationSelectDto());
-        GameSide firstGameSide = GameSide.fromDto(gameSelectDto.firstGameSideSelectDto(), gameSelectDto.firstGameSideSelectDto().gameSidePlayerDataList(), gameSelectDto.gameTurnLength());
+        GameSide firstGameSide = GameSide.fromDto(gameSelectDto.firstGameSideSelectDto(), gameSelectDto.firstGameSideSelectDto().gameSidePlayerDataList());
         GameSide secondGameSide = null;
         if (Objects.nonNull(gameSelectDto.secondGameSideSelectDto())) {
-            secondGameSide = GameSide.fromDto(gameSelectDto.secondGameSideSelectDto(), gameSelectDto.secondGameSideSelectDto().gameSidePlayerDataList(), gameSelectDto.gameTurnLength());
+            secondGameSide = GameSide.fromDto(gameSelectDto.secondGameSideSelectDto(), gameSelectDto.secondGameSideSelectDto().gameSidePlayerDataList());
         }
         Game game = new Game(
                 new GameId(gameSelectDto.gameId()),
@@ -135,46 +123,4 @@ public class Game {
         return new GameSnapshot(this);
     }
 
-    private static void populateSide(List<Player> playerList, InitialGameSidePlayerDataDto initialGameSidePlayerDataDto, List<GameSidePlayerData> gameSidePlayerDataList) {
-        Optional<Player> playerOptional = playerList.stream().filter(playerLambda -> playerLambda.getUserId().id().equals(initialGameSidePlayerDataDto.playerId())).findFirst();
-        if (playerOptional.isEmpty()) {
-            log.error("Could not retrieve player!");
-        } else {
-            Player player = playerOptional.get();
-            List<GameArmy> allyArmyList;
-            if (Objects.nonNull(initialGameSidePlayerDataDto.allyArmyList())) {
-                allyArmyList = new ArrayList<>();
-                initialGameSidePlayerDataDto.allyArmyList().forEach(
-                        allyArmy -> allyArmyList.add(
-                                new GameArmy(
-                                        new GameArmyType(allyArmy.armyType()),
-                                        allyArmy.armyName(),
-                                        allyArmy.pointValue()
-                                )
-                        )
-                );
-            } else {
-                allyArmyList = null;
-            }
-
-            gameSidePlayerDataList.add(
-                    new GameSidePlayerData(
-                            player,
-                            new ELO(player.getRanking().score()),
-                            new GameArmy(
-                                    new GameArmyType(initialGameSidePlayerDataDto.primaryArmy().armyType()),
-                                    initialGameSidePlayerDataDto.primaryArmy().armyName(),
-                                    initialGameSidePlayerDataDto.primaryArmy().pointValue()
-                            ),
-                            allyArmyList
-
-                    ));
-        }
-    }
-
-    private static void checkPlayers(List<Player> sidePlayerList, List<InitialGameSidePlayerDataDto> dtoPlayerList) throws HPLRIllegalStateException {
-        if (sidePlayerList.size() != dtoPlayerList.size()) {
-            throw new HPLRIllegalStateException("Player retrieval failed!");
-        }
-    }
 }

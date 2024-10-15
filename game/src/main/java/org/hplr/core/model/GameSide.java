@@ -1,11 +1,13 @@
 package org.hplr.core.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.hplr.core.enums.Allegiance;
 import org.hplr.core.model.vo.ELO;
 import org.hplr.core.model.vo.GameSideId;
 import org.hplr.core.model.vo.GameSidePlayerData;
 import org.hplr.core.model.vo.Score;
+import org.hplr.core.usecases.port.dto.CreatedGameSaveSecondSideDto;
 import org.hplr.core.usecases.port.dto.GameSidePlayerDataDto;
 import org.hplr.core.usecases.port.dto.GameSideSelectDto;
 import org.hplr.core.usecases.port.dto.InitialGameSaveSideDto;
@@ -13,8 +15,10 @@ import org.hplr.core.usecases.port.dto.InitialGameSaveSideDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Getter
+@AllArgsConstructor
 public class GameSide {
     private GameSideId sideId;
     private Allegiance allegiance;
@@ -27,9 +31,17 @@ public class GameSide {
         this.allegiance = allegiance;
         this.gameSidePlayerDataList = gameSidePlayerDataList;
         this.isFirst = isFirst;
-        this.scorePerTurnList = new ArrayList<>(gameTurnLength);
+        this.scorePerTurnList = new ArrayList<>();
+        for (int i = 0; i < gameTurnLength; i++) {
+            scorePerTurnList.add(new Score(
+                    (long) i+1,
+                    0L,
+                    false
+            ));
+        }
 
     }
+
 
     public static GameSide fromDto(InitialGameSaveSideDto initialGameSaveSideDto, List<GameSidePlayerData> gameSidePlayerDataList, Integer turnLength) {
         return new GameSide(
@@ -40,7 +52,16 @@ public class GameSide {
         );
     }
 
-    public static GameSide fromDto(GameSideSelectDto gameSideSelectDto, List<GameSidePlayerDataDto> gameSidePlayerDataList, Integer turnLength){
+    public static GameSide fromDto(CreatedGameSaveSecondSideDto createdGameSaveSecondSideDto, List<GameSidePlayerData> gameSidePlayerDataList, Integer turnLength) {
+        return new GameSide(
+                createdGameSaveSecondSideDto.allegiance(),
+                gameSidePlayerDataList,
+                null,
+                turnLength
+        );
+    }
+
+    public static GameSide fromDto(GameSideSelectDto gameSideSelectDto, List<GameSidePlayerDataDto> gameSidePlayerDataList){
         List<GameSidePlayerData> gameSidePlayerDataArrayList = new ArrayList<>();
         for (GameSidePlayerDataDto gameSidePlayerDataDto : gameSidePlayerDataList) {
             gameSidePlayerDataArrayList.add(new GameSidePlayerData(
@@ -51,10 +72,11 @@ public class GameSide {
             ));
         }
         return new GameSide(
+                new GameSideId(gameSideSelectDto.sideId()),
                 gameSideSelectDto.allegiance(),
                 gameSidePlayerDataArrayList,
                 gameSideSelectDto.first(),
-                turnLength
+                gameSideSelectDto.scorePerTurnList().stream().map(Score::fromDto).collect(Collectors.toCollection(ArrayList::new))
         );
     }
 }

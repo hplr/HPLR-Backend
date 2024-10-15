@@ -87,22 +87,17 @@ public class GameDatabaseMapper {
                 );
     }
 
-    private static List<GameTurnScoreEntity> mapScore(GameSideSnapshot gameSide) {
+    public static List<GameTurnScoreEntity> mapScore(GameSideSnapshot gameSide) {
         List<GameTurnScoreEntity> turnScoreEntityList = new ArrayList<>();
         gameSide.scorePerTurnList().forEach(
                 score -> turnScoreEntityList.add(
-                        new GameTurnScoreEntity(
-                                null,
-                                score.index(),
-                                score.scoreValue()
-
-                        )
+                    ScoreMapper.fromSnapshot(score)
                 )
         );
         return turnScoreEntityList;
     }
 
-    private static List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSideSnapshot gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
+    public static List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSideSnapshot gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
         List<GamePlayerDataEntity> gamePlayerDataEntityList = new ArrayList<>();
         gameSide.gameSidePlayerDataList().forEach(gameSidePlayerData ->
                 {

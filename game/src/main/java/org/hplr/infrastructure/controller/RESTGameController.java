@@ -6,7 +6,9 @@ import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.model.vo.GameArmyType;
 import org.hplr.core.model.vo.GameDeployment;
 import org.hplr.core.model.vo.GameMission;
+import org.hplr.core.usecases.port.dto.CreatedGameSaveSecondSideDto;
 import org.hplr.core.usecases.port.dto.InitialGameSaveDataDto;
+import org.hplr.core.usecases.port.dto.SaveScoreForGameSideDto;
 import org.hplr.core.usecases.port.in.*;
 import org.hplr.exception.HPLRValidationException;
 import org.hplr.exception.LocationCalculationException;
@@ -28,6 +30,9 @@ public class RESTGameController {
     GetAllGameMissionsUseCaseInterface getAllGameMissionsUseCaseInterface;
     GetAllGameDeploymentsUseCaseInterface getAllGameDeploymentsUseCaseInterface;
     GetAllGamesByStatusAndPlayerIdUseCaseInterface getAllGamesByStatusAndPlayerIdUseCaseInterface;
+    SetSecondSideUseCaseInterface setSecondSideUseCaseInterface;
+    SaveScoreForGameSideUseCaseInterface saveScoreForGameSideUseCaseInterface;
+    FinishGameManualUseCaseInterface finishGameManualUseCaseInterface;
 
     @PostMapping(path = "/save")
     public ResponseEntity<UUID> saveGame(@RequestBody InitialGameSaveDataDto initialGameSaveDataDto) {
@@ -40,6 +45,25 @@ public class RESTGameController {
             throw new HPLRValidationException(e.getMessage());
         }
         return new ResponseEntity<>(gameId, HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/saveSecondSide")
+    public ResponseEntity<UUID> saveGameSecondSide(@RequestBody CreatedGameSaveSecondSideDto createdGameSaveSecondSideDto) {
+        UUID gameId;
+        //todo: validate
+        try {
+            gameId = setSecondSideUseCaseInterface.setSecondSideForGame(createdGameSaveSecondSideDto);
+        } catch (LocationCalculationException e) {
+            throw new LocationCalculationException(e.getMessage());
+        } catch (HPLRValidationException e) {
+            throw new HPLRValidationException(e.getMessage());
+        }
+        return new ResponseEntity<>(gameId, HttpStatus.OK);
+    }
+
+    @PostMapping(path="/saveScore")
+    public ResponseEntity<UUID> saveScore(@RequestBody SaveScoreForGameSideDto saveScoreForGameSideDto){
+        return new ResponseEntity<>(saveScoreForGameSideUseCaseInterface.saveScoreForGameSide(saveScoreForGameSideDto), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}",  produces =  MediaType.APPLICATION_JSON_VALUE)
@@ -70,4 +94,10 @@ public class RESTGameController {
         return new ResponseEntity<>(getAllGamesByStatusAndPlayerIdUseCaseInterface
                 .getAllGamesByStatusAndPlayerId(status,playerId),HttpStatus.OK);
     }
+
+    @PostMapping(path="/finish")
+    public ResponseEntity<UUID> finishGame(@RequestParam UUID gameId){
+        return new ResponseEntity<>(finishGameManualUseCaseInterface.finishGameManual(gameId), HttpStatus.OK);
+    }
+
 }

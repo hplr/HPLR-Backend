@@ -1,6 +1,7 @@
 package org.hplr.core.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.hplr.core.model.vo.UserData;
 import org.hplr.core.model.vo.UserId;
 import org.hplr.core.model.vo.PlayerRanking;
@@ -14,7 +15,7 @@ import static org.hplr.core.util.ConstValues.INITIAL_ELO_VALUE;
 
 @Getter
 public class Player extends User {
-
+    @Setter
     private PlayerRanking ranking;
     private PlayerSecurity security;
 
