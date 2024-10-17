@@ -5,6 +5,7 @@ import org.hplr.core.model.GameSnapshot;
 import org.hplr.core.usecases.port.out.command.SaveFinishedGameCommandInterface;
 import org.hplr.core.usecases.port.out.command.SaveGameCommandInterface;
 import org.hplr.core.usecases.port.out.command.StartAllDueGamesCommandInterface;
+import org.hplr.core.usecases.port.out.command.StartGameCommandInterface;
 import org.hplr.exception.HPLRIllegalStateException;
 import org.hplr.infrastructure.dbadapter.entities.*;
 import org.hplr.infrastructure.dbadapter.mapper.LocationMapper;
@@ -18,7 +19,8 @@ import java.util.*;
 @Service
 public class GameCommandAdapter implements SaveGameCommandInterface,
         StartAllDueGamesCommandInterface,
-        SaveFinishedGameCommandInterface {
+        SaveFinishedGameCommandInterface,
+        StartGameCommandInterface {
 
     final LocationRepository locationRepository;
     final PlayerQueryRepository playerQueryRepository;
@@ -87,5 +89,11 @@ public class GameCommandAdapter implements SaveGameCommandInterface,
         GameEntity gameEntity = gameRepository.findByGameId(gameSnapshot.gameId().gameId()).orElseThrow(() -> new NoSuchElementException("Game not found!"));
         gameEntity.setStatus(gameSnapshot.gameStatus());
         gameRepository.save(gameEntity);
+    }
+
+    @Override
+    public void startGame(GameSnapshot gameSnapshot) {
+        gameRepository.startGame(gameSnapshot.gameId().gameId());
+        log.info("Game started: {}",gameSnapshot.gameId().gameId());
     }
 }

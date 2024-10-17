@@ -151,6 +151,13 @@ public class GameValidator {
         }
     }
 
+    public static void validateStartingGame(Game game) throws HPLRValidationException {
+        try {
+            validateMandatoryGameInfo(game);
+        } catch (HPLRIllegalStateException | HPLRIllegalArgumentException e) {
+            throw new HPLRValidationException(e.toString());
+        }
+    }
 
     private GameValidator() {
         throw new IllegalArgumentException("Utility class");

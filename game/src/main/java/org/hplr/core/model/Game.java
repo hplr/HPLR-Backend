@@ -98,7 +98,7 @@ public class Game {
         if (Objects.nonNull(gameSelectDto.secondGameSideSelectDto())) {
             secondGameSide = GameSide.fromDto(gameSelectDto.secondGameSideSelectDto(), gameSelectDto.secondGameSideSelectDto().gameSidePlayerDataList());
         }
-        Game game = new Game(
+        return new Game(
                 new GameId(gameSelectDto.gameId()),
                 new GameLocation(location),
                 new GameData(
@@ -115,8 +115,6 @@ public class Game {
                 firstGameSide,
                 secondGameSide
         );
-        GameValidator.validateSelectedGame(game);
-        return game;
     }
 
     public GameSnapshot toSnapshot() {

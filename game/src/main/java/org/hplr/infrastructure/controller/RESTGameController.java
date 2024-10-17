@@ -33,6 +33,7 @@ public class RESTGameController {
     SetSecondSideUseCaseInterface setSecondSideUseCaseInterface;
     SaveScoreForGameSideUseCaseInterface saveScoreForGameSideUseCaseInterface;
     FinishGameManualUseCaseInterface finishGameManualUseCaseInterface;
+    StartGameManualUseCaseInterface startGameManualUseCaseInterface;
 
     @PostMapping(path = "/save")
     public ResponseEntity<UUID> saveGame(@RequestBody InitialGameSaveDataDto initialGameSaveDataDto) {
@@ -100,4 +101,8 @@ public class RESTGameController {
         return new ResponseEntity<>(finishGameManualUseCaseInterface.finishGameManual(gameId), HttpStatus.OK);
     }
 
+    @PostMapping("/start")
+    public ResponseEntity<UUID> startGame(@RequestParam UUID gameId){
+        return new ResponseEntity<>(startGameManualUseCaseInterface.startGameManual(gameId), HttpStatus.OK);
+    }
 }

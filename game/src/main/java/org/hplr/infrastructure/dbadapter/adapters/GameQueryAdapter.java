@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hplr.core.enums.Status;
 import org.hplr.core.usecases.port.dto.GameSelectDto;
 import org.hplr.core.usecases.port.out.query.SelectAllGamesQueryInterface;
+import org.hplr.core.usecases.port.out.query.SelectCreatedGamesByPlayerIdNotMatchingQueryInterface;
 import org.hplr.core.usecases.port.out.query.SelectGameByGameIdQueryInterface;
 import org.hplr.core.usecases.port.out.query.SelectGamesByStatusAndPlayerIdQueryInterface;
 import org.hplr.infrastructure.dbadapter.entities.GameEntity;
@@ -18,7 +19,8 @@ import java.util.*;
 public class GameQueryAdapter implements
         SelectGameByGameIdQueryInterface,
         SelectAllGamesQueryInterface,
-        SelectGamesByStatusAndPlayerIdQueryInterface {
+        SelectGamesByStatusAndPlayerIdQueryInterface,
+        SelectCreatedGamesByPlayerIdNotMatchingQueryInterface {
     final GameRepository gameRepository;
 
     public GameQueryAdapter(GameRepository gameRepository) {
@@ -77,5 +79,18 @@ public class GameQueryAdapter implements
                     }
                 });
         return  gameSelectDtoList;
+    }
+
+    @Override
+    public List<GameSelectDto> selectCreatedGamesByPlayerIdNotMatching(UUID playerId) {
+        List<GameEntity> gameEntityList = gameRepository.findAllByStatus(Status.CREATED);
+        List<GameEntity> gameEntityFiltered = gameEntityList
+                .stream()
+                .filter(gameEntity -> gameEntity.getFirstGameSide().getGamePlayerDataEntityList()
+                        .stream()
+                        .noneMatch(gamePlayerDataEntity -> Objects.equals(playerId,gamePlayerDataEntity.getPlayerEntity().getUserId()))).toList()
+                ;
+        return gameEntityFiltered.stream().map(GameDatabaseMapper::toDto).toList();
+
     }
 }

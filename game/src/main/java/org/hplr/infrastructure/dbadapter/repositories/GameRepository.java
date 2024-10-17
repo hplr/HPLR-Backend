@@ -27,4 +27,10 @@ public interface GameRepository extends CrudRepository<GameEntity, Long> {
     @NonNull
     @Query(value = "select ge from GameEntity ge WHERE ge.status = :status")
     List<GameEntity> findAllByStatus(Status status);
+
+    @Transactional
+    @Modifying
+    @Query(value="update GameEntity g set g.status=org.hplr.core.enums.Status.IN_PROGRESS where g.gameId = :gameToStartIdList")
+    void startGame(UUID gameToStartId);
+
 }
