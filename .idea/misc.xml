@@ -7,6 +7,17 @@
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/ELO/pom.xml" />
+        <option value="$PROJECT_DIR$/bootstrap/pom.xml" />
+        <option value="$PROJECT_DIR$/game/pom.xml" />
+        <option value="$PROJECT_DIR$/library/pom.xml" />
+        <option value="$PROJECT_DIR$/location/pom.xml" />
+        <option value="$PROJECT_DIR$/tournament/pom.xml" />
+        <option value="$PROJECT_DIR$/user/pom.xml" />
+      </set>
+    </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-22" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
