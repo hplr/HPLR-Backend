@@ -11,6 +11,7 @@ public class ConstValues {
     public static final Long INITIAL_ELO_VALUE = 1400L;
     public static final Long TOKEN_DURATION = 10L;
     public static final Long INITIAL_WEIGHT = 800L;
+    public static final String DATE_PATTERN = "yyyy-MM-dd HH:mm";
 
     private ConstValues() {
         throw new IllegalStateException("Utility class");
