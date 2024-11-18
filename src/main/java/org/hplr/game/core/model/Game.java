@@ -7,17 +7,16 @@ import org.hplr.game.core.enums.Status;
 import org.hplr.game.core.model.vo.*;
 import org.hplr.game.core.usecases.port.dto.GameSelectDto;
 import org.hplr.game.core.usecases.port.dto.InitialGameSaveDataDto;
+import org.hplr.library.core.util.ConstValues;
 import org.hplr.library.exception.HPLRValidationException;
 import org.hplr.library.exception.LocationCalculationException;
 import org.hplr.location.core.model.Location;
-import org.hplr.user.core.model.Player;
+import org.hplr.tournament.core.model.dto.TournamentGameDto;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import static org.hplr.game.core.mappers.GameSideMapper.createPlayerListForSide;
 
 @Slf4j
 @Getter
@@ -49,24 +48,19 @@ public class Game {
     }
 
 
-    public static Game fromDto(InitialGameSaveDataDto initialGameSaveDataDto, List<Player> firstSidePlayerList, List<Player> secondSidePlayerList) throws LocationCalculationException, HPLRValidationException {
+    public static Game fromDto(InitialGameSaveDataDto initialGameSaveDataDto, List<GameSidePlayerData> firstSidePlayerList, List<GameSidePlayerData> secondSidePlayerList) throws LocationCalculationException, HPLRValidationException {
         Location location = Location.fromDto(initialGameSaveDataDto.locationSaveDto());
         Duration gameDuration = Duration.ofHours(initialGameSaveDataDto.gameTime());
         GameSide secondSide = null;
         Status status = Status.CREATED;
         if (Objects.nonNull(secondSidePlayerList)) {
-            List<GameSidePlayerData> secondGameSidePlayerDataList = createPlayerListForSide(secondSidePlayerList,
-                    initialGameSaveDataDto.secondSide().playerDataList());
-
             secondSide = GameSide.fromDto(
-                    initialGameSaveDataDto.secondSide(),
-                    secondGameSidePlayerDataList,
-                    initialGameSaveDataDto.gameTurnLength());
+                    initialGameSaveDataDto.secondSide().allegiance(),
+                    secondSidePlayerList,
+                    initialGameSaveDataDto.gameTurnLength()
+            );
             status = Status.AWAITING;
         }
-
-        List<GameSidePlayerData> firstGameSidePlayerDataList = createPlayerListForSide(firstSidePlayerList,
-                initialGameSaveDataDto.firstSide().playerDataList());
 
         Game game = new Game(
                 new GameId(UUID.randomUUID()),
@@ -77,14 +71,14 @@ public class Game {
                         initialGameSaveDataDto.gamePointSize(),
                         initialGameSaveDataDto.gameTurnLength(),
                         gameDuration,
-                        LocalDateTime.parse(initialGameSaveDataDto.gameStartTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
-                        LocalDateTime.parse(initialGameSaveDataDto.gameStartTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).plus(gameDuration),
+                        LocalDateTime.parse(initialGameSaveDataDto.gameStartTime(), DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
+                        LocalDateTime.parse(initialGameSaveDataDto.gameStartTime(), DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)).plus(gameDuration),
                         initialGameSaveDataDto.ranking()
                 ),
                 status,
                 GameSide.fromDto(
-                        initialGameSaveDataDto.firstSide(),
-                        firstGameSidePlayerDataList,
+                        initialGameSaveDataDto.firstSide().allegiance(),
+                        firstSidePlayerList,
                         initialGameSaveDataDto.gameTurnLength()
                 ),
                 secondSide);
@@ -116,6 +110,26 @@ public class Game {
                 gameSelectDto.status(),
                 firstGameSide,
                 secondGameSide
+        );
+    }
+
+    public static Game fromTournamentDto(TournamentGameDto tournamentGameDto){
+        return new Game(
+                new GameId(UUID.randomUUID()),
+                new GameLocation(tournamentGameDto.location()),
+                new GameData(
+                        tournamentGameDto.gameMission(),
+                        tournamentGameDto.gameDeployment(),
+                        tournamentGameDto.gamePointSize(),
+                        tournamentGameDto.gameTurnLength(),
+                        Duration.ofHours(tournamentGameDto.gameHoursDuration()),
+                        LocalDateTime.parse(tournamentGameDto.gameStartTime(), DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
+                        LocalDateTime.parse(tournamentGameDto.gameStartTime(), DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
+                        true
+                ),
+                Status.AWAITING,
+                GameSide.fromTournamentDto(tournamentGameDto.firstSide(), tournamentGameDto.gameTurnLength()),
+                GameSide.fromTournamentDto(tournamentGameDto.secondSide(), tournamentGameDto.gameTurnLength())
         );
     }
 

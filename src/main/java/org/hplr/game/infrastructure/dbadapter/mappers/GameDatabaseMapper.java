@@ -125,7 +125,6 @@ public class GameDatabaseMapper {
                             new GamePlayerDataEntity(
                                     null,
                                     playerEntity,
-                                    playerEntity.getScore(),
                                     new GameArmyEntity(
                                             null,
                                             primaryGameArmyTypeEntity,

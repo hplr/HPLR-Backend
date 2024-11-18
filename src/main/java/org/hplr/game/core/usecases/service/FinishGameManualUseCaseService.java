@@ -2,8 +2,10 @@ package org.hplr.game.core.usecases.service;
 
 import lombok.RequiredArgsConstructor;
 
+import org.hplr.elo.core.model.vo.Elo;
 import org.hplr.game.core.enums.Status;
 import org.hplr.game.core.model.Game;
+import org.hplr.game.core.model.vo.GameHistoricalElo;
 import org.hplr.game.core.usecases.port.dto.GameSelectDto;
 import org.hplr.game.core.usecases.port.in.FinishGameUseCaseInterface;
 import org.hplr.game.core.usecases.port.out.command.SaveFinishedGameCommandInterface;
@@ -44,13 +46,13 @@ public class FinishGameManualUseCaseService implements FinishGameUseCaseInterfac
         Long firstElo = calculateAverageELOForGameSideUseCaseInterface.calculateAverageELO(
                 game.getFirstGameSide().getGameSidePlayerDataList()
                         .stream()
-                        .map(gameSidePlayerData -> gameSidePlayerData.currentELO().ELOValue())
+                        .map(gameSidePlayerData -> gameSidePlayerData.player().getRanking().score())
                         .toList()
         );
         Long secondElo = calculateAverageELOForGameSideUseCaseInterface.calculateAverageELO(
                 game.getSecondGameSide().getGameSidePlayerDataList()
                         .stream()
-                        .map(gameSidePlayerData -> gameSidePlayerData.currentELO().ELOValue())
+                        .map(gameSidePlayerData -> gameSidePlayerData.player().getRanking().score())
                         .toList()
         );
         Long gameScore;
@@ -95,7 +97,12 @@ public class FinishGameManualUseCaseService implements FinishGameUseCaseInterfac
                             gameSidePlayerData.player().setRanking(playerRanking);
                         }
                 );
-        saveFinishedGameCommandInterface.saveFinishedGame(game.toSnapshot());
+        GameHistoricalElo gameHistoricalElo = new GameHistoricalElo(
+                game.getGameId(),
+                new Elo(firstElo),
+                new Elo(secondElo)
+        );
+        saveFinishedGameCommandInterface.saveFinishedGame(game.toSnapshot(), gameHistoricalElo);
         return game.getGameId().gameId();
     }
 }

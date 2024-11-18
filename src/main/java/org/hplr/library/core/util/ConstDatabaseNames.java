@@ -16,6 +16,8 @@ public class ConstDatabaseNames {
     public static final String ADMINISTRATOR_TABLE = "administrator";
     public static final String ROLE_TABLE = "role";
     public static final String SCORE_TABLE = "score";
+    public static final String TOURNAMENT_TABLE = "tournament";
+    public static final String TOURNAMENT_ROUND_TABLE = "tournament_round";
 
     public static final String PLAYER_RANKING_VIEW = "PlayerRanking_v";
 

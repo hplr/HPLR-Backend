@@ -11,6 +11,7 @@ import org.hplr.game.core.usecases.port.dto.InitialGameSaveDataDto;
 import org.hplr.game.core.usecases.port.dto.SaveScoreForGameSideDto;
 import org.hplr.game.core.usecases.port.in.*;
 
+import org.hplr.game.core.usecases.service.GetAllAvailableGamesUseCaseService;
 import org.hplr.library.exception.HPLRValidationException;
 import org.hplr.library.exception.LocationCalculationException;
 
@@ -26,6 +27,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/game")
 public class RESTGameController {
+    private final GetAllAvailableGamesUseCaseService getAllAvailableGamesUseCaseService;
     SaveGameUseCaseInterface saveGameUseCaseInterface;
     GetGameByIDUseCaseInterface getGameByIDUseCaseInterface;
     GetAllGameArmyTypesUseCaseInterface getAllGameArmyTypesUseCaseInterface;
@@ -36,6 +38,7 @@ public class RESTGameController {
     SaveScoreForGameSideUseCaseInterface saveScoreForGameSideUseCaseInterface;
     FinishGameUseCaseInterface finishGameUseCaseInterface;
     StartGameManualUseCaseInterface startGameManualUseCaseInterface;
+    GetAllAvailableGamesUseCaseInterface getAllAvailableGamesUseCaseInterface;
 
     @PostMapping(path = "/save")
     public ResponseEntity<UUID> saveGame(@RequestBody InitialGameSaveDataDto initialGameSaveDataDto) {
@@ -106,5 +109,10 @@ public class RESTGameController {
     @PostMapping("/start")
     public ResponseEntity<UUID> startGame(@RequestParam UUID gameId){
         return new ResponseEntity<>(startGameManualUseCaseInterface.startGameManual(gameId), HttpStatus.OK);
+    }
+
+    @GetMapping("/find/{playerId}")
+    public ResponseEntity<List<GameSnapshot>> findAvailableGames(@PathVariable UUID playerId){
+        return new ResponseEntity<>(getAllAvailableGamesUseCaseService.getAllAvailableGames(playerId), HttpStatus.OK);
     }
 }

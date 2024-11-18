@@ -1,8 +1,6 @@
 package org.hplr.game.infrastructure.dbadapter.adapters;
 
 
-import org.hplr.elo.core.model.vo.Elo;
-
 import org.hplr.game.core.enums.Allegiance;
 import org.hplr.game.core.enums.Status;
 import org.hplr.game.core.model.GameSide;
@@ -210,7 +208,6 @@ class GameCommandAdapterTests {
                                                         test_lastLogin
                                                 )
                                         ),
-                                        new Elo(100L),
                                         new GameArmy(
                                                 new GameArmyType("IH"),
                                                 test_nickname,
@@ -251,7 +248,6 @@ class GameCommandAdapterTests {
                                                         test_lastLogin
                                                 )
                                         ),
-                                        new Elo(100L),
                                         new GameArmy(
                                                 new GameArmyType("IH"),
                                                 test_nickname,

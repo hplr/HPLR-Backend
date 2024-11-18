@@ -2,15 +2,13 @@ package org.hplr.game.core.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.hplr.elo.core.model.vo.Elo;
 import org.hplr.game.core.enums.Allegiance;
 import org.hplr.game.core.model.vo.GameSideId;
 import org.hplr.game.core.model.vo.GameSidePlayerData;
 import org.hplr.elo.core.model.vo.Score;
-import org.hplr.game.core.usecases.port.dto.CreatedGameSaveSecondSideDto;
 import org.hplr.game.core.usecases.port.dto.GameSidePlayerDataDto;
 import org.hplr.game.core.usecases.port.dto.GameSideSelectDto;
-import org.hplr.game.core.usecases.port.dto.InitialGameSaveSideDto;
+import org.hplr.tournament.core.model.vo.TournamentPlayer;
 import org.hplr.user.core.model.Player;
 
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ public class GameSide {
         this.scorePerTurnList = new ArrayList<>();
         for (int i = 0; i < gameTurnLength; i++) {
             scorePerTurnList.add(new Score(
-                    (long) i+1,
+                    (long) i + 1,
                     0L,
                     false
             ));
@@ -44,30 +42,30 @@ public class GameSide {
     }
 
 
-    public static GameSide fromDto(InitialGameSaveSideDto initialGameSaveSideDto, List<GameSidePlayerData> gameSidePlayerDataList, Integer turnLength) {
+    public static GameSide fromDto(Allegiance allegiance, List<GameSidePlayerData> gameSidePlayerDataList, Integer turnLength) {
         return new GameSide(
-                initialGameSaveSideDto.allegiance(),
+                allegiance,
                 gameSidePlayerDataList,
                 null,
                 turnLength
         );
     }
 
-    public static GameSide fromDto(CreatedGameSaveSecondSideDto createdGameSaveSecondSideDto, List<GameSidePlayerData> gameSidePlayerDataList, Integer turnLength) {
+    public static GameSide fromTournamentDto(TournamentPlayer tournamentGameSideDto, Integer turnLength) {
         return new GameSide(
-                createdGameSaveSecondSideDto.allegiance(),
-                gameSidePlayerDataList,
+                tournamentGameSideDto.allegiance(),
+                List.of(tournamentGameSideDto.gameSidePlayerData()),
                 null,
                 turnLength
         );
     }
 
-    public static GameSide fromDto(GameSideSelectDto gameSideSelectDto, List<GameSidePlayerDataDto> gameSidePlayerDataList){
+
+    public static GameSide fromDto(GameSideSelectDto gameSideSelectDto, List<GameSidePlayerDataDto> gameSidePlayerDataList) {
         List<GameSidePlayerData> gameSidePlayerDataArrayList = new ArrayList<>();
         for (GameSidePlayerDataDto gameSidePlayerDataDto : gameSidePlayerDataList) {
             gameSidePlayerDataArrayList.add(new GameSidePlayerData(
                     Player.fromDto(gameSidePlayerDataDto.playerSelectDto()),
-                    new Elo(gameSidePlayerDataDto.currentELO().ELOValue()),
                     gameSidePlayerDataDto.armyPrimary(),
                     gameSidePlayerDataDto.allyArmyList()
             ));

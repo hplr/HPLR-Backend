@@ -1,6 +1,6 @@
 package org.hplr.game.infrastructure.dbadapter.mappers;
 
-import org.hplr.elo.core.usecases.port.dto.EloDto;
+
 import org.hplr.elo.core.usecases.port.dto.ScoreDto;
 import org.hplr.game.core.model.vo.*;
 import org.hplr.game.core.usecases.port.dto.*;
@@ -34,7 +34,6 @@ public class GameSideDatabaseMapper {
 
                     gameSidePlayerDataList.add(new GameSidePlayerDataDto(
                             PlayerMapper.toDto(gamePlayerDataEntity.getPlayerEntity()),
-                            new EloDto(gamePlayerDataEntity.getEloScore()),
                             new GameArmy(
                                     new GameArmyType(gamePlayerDataEntity.getPrimaryArmyEntity().getGameArmyTypeEntity().getName()),
                                     gamePlayerDataEntity.getPrimaryArmyEntity().getName(),
@@ -46,7 +45,6 @@ public class GameSideDatabaseMapper {
 
                 }
         );
-        //todo: implement this actually xddddddd
         List<ScoreDto> scorePerTurnList = gameSideEntity.getTurnScoreEntityList().stream().map(ScoreMapper::fromEntity).toList();
 
         return new GameSideSelectDto(
@@ -77,6 +75,8 @@ public class GameSideDatabaseMapper {
                 mapScore(gameSideSnapshot)
         );
     }
+
+
 
 
     private GameSideDatabaseMapper() {
