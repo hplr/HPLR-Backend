@@ -1,5 +1,6 @@
 package org.hplr.tournament.infrastructure.dbadapter.mappers;
 
+import org.hplr.game.core.model.Game;
 import org.hplr.game.infrastructure.dbadapter.mappers.GameDatabaseMapper;
 import org.hplr.location.core.model.Location;
 import org.hplr.location.infrastructure.dbadapter.mapper.LocationMapper;
@@ -9,7 +10,7 @@ import org.hplr.tournament.infrastructure.dbadapter.entities.TournamentRoundEnti
 
 public class TournamentDatabaseMapper {
 
-    public static TournamentEntity fromSnapshot(TournamentSnapshot tournamentSnapshot){
+    public static TournamentEntity fromSnapshot(TournamentSnapshot tournamentSnapshot) {
         return new TournamentEntity(
                 null,
                 tournamentSnapshot.tournamentId().tournamentId(),
@@ -22,10 +23,11 @@ public class TournamentDatabaseMapper {
                 LocationMapper.fromSnapshot(tournamentSnapshot.tournamentLocation().location().toSnapshot()),
                 tournamentSnapshot.tournamentRoundList()
                         .stream()
-                        .map(tournamentRound ->  new TournamentRoundEntity(
+                        .map(tournamentRound -> new TournamentRoundEntity(
                                 null,
-                                null
-        ))
+                                tournamentRound.getGameList().stream().map(Game::toSnapshot).map(GameDatabaseMapper::fromSnapshot).toList(),
+                                tournamentRound.getGameList().stream().map(Game::toSnapshot).toList()
+                        ))
                         .toList(),
                 null,
                 tournamentSnapshot.closed()

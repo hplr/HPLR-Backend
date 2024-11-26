@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hplr.game.core.model.GameSnapshot;
 import org.hplr.game.core.model.vo.GameHistoricalElo;
 import org.hplr.game.core.model.vo.GameSidePlayerDataSnapshot;
+import org.hplr.game.core.model.vo.GameSideSnapshot;
 import org.hplr.game.core.usecases.port.out.command.*;
 import org.hplr.game.infrastructure.dbadapter.entities.*;
 
@@ -21,6 +22,8 @@ import org.hplr.user.infrastructure.dbadapter.repositories.PlayerQueryRepository
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import static org.hplr.game.infrastructure.dbadapter.mappers.GameDatabaseMapper.mapScore;
 
 @Slf4j
 @Service
@@ -77,8 +80,25 @@ public class GameCommandAdapter implements SaveGameCommandInterface,
                 null,
                 gameSnapshot.gameData().gameDeployment().name()
         ));
-
-        gameRepository.save(GameDatabaseMapper.fromSnapshot(gameSnapshot, locationEntity, gameMissionEntity, gameDeploymentEntity, allPlayerEntityList, armyTypeEntityList));
+        GameEntity gameEntity = GameDatabaseMapper.fromSnapshot(gameSnapshot);
+        gameEntity.setLocationEntity(locationEntity);
+        gameEntity.setGameMissionEntity(gameMissionEntity);
+        gameEntity.setGameDeploymentEntity(gameDeploymentEntity);
+        gameEntity.setFirstGameSide(new GameSideEntity(
+                null,
+                gameSnapshot.firstGameSide().sideId().sideId(),
+                gameSnapshot.firstGameSide().allegiance(),
+                mapGamePlayerDataEntityList(gameSnapshot.firstGameSide(), allPlayerEntityList, armyTypeEntityList),
+                gameSnapshot.firstGameSide().isFirst(),
+                mapScore(gameSnapshot.firstGameSide())));
+        gameEntity.setSecondGameSide(new GameSideEntity(
+                null,
+                gameSnapshot.secondGameSide().sideId().sideId(),
+                gameSnapshot.secondGameSide().allegiance(),
+                mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), allPlayerEntityList, armyTypeEntityList),
+                gameSnapshot.secondGameSide().isFirst(),
+                mapScore(gameSnapshot.secondGameSide())));
+        gameRepository.save(gameEntity);
     }
 
     @Override
@@ -157,10 +177,51 @@ public class GameCommandAdapter implements SaveGameCommandInterface,
                             null,
                             gameSnapshot.gameData().gameDeployment().name()
                     ));
-                    gameRepository.save(GameDatabaseMapper.fromSnapshot(gameSnapshot, locationEntity, gameMissionEntity, gameDeploymentEntity, allPlayerEntityList, armyTypeEntityList));
+                    gameRepository.save(GameDatabaseMapper.fromSnapshot(gameSnapshot));
                 }
                 );
 
 
+    }
+
+    private List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSideSnapshot gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
+        List<GamePlayerDataEntity> gamePlayerDataEntityList = new ArrayList<>();
+        gameSide.gameSidePlayerDataList().forEach(gameSidePlayerData ->
+                {
+                    PlayerEntity playerEntity = playerEntityList.stream().filter(playerEntity1 -> playerEntity1.getUserId().equals(gameSidePlayerData.player().userId().id())).findFirst().orElseThrow(NoSuchElementException::new);
+                    GameArmyTypeEntity primaryGameArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(gameSidePlayerData.armyPrimary().army().name())).findFirst().orElseThrow(NoSuchElementException::new);
+                    List<GameArmyEntity> allyArmyEntityList;
+                    if (Objects.nonNull(gameSidePlayerData.allyArmyList())) {
+                        allyArmyEntityList = new ArrayList<>();
+                        gameSidePlayerData.allyArmyList().forEach(allyArmy -> {
+                            GameArmyTypeEntity allyArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(allyArmy.name())).findFirst().orElseThrow(NoSuchElementException::new);
+                            allyArmyEntityList.add(new GameArmyEntity(
+                                    null,
+                                    allyArmyTypeEntity,
+                                    allyArmy.name(),
+                                    allyArmy.pointValue()
+
+                            ));
+                        });
+                    } else {
+                        allyArmyEntityList = null;
+                    }
+                    gamePlayerDataEntityList.add(
+                            new GamePlayerDataEntity(
+                                    null,
+                                    playerEntity,
+                                    new GameArmyEntity(
+                                            null,
+                                            primaryGameArmyTypeEntity,
+                                            gameSidePlayerData.armyPrimary().name(),
+                                            gameSidePlayerData.armyPrimary().pointValue()
+                                    ),
+                                    allyArmyEntityList
+
+                            )
+                    );
+                }
+        );
+        return gamePlayerDataEntityList;
     }
 }

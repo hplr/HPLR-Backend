@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static org.hplr.game.infrastructure.dbadapter.mappers.GameDatabaseMapper.mapGamePlayerDataEntityList;
 import static org.hplr.game.infrastructure.dbadapter.mappers.GameDatabaseMapper.mapScore;
 
 public class GameSideDatabaseMapper {

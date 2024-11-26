@@ -7,30 +7,23 @@ import org.hplr.game.core.model.vo.GameSideSnapshot;
 import org.hplr.game.core.usecases.port.dto.GameSelectDto;
 import org.hplr.game.core.usecases.port.dto.GameSideSelectDto;
 import org.hplr.game.infrastructure.dbadapter.entities.*;
-import org.hplr.location.infrastructure.dbadapter.entities.LocationEntity;
 import org.hplr.location.infrastructure.dbadapter.mapper.LocationMapper;
-import org.hplr.user.infrastructure.dbadapter.entities.PlayerEntity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class GameDatabaseMapper {
 
-    public static GameEntity fromSnapshot(GameSnapshot gameSnapshot, LocationEntity locationEntity, GameMissionEntity gameMissionEntity, GameDeploymentEntity gameDeploymentEntity, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
-
-
-        List<GameTurnScoreEntity> firstSideTurnScoreEntityList = mapScore(gameSnapshot.firstGameSide());
-        List<GamePlayerDataEntity> firstSideGamePlayerDataEntityList = mapGamePlayerDataEntityList(gameSnapshot.firstGameSide(), playerEntityList, gameArmyTypeEntityList);
-        GameEntity gameEntity = new GameEntity(
+    public static GameEntity fromSnapshot(GameSnapshot gameSnapshot) {
+        return new GameEntity(
                 null,
                 null,
                 null,
                 gameSnapshot.gameId().gameId(),
-                locationEntity,
-                gameMissionEntity,
-                gameDeploymentEntity,
+                null,
+                null,
+                null,
                 gameSnapshot.gameData().gamePointSize(),
                 gameSnapshot.gameData().gameTurnLength(),
                 gameSnapshot.gameData().gameTimeLength().toHoursPart(),
@@ -38,30 +31,9 @@ public class GameDatabaseMapper {
                 gameSnapshot.gameData().gameEndTime(),
                 gameSnapshot.gameData().ranking(),
                 gameSnapshot.gameStatus(),
-                new GameSideEntity(
-                        null,
-                        gameSnapshot.firstGameSide().sideId().sideId(),
-                        gameSnapshot.firstGameSide().allegiance(),
-                        firstSideGamePlayerDataEntityList,
-                        gameSnapshot.firstGameSide().isFirst(),
-                        firstSideTurnScoreEntityList
-                ),
+                null,
                 null
         );
-        if (Objects.nonNull(gameSnapshot.secondGameSide())) {
-            List<GameTurnScoreEntity> secondSideTurnScoreEntityList = mapScore(gameSnapshot.secondGameSide());
-            List<GamePlayerDataEntity> secondSideGamePlayerDataEntityList = mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), playerEntityList, gameArmyTypeEntityList);
-            GameSideEntity secondGameSideEntity = new GameSideEntity(
-                    null,
-                    gameSnapshot.secondGameSide().sideId().sideId(),
-                    gameSnapshot.secondGameSide().allegiance(),
-                    secondSideGamePlayerDataEntityList,
-                    gameSnapshot.secondGameSide().isFirst(),
-                    secondSideTurnScoreEntityList
-            );
-            gameEntity.setSecondGameSide(secondGameSideEntity);
-        }
-        return gameEntity;
 
 
     }
@@ -99,46 +71,6 @@ public class GameDatabaseMapper {
         return turnScoreEntityList;
     }
 
-    public static List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSideSnapshot gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
-        List<GamePlayerDataEntity> gamePlayerDataEntityList = new ArrayList<>();
-        gameSide.gameSidePlayerDataList().forEach(gameSidePlayerData ->
-                {
-                    PlayerEntity playerEntity = playerEntityList.stream().filter(playerEntity1 -> playerEntity1.getUserId().equals(gameSidePlayerData.player().userId().id())).findFirst().orElseThrow(NoSuchElementException::new);
-                    GameArmyTypeEntity primaryGameArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(gameSidePlayerData.armyPrimary().army().name())).findFirst().orElseThrow(NoSuchElementException::new);
-                    List<GameArmyEntity> allyArmyEntityList;
-                    if (Objects.nonNull(gameSidePlayerData.allyArmyList())) {
-                        allyArmyEntityList = new ArrayList<>();
-                        gameSidePlayerData.allyArmyList().forEach(allyArmy -> {
-                            GameArmyTypeEntity allyArmyTypeEntity = gameArmyTypeEntityList.stream().filter(gameArmyTypeEntity -> gameArmyTypeEntity.getName().equals(allyArmy.name())).findFirst().orElseThrow(NoSuchElementException::new);
-                            allyArmyEntityList.add(new GameArmyEntity(
-                                    null,
-                                    allyArmyTypeEntity,
-                                    allyArmy.name(),
-                                    allyArmy.pointValue()
-
-                            ));
-                        });
-                    } else {
-                        allyArmyEntityList = null;
-                    }
-                    gamePlayerDataEntityList.add(
-                            new GamePlayerDataEntity(
-                                    null,
-                                    playerEntity,
-                                    new GameArmyEntity(
-                                            null,
-                                            primaryGameArmyTypeEntity,
-                                            gameSidePlayerData.armyPrimary().name(),
-                                            gameSidePlayerData.armyPrimary().pointValue()
-                                    ),
-                                    allyArmyEntityList
-
-                            )
-                    );
-                }
-        );
-        return gamePlayerDataEntityList;
-    }
 
     private GameDatabaseMapper() {
         throw new IllegalStateException("Utility class");

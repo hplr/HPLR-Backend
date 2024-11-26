@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hplr.game.core.model.GameSnapshot;
 import org.hplr.game.infrastructure.dbadapter.entities.GameSideEntity;
 import org.hplr.library.core.util.ConstDatabaseNames;
 import org.hplr.location.infrastructure.dbadapter.entities.LocationEntity;
@@ -37,4 +38,6 @@ public class TournamentEntity {
     @OneToMany
     List<GameSideEntity> gameSideEntityList;
     Boolean closed;
+
+
 }

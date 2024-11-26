@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hplr.game.core.model.GameSnapshot;
 import org.hplr.game.infrastructure.dbadapter.entities.GameEntity;
 import org.hplr.library.core.util.ConstDatabaseNames;
 
@@ -23,4 +24,7 @@ public class TournamentRoundEntity {
     private Long id;
     @OneToMany
     private List<GameEntity> gameEntityList;
+
+    @Transient
+    List<GameSnapshot> gameSnapshotList;
 }
