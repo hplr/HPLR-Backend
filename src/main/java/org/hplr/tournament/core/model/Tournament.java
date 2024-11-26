@@ -5,14 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hplr.game.core.model.Game;
-import org.hplr.game.core.model.vo.GameSidePlayerData;
+import org.hplr.game.core.model.GameSide;
 import org.hplr.location.core.model.Location;
 import org.hplr.tournament.core.model.vo.TournamentData;
 import org.hplr.tournament.core.model.vo.TournamentId;
 import org.hplr.tournament.core.model.vo.TournamentLocation;
 import org.hplr.tournament.core.model.vo.TournamentPlayer;
+import org.hplr.tournament.core.usecases.port.dto.TournamentSelectDto;
 import org.hplr.tournament.core.usecases.service.dto.InitialTournamentSaveDto;
-import org.hplr.user.core.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,4 +50,38 @@ public class Tournament {
         return tournament;
     }
 
+    public static Tournament fromSelectDto(TournamentSelectDto tournamentSelectDto){
+        Tournament tournament = new Tournament(
+                new TournamentId(tournamentSelectDto.tournamentId()),
+                new TournamentData(
+                        tournamentSelectDto.tournamentName(),
+                        tournamentSelectDto.tournamentStart(),
+                        tournamentSelectDto.pointLimit(),
+                        tournamentSelectDto.gameLength(),
+                        tournamentSelectDto.gameTurnAmount(),
+                        tournamentSelectDto.maxPlayers()
+                ),
+                new TournamentLocation(Location.fromDto(tournamentSelectDto.locationSelectDto())),
+                tournamentSelectDto.tournamentRoundSelectDtoList()
+                        .stream()
+                        .map(tournamentRoundSelectDto -> new TournamentRound(
+                                tournamentRoundSelectDto.gameSelectDtoList()
+                                        .stream()
+                                        .map(Game::fromDto)
+                                        .toList()
+                        ))
+                        .toList(),
+                tournamentSelectDto.playerDtoList()
+                        .stream()
+                        .map(gameSide -> GameSide.fromDto(gameSide, gameSide.gameSidePlayerDataList()))
+                        .map(gameSide -> new TournamentPlayer(gameSide.getAllegiance(), gameSide.getGameSidePlayerDataList().getFirst()))
+                                .toList(),
+                tournamentSelectDto.closed()
+        );
+        return tournament;
+    }
+
+    public TournamentSnapshot toSnapshot() {
+        return new TournamentSnapshot(this);
+    }
 }

@@ -1,12 +1,18 @@
 package org.hplr.tournament.infrastructure.dbadapter.mappers;
 
 import org.hplr.game.core.model.Game;
+import org.hplr.game.core.model.GameSide;
+import org.hplr.game.core.model.vo.GameSideSnapshot;
 import org.hplr.game.infrastructure.dbadapter.mappers.GameDatabaseMapper;
-import org.hplr.location.core.model.Location;
+import org.hplr.game.infrastructure.dbadapter.mappers.GameSideDatabaseMapper;
 import org.hplr.location.infrastructure.dbadapter.mapper.LocationMapper;
 import org.hplr.tournament.core.model.TournamentSnapshot;
+import org.hplr.tournament.core.usecases.port.dto.TournamentRoundSelectDto;
+import org.hplr.tournament.core.usecases.port.dto.TournamentSelectDto;
 import org.hplr.tournament.infrastructure.dbadapter.entities.TournamentEntity;
 import org.hplr.tournament.infrastructure.dbadapter.entities.TournamentRoundEntity;
+
+import java.util.List;
 
 public class TournamentDatabaseMapper {
 
@@ -29,8 +35,36 @@ public class TournamentDatabaseMapper {
                                 tournamentRound.getGameList().stream().map(Game::toSnapshot).toList()
                         ))
                         .toList(),
-                null,
+                tournamentSnapshot.playerList().stream().map(player -> GameSideDatabaseMapper.fromSnapshot(new GameSideSnapshot(GameSide.fromDto(
+                        player.allegiance(),
+                        List.of(player.gameSidePlayerData()),
+                        7
+                )))).toList(),
                 tournamentSnapshot.closed()
         );
     }
+
+    public static TournamentSelectDto fromEntity(TournamentEntity tournamentEntity) {
+        return new TournamentSelectDto(
+                tournamentEntity.getTournamentId(),
+                tournamentEntity.getName(),
+                tournamentEntity.getTournamentStart(),
+                tournamentEntity.getPointSize(),
+                tournamentEntity.getGameLength(),
+                tournamentEntity.getGameTurnAmount(),
+                tournamentEntity.getMaxPlayers(),
+                LocationMapper.fromEntity(tournamentEntity.getLocationEntity()),
+                tournamentEntity.getTournamentRoundEntityList()
+                        .stream()
+                        .map(tournamentRoundEntity ->
+                        new TournamentRoundSelectDto(tournamentRoundEntity.getGameEntityList()
+                                .stream()
+                                .map(GameDatabaseMapper::toDto)
+                                .toList()
+                        )).toList(),
+                tournamentEntity.getGameSideEntityList().stream().map(GameSideDatabaseMapper::fromEntity).toList(),
+                tournamentEntity.getClosed()
+        );
+    }
 }
+

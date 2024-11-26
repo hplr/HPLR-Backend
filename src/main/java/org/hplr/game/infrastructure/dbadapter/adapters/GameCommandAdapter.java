@@ -91,13 +91,15 @@ public class GameCommandAdapter implements SaveGameCommandInterface,
                 mapGamePlayerDataEntityList(gameSnapshot.firstGameSide(), allPlayerEntityList, armyTypeEntityList),
                 gameSnapshot.firstGameSide().isFirst(),
                 mapScore(gameSnapshot.firstGameSide())));
-        gameEntity.setSecondGameSide(new GameSideEntity(
-                null,
-                gameSnapshot.secondGameSide().sideId().sideId(),
-                gameSnapshot.secondGameSide().allegiance(),
-                mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), allPlayerEntityList, armyTypeEntityList),
-                gameSnapshot.secondGameSide().isFirst(),
-                mapScore(gameSnapshot.secondGameSide())));
+        if(Objects.nonNull(gameSnapshot.secondGameSide())){
+            gameEntity.setSecondGameSide(new GameSideEntity(
+                    null,
+                    gameSnapshot.secondGameSide().sideId().sideId(),
+                    gameSnapshot.secondGameSide().allegiance(),
+                    mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), allPlayerEntityList, armyTypeEntityList),
+                    gameSnapshot.secondGameSide().isFirst(),
+                    mapScore(gameSnapshot.secondGameSide())));
+        }
         gameRepository.save(gameEntity);
     }
 
@@ -177,6 +179,26 @@ public class GameCommandAdapter implements SaveGameCommandInterface,
                             null,
                             gameSnapshot.gameData().gameDeployment().name()
                     ));
+                    GameEntity gameEntity = GameDatabaseMapper.fromSnapshot(gameSnapshot);
+                    gameEntity.setLocationEntity(locationEntity);
+                    gameEntity.setGameMissionEntity(gameMissionEntity);
+                    gameEntity.setGameDeploymentEntity(gameDeploymentEntity);
+                    gameEntity.setFirstGameSide(new GameSideEntity(
+                            null,
+                            gameSnapshot.firstGameSide().sideId().sideId(),
+                            gameSnapshot.firstGameSide().allegiance(),
+                            mapGamePlayerDataEntityList(gameSnapshot.firstGameSide(), allPlayerEntityList, armyTypeEntityList),
+                            gameSnapshot.firstGameSide().isFirst(),
+                            mapScore(gameSnapshot.firstGameSide())));
+                    if(Objects.nonNull(gameSnapshot.secondGameSide())){
+                        gameEntity.setSecondGameSide(new GameSideEntity(
+                                null,
+                                gameSnapshot.secondGameSide().sideId().sideId(),
+                                gameSnapshot.secondGameSide().allegiance(),
+                                mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), allPlayerEntityList, armyTypeEntityList),
+                                gameSnapshot.secondGameSide().isFirst(),
+                                mapScore(gameSnapshot.secondGameSide())));
+                    }
                     gameRepository.save(GameDatabaseMapper.fromSnapshot(gameSnapshot));
                 }
                 );
@@ -184,7 +206,7 @@ public class GameCommandAdapter implements SaveGameCommandInterface,
 
     }
 
-    private List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSideSnapshot gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
+    public static List<GamePlayerDataEntity> mapGamePlayerDataEntityList(GameSideSnapshot gameSide, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList) {
         List<GamePlayerDataEntity> gamePlayerDataEntityList = new ArrayList<>();
         gameSide.gameSidePlayerDataList().forEach(gameSidePlayerData ->
                 {

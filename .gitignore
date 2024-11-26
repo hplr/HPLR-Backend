@@ -38,3 +38,5 @@ build/
 .DS_Store
 .idea/sonarlint/**/*
 /bootstrap/src/main/resources/application.properties
+/src/main/resources/application.properties
+/src/main/resources/data.sql

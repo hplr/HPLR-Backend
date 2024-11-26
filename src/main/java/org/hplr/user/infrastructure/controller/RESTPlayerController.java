@@ -22,19 +22,21 @@ import java.util.UUID;
 @RequestMapping(value = "/player")
 public class RESTPlayerController {
 
+    final GetPlayerUseCaseService getPlayerUseCaseInterface;
     final GetAllPlayerListUseCaseInterface getAllPlayerListUseCaseInterface;
     final RegisterPlayerUseCaseInterface registerPlayerUseCaseInterface;
     final LoginPlayerUseCaseInterface loginPlayerUseCaseInterface;
-    final GetPlayerUseCaseService getPlayerUseCaseInterface;
 
-    @GetMapping(path = "/getAll", produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<PlayerSnapshot>> getAllPlayerList() {
-        return new ResponseEntity<>(getAllPlayerListUseCaseInterface.getAllPlayerList(), HttpStatus.OK);
-    }
+
 
     @GetMapping(path = "/{id}", produces =  MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerSnapshot> getPlayerByPlayerId(@PathVariable UUID id) {
         return new ResponseEntity<>(getPlayerUseCaseInterface.getPlayerByUserId(id), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/getAll", produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<PlayerSnapshot>> getAllPlayerList() {
+        return new ResponseEntity<>(getAllPlayerListUseCaseInterface.getAllPlayerList(), HttpStatus.OK);
     }
 
     @PostMapping(path="/register", produces = MediaType.APPLICATION_JSON_VALUE)

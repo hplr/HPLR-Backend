@@ -24,6 +24,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static org.hplr.game.infrastructure.dbadapter.adapters.GameCommandAdapter.mapGamePlayerDataEntityList;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -46,10 +48,8 @@ public class GameSideCommandAdapter implements SaveGameSecondSideCommandInterfac
         }
         GameEntity gameEntity = gameRepository.findByGameId(gameSnapshot.gameId().gameId()).orElseThrow(() -> new NoSuchElementException("Game not found!"));
         gameEntity.setSecondGameSide(GameSideDatabaseMapper.fromSnapshot(
-                gameSnapshot.secondGameSide(),
-                gameSnapshot.gameData().gameTurnLength(),
-                allPlayerEntityList,
-                armyTypeEntityList));
+                gameSnapshot.secondGameSide()));
+        gameEntity.getSecondGameSide().setGamePlayerDataEntityList( mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), allPlayerEntityList, armyTypeEntityList));
         gameRepository.save(gameEntity);
     }
 

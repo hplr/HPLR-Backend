@@ -8,10 +8,10 @@ import org.hplr.game.core.usecases.port.out.command.SaveAllGamesCommandInterface
 import org.hplr.game.core.usecases.port.out.query.SelectAllGameDeploymentsQueryInterface;
 import org.hplr.game.core.usecases.port.out.query.SelectAllGameMissionsQueryInterface;
 import org.hplr.tournament.core.model.Tournament;
-import org.hplr.tournament.core.model.TournamentRound;
 import org.hplr.tournament.core.model.dto.TournamentGameDto;
 import org.hplr.tournament.core.model.vo.TournamentPairing;
-import org.hplr.tournament.core.usecases.port.StartTournamentUseCaseInterface;
+import org.hplr.tournament.core.usecases.port.in.StartTournamentUseCaseInterface;
+import org.hplr.tournament.core.usecases.port.out.query.SelectTournamentByTournamentIdQueryInterface;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -20,7 +20,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class StartTournamentUseCaseService implements StartTournamentUseCaseInterface {
 //todo: implement
-//    private final SelectTournamentByTournamentIdQueryInterface selectTournamentByTournamentIdQueryInterface;
+    private final SelectTournamentByTournamentIdQueryInterface selectTournamentByTournamentIdQueryInterface;
     private final SelectAllGameDeploymentsQueryInterface selectAllGameDeploymentsQueryInterface;
     private final SelectAllGameMissionsQueryInterface selectAllGameMissionsQueryInterface;
     private final SaveAllGamesCommandInterface saveAllGamesCommandInterface;

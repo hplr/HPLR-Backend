@@ -40,6 +40,38 @@ public class RESTGameController {
     StartGameManualUseCaseInterface startGameManualUseCaseInterface;
     GetAllAvailableGamesUseCaseInterface getAllAvailableGamesUseCaseInterface;
 
+    //Dictionary endpoints
+    @GetMapping(path = "/army", produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<GameArmyType>> getAllGameArmyType() {
+        return new ResponseEntity<>(getAllGameArmyTypesUseCaseInterface.getAllGameArmyTypes(),HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/mission", produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<GameMission>> getAllGameMissions() {
+        return new ResponseEntity<>(getAllGameMissionsUseCaseInterface.getAllGameMissions(),HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/deployment", produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<GameDeployment>> getAllGameDeployments() {
+        return new ResponseEntity<>(getAllGameDeploymentsUseCaseInterface.getAllGameDeployments(),HttpStatus.OK);
+    }
+
+    //Get endpoints
+    @GetMapping(path = "/{id}",  produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GameSnapshot> getGameById(@PathVariable UUID id) {
+        GameSnapshot gameSnapshot;
+
+        gameSnapshot = getGameByIDUseCaseInterface.getGameByID(id);
+        return new ResponseEntity<>(gameSnapshot, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/{status}/{playerId}", produces =  MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<GameSnapshot>> getAllGamesByStatusAndPlayerId(@PathVariable Status status, @PathVariable UUID playerId) {
+        return new ResponseEntity<>(getAllGamesByStatusAndPlayerIdUseCaseInterface
+                .getAllGamesByStatusAndPlayerId(status,playerId),HttpStatus.OK);
+    }
+
+    //Save game data endpoints
     @PostMapping(path = "/save")
     public ResponseEntity<UUID> saveGame(@RequestBody InitialGameSaveDataDto initialGameSaveDataDto) {
         UUID gameId;
@@ -67,38 +99,15 @@ public class RESTGameController {
         return new ResponseEntity<>(gameId, HttpStatus.OK);
     }
 
-    @PostMapping(path="/saveScore")
+    //Handle game changes
+    @PostMapping("/start")
+    public ResponseEntity<UUID> startGame(@RequestParam UUID gameId){
+        return new ResponseEntity<>(startGameManualUseCaseInterface.startGameManual(gameId), HttpStatus.OK);
+    }
+
+    @PutMapping(path="/saveScore")
     public ResponseEntity<UUID> saveScore(@RequestBody SaveScoreForGameSideDto saveScoreForGameSideDto){
         return new ResponseEntity<>(saveScoreForGameSideUseCaseInterface.saveScoreForGameSide(saveScoreForGameSideDto), HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/{id}",  produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GameSnapshot> getGameById(@PathVariable UUID id) {
-        GameSnapshot gameSnapshot;
-
-        gameSnapshot = getGameByIDUseCaseInterface.getGameByID(id);
-        return new ResponseEntity<>(gameSnapshot, HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/army", produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<GameArmyType>> getAllGameArmyType() {
-        return new ResponseEntity<>(getAllGameArmyTypesUseCaseInterface.getAllGameArmyTypes(),HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/mission", produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<GameMission>> getAllGameMissions() {
-        return new ResponseEntity<>(getAllGameMissionsUseCaseInterface.getAllGameMissions(),HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/deployment", produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<GameDeployment>> getAllGameDeployments() {
-        return new ResponseEntity<>(getAllGameDeploymentsUseCaseInterface.getAllGameDeployments(),HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/{status}/{playerId}", produces =  MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<GameSnapshot>> getAllGamesByStatusAndPlayerId(@PathVariable Status status, @PathVariable UUID playerId) {
-        return new ResponseEntity<>(getAllGamesByStatusAndPlayerIdUseCaseInterface
-                .getAllGamesByStatusAndPlayerId(status,playerId),HttpStatus.OK);
     }
 
     @PostMapping(path="/finish")
@@ -106,10 +115,7 @@ public class RESTGameController {
         return new ResponseEntity<>(finishGameUseCaseInterface.finishGame(gameId), HttpStatus.OK);
     }
 
-    @PostMapping("/start")
-    public ResponseEntity<UUID> startGame(@RequestParam UUID gameId){
-        return new ResponseEntity<>(startGameManualUseCaseInterface.startGameManual(gameId), HttpStatus.OK);
-    }
+
 
     @GetMapping("/find/{playerId}")
     public ResponseEntity<List<GameSnapshot>> findAvailableGames(@PathVariable UUID playerId){

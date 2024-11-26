@@ -5,7 +5,6 @@ import org.hplr.elo.core.usecases.port.dto.ScoreDto;
 import org.hplr.game.core.model.vo.*;
 import org.hplr.game.core.usecases.port.dto.*;
 import org.hplr.game.infrastructure.dbadapter.entities.*;
-import org.hplr.user.infrastructure.dbadapter.entities.PlayerEntity;
 import org.hplr.user.infrastructure.dbadapter.mappers.PlayerMapper;
 
 import java.util.ArrayList;
@@ -55,25 +54,27 @@ public class GameSideDatabaseMapper {
         );
     }
 
-    public static GameSideEntity fromSnapshot(GameSideSnapshot gameSideSnapshot, Integer turnNumber, List<PlayerEntity> playerEntityList, List<GameArmyTypeEntity> gameArmyTypeEntityList){
-        List<GameTurnScoreEntity> gameTurnScoreEntityList = new ArrayList<>();
-        for(int i = 0; i< turnNumber; i++){
-            gameTurnScoreEntityList.add(new GameTurnScoreEntity(
-                    null,
-                    (long) (i + 1),
-                    0L,
-                    false
-            ));
-        }
+    public static GameSideEntity fromSnapshot(GameSideSnapshot gameSideSnapshot){
+//        List<GameTurnScoreEntity> gameTurnScoreEntityList = new ArrayList<>();
+//        for(int i = 0; i< turnNumber; i++){
+//            gameTurnScoreEntityList.add(new GameTurnScoreEntity(
+//                    null,
+//                    (long) (i + 1),
+//                    0L,
+//                    false
+//            ));
+//        }
         return new GameSideEntity(
                 null,
                 gameSideSnapshot.sideId().sideId(),
                 gameSideSnapshot.allegiance(),
-                mapGamePlayerDataEntityList(gameSideSnapshot, playerEntityList, gameArmyTypeEntityList),
+                null,
                 gameSideSnapshot.isFirst(),
                 mapScore(gameSideSnapshot)
         );
     }
+
+
 
 
 

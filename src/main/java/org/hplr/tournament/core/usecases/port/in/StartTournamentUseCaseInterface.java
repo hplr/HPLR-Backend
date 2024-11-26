@@ -1,4 +1,4 @@
-package org.hplr.tournament.core.usecases.port;
+package org.hplr.tournament.core.usecases.port.in;
 
 import java.util.UUID;
 
