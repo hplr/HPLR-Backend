@@ -25,6 +25,7 @@ public class AddPlayerToTournamentUseCaseService implements AddPlayerToTournamen
 
     @Override
     public UUID addPlayerToTournament(AddPlayerToTournamentDto addPlayerToTournamentDto) {
+        //todo: validate if player isnt already in the tournament
         Player player = Player.fromDto(selectPlayerByUserId
                 .selectPlayerByUserId(
                         addPlayerToTournamentDto.playerId()).orElseThrow(NoSuchElementException::new)
