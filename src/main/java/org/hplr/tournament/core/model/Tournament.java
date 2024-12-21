@@ -46,12 +46,12 @@ public class Tournament {
                 new ArrayList<>(),
                 false
         );
-        //todo: validate
+        TournamentValidator.validateInitialTournament(tournament);
         return tournament;
     }
 
     public static Tournament fromSelectDto(TournamentSelectDto tournamentSelectDto){
-        Tournament tournament = new Tournament(
+        return new Tournament(
                 new TournamentId(tournamentSelectDto.tournamentId()),
                 new TournamentData(
                         tournamentSelectDto.tournamentName(),
@@ -78,7 +78,6 @@ public class Tournament {
                                 .toList()),
                 tournamentSelectDto.closed()
         );
-        return tournament;
     }
 
     public TournamentSnapshot toSnapshot() {

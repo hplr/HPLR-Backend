@@ -1,6 +1,5 @@
 package org.hplr.game.core.model;
 
-import org.hplr.game.core.enums.Status;
 import org.hplr.game.core.model.vo.GameArmy;
 import org.hplr.game.core.model.vo.GameSidePlayerData;
 import org.hplr.library.core.util.ConstValues;
@@ -18,19 +17,6 @@ public class GameValidator {
         try {
             validateNoneFirst(game);
             validateMandatoryGameInfo(game);
-        } catch (HPLRIllegalStateException | HPLRIllegalArgumentException e) {
-            throw new HPLRValidationException(e.toString());
-        }
-    }
-
-    public static void validateSelectedGame(Game game) throws HPLRValidationException {
-        try {
-            validateMandatoryGameInfo(game);
-            if (Status.FINISHED.equals(game.getGameStatus())) {
-                validateELOChangeIsNotNull(game);
-                validateSideHasFilledTurnPoints(game.getFirstGameSide());
-                validateSideHasFilledTurnPoints(game.getSecondGameSide());
-            }
         } catch (HPLRIllegalStateException | HPLRIllegalArgumentException e) {
             throw new HPLRValidationException(e.toString());
         }
@@ -121,12 +107,6 @@ public class GameValidator {
         }
     }
 
-    private static void validateELOChangeIsNotNull(Game game) {
-        if (Objects.isNull(game.getGameELOChangeValue())) {
-            throw new HPLRIllegalStateException("Ranking game must have defined ELO change value");
-        }
-    }
-
     private static void validateSideHasFilledTurnPoints(GameSide gameSide) {
         Boolean emptyScore = gameSide.getScorePerTurnList()
                 .stream()
@@ -157,6 +137,16 @@ public class GameValidator {
         } catch (HPLRIllegalStateException | HPLRIllegalArgumentException e) {
             throw new HPLRValidationException(e.toString());
         }
+    }
+
+    public static void validateSecondSide(Game game){
+        validateSideHasCorrectAmountOfPoints(game, game.getSecondGameSide());
+    }
+
+    public static void validateFinishedGame(Game game){
+        validateMandatoryGameInfo(game);
+        validateSideHasFilledTurnPoints(game.getFirstGameSide());
+        validateSideHasFilledTurnPoints(game.getSecondGameSide());
     }
 
     private GameValidator() {

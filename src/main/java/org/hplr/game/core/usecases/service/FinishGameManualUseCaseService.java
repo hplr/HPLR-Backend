@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.hplr.elo.core.model.vo.Elo;
 import org.hplr.game.core.enums.Status;
 import org.hplr.game.core.model.Game;
+import org.hplr.game.core.model.GameValidator;
 import org.hplr.game.core.model.vo.GameHistoricalElo;
 import org.hplr.game.core.usecases.port.dto.GameSelectDto;
 import org.hplr.game.core.usecases.port.in.FinishGameUseCaseInterface;
@@ -41,8 +42,7 @@ public class FinishGameManualUseCaseService implements FinishGameUseCaseInterfac
                 selectGameByGameIdQueryInterface.selectGameByGameId(gameId);
 
         Game game = Game.fromDto(gameSelectDtoOptional.orElseThrow(NoSuchElementException::new));
-        //todo: validate finished game
-        //GameValidator.validateFinishedGame(game);
+        GameValidator.validateFinishedGame(game);
         game.setGameStatus(Status.FINISHED);
         Long firstElo = calculateAverageELOForGameSideUseCaseInterface.calculateAverageELO(
                 game.getFirstGameSide().getGameSidePlayerDataList()

@@ -14,7 +14,6 @@ import org.hplr.location.infrastructure.external.OSMCoordinatesCalculator;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -73,7 +72,7 @@ public class Location {
                         new LocationMapPoint(0.0,0.0)
                 ));
             }
-            validateLocation(location);
+            LocationValidator.validateLocation(location);
             return location;
         }
     }
@@ -96,13 +95,7 @@ public class Location {
 
         );
     }
-    //todo: move it to class
-    private static void validateLocation(Location location) {
-        if (!location.getPrivateLocation() && Objects.isNull(location.getLocationGeoData())) {
-            throw new IllegalArgumentException();
 
-        }
-    }
 
     public LocationSnapshot toSnapshot(){
         return new LocationSnapshot(this);

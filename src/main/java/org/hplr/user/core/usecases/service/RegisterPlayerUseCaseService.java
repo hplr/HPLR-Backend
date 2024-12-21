@@ -1,6 +1,7 @@
 package org.hplr.user.core.usecases.service;
 
 import lombok.RequiredArgsConstructor;
+import org.hplr.library.exception.HPLRValidationException;
 import org.hplr.user.core.model.Player;
 import org.hplr.user.core.model.PlayerFullDataSnapshot;
 import org.hplr.user.core.model.vo.PlayerSecurity;
@@ -42,8 +43,8 @@ public class RegisterPlayerUseCaseService implements RegisterPlayerUseCaseInterf
             player = Player.fromDto(initialPlayerSaveDto);
             playerFullDataSnapshot = player.toFullSnapshot();
             savePlayerDataCommandInterface.savePlayer(playerFullDataSnapshot);
-        } catch(HPLRIllegalStateException exception) {
-            throw new HPLRIllegalStateException(exception.getMessage());
+        } catch(HPLRValidationException exception) {
+            throw new HPLRValidationException(exception.getMessage());
         }
         return playerFullDataSnapshot.userId().id();
     }

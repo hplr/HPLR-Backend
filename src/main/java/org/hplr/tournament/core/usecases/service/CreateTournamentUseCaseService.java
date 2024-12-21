@@ -18,7 +18,6 @@ public class CreateTournamentUseCaseService implements CreateTournamentUseCaseIn
 
     @Override
     public UUID createTournament(InitialTournamentSaveDto initialTournamentSaveDto) {
-        //todo: validate
         Tournament tournament = Tournament.fromInitialDto(initialTournamentSaveDto);
         TournamentSnapshot tournamentSnapshot = tournament.toSnapshot();
         saveTournamentCommandInterface.saveTournament(tournamentSnapshot);

@@ -104,7 +104,6 @@ public class RESTGameController {
     @PostMapping(path = "/saveSecondSide")
     public ResponseEntity<UUID> saveGameSecondSide(@RequestBody CreatedGameSaveSecondSideDto createdGameSaveSecondSideDto) {
         UUID gameId;
-        //todo: validate
         try {
             gameId = setSecondSideUseCaseInterface.setSecondSideForGame(createdGameSaveSecondSideDto);
         } catch (LocationCalculationException e) {

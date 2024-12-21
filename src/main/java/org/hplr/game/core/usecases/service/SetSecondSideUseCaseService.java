@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hplr.game.core.enums.Status;
 import org.hplr.game.core.model.Game;
 import org.hplr.game.core.model.GameSide;
+import org.hplr.game.core.model.GameValidator;
 import org.hplr.game.core.model.vo.GameArmy;
 import org.hplr.game.core.model.vo.GameSidePlayerData;
 import org.hplr.game.core.usecases.port.dto.CreatedGameSaveSecondSideDto;
@@ -53,7 +54,7 @@ public class SetSecondSideUseCaseService implements SetSecondSideUseCaseInterfac
                 }).toList().stream().filter(Objects::nonNull).toList();
         GameSide secondGameSide = GameSide.fromDto(createdGameSaveSecondSideDto.allegiance(), sidePlayerList, game.getGameData().gameTurnLength());
         game.setSecondGameSide(secondGameSide);
-        //todo: validate
+        GameValidator.validateSecondSide(game);
         game.setGameStatus(Status.AWAITING);
         saveGameSecondSideCommandInterface.saveGameSecondSide(game.toSnapshot());
         return secondGameSide.getSideId().sideId();
