@@ -1,5 +1,7 @@
 package org.hplr.game.infrastructure.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.hplr.game.core.enums.Status;
 import org.hplr.game.core.model.GameSnapshot;
@@ -8,13 +10,16 @@ import org.hplr.game.core.model.vo.GameDeployment;
 import org.hplr.game.core.model.vo.GameMission;
 import org.hplr.game.core.usecases.port.dto.CreatedGameSaveSecondSideDto;
 import org.hplr.game.core.usecases.port.dto.InitialGameSaveDataDto;
+import org.hplr.game.core.usecases.port.dto.InitialGameSidePlayerDataDto;
 import org.hplr.game.core.usecases.port.dto.SaveScoreForGameSideDto;
 import org.hplr.game.core.usecases.port.in.*;
 
 import org.hplr.game.core.usecases.service.GetAllAvailableGamesUseCaseService;
+import org.hplr.library.exception.HPLRAccessDeniedException;
 import org.hplr.library.exception.HPLRValidationException;
 import org.hplr.library.exception.LocationCalculationException;
 
+import org.hplr.library.infrastructure.controller.AccessValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +44,7 @@ public class RESTGameController {
     FinishGameUseCaseInterface finishGameUseCaseInterface;
     StartGameManualUseCaseInterface startGameManualUseCaseInterface;
     GetAllAvailableGamesUseCaseInterface getAllAvailableGamesUseCaseInterface;
+    AccessValidator accessValidator;
 
     //Dictionary endpoints
     @GetMapping(path = "/army", produces =  MediaType.APPLICATION_JSON_VALUE)
@@ -73,9 +79,19 @@ public class RESTGameController {
 
     //Save game data endpoints
     @PostMapping(path = "/save")
-    public ResponseEntity<UUID> saveGame(@RequestBody InitialGameSaveDataDto initialGameSaveDataDto) {
+    @SecurityRequirement(name = "bearer")
+    public ResponseEntity<UUID> saveGame(HttpServletRequest httpRequest, @RequestBody InitialGameSaveDataDto initialGameSaveDataDto) {
         UUID gameId;
         try {
+            boolean playerInList = false;
+            for(InitialGameSidePlayerDataDto player : initialGameSaveDataDto.firstSide().playerDataList()){
+                if(Boolean.TRUE.equals(accessValidator.validateUserAccess(httpRequest,player.playerId()))){
+                    playerInList = true;
+                }
+            }
+            if(Boolean.FALSE.equals(playerInList)){
+                throw new HPLRAccessDeniedException("Access denied for user "+accessValidator.getUserId(httpRequest));
+            }
             gameId = saveGameUseCaseInterface.saveGame(initialGameSaveDataDto);
         } catch (LocationCalculationException e) {
             throw new LocationCalculationException(e.getMessage());

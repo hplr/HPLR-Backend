@@ -20,6 +20,7 @@ import org.hplr.elo.core.usecases.port.in.CalculateScoreForGameUseCaseInterface;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
@@ -82,18 +83,18 @@ public class FinishGameManualUseCaseService implements FinishGameUseCaseInterfac
             );
         }
 
-        Long eloChange = calculateELOChangeForGameUseCaseInterface.calculateChangeForGame(firstElo, secondElo, gameScore);
+        Map<Integer, Long> eloMap = calculateELOChangeForGameUseCaseInterface.calculateChangeForGame(firstElo, secondElo, gameScore);
         game.getFirstGameSide().getGameSidePlayerDataList()
                 .forEach(gameSidePlayerData -> {
                             Long score = gameSidePlayerData.player().getRanking().score();
-                            PlayerRanking playerRanking = new PlayerRanking( score + eloChange);
+                            PlayerRanking playerRanking = new PlayerRanking( score + eloMap.get(1));
                             gameSidePlayerData.player().setRanking(playerRanking);
                         }
                 );
         game.getSecondGameSide().getGameSidePlayerDataList()
                 .forEach(gameSidePlayerData -> {
                             Long score = gameSidePlayerData.player().getRanking().score();
-                            PlayerRanking playerRanking = new PlayerRanking( score - eloChange);
+                            PlayerRanking playerRanking = new PlayerRanking(score +  eloMap.get(2));
                             gameSidePlayerData.player().setRanking(playerRanking);
                         }
                 );

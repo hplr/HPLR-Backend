@@ -11,6 +11,10 @@ public record GameSidePlayerData(
         GameArmy armyPrimary,
         List<GameArmy> allyArmyList
 ) {
+    public Long calculateTotalPointValue(){
+        return armyPrimary.pointValue() + allyArmyList.stream().map(GameArmy::pointValue).reduce(0L, Long::sum);
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;

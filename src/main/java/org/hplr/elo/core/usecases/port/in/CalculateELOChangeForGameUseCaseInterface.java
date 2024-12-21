@@ -1,6 +1,8 @@
 package org.hplr.elo.core.usecases.port.in;
 
+import java.util.Map;
+
 public interface CalculateELOChangeForGameUseCaseInterface {
 
-    Long calculateChangeForGame(Long firstElo, Long secondElo, Long gameScore);
+    Map<Integer, Long> calculateChangeForGame(Long firstElo, Long secondElo, Long gameScore);
 }

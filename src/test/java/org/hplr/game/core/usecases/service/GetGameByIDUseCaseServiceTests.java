@@ -139,7 +139,6 @@ class GetGameByIDUseCaseServiceTests {
                                                 test_motto,
                                                 test_score
                                         ),
-                                        test_score,
                                         new GameArmyEntity(
                                                 null,
                                                 new GameArmyTypeEntity(

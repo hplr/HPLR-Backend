@@ -9,7 +9,6 @@ import org.hplr.game.core.usecases.port.dto.InitialGameSidePlayerArmyDto;
 import org.hplr.game.core.usecases.port.dto.InitialGameSidePlayerDataDto;
 import org.hplr.game.core.usecases.port.out.command.SaveGameCommandInterface;
 
-import org.hplr.library.exception.HPLRIllegalStateException;
 import org.hplr.library.exception.HPLRValidationException;
 import org.hplr.library.exception.LocationCalculationException;
 
@@ -17,6 +16,7 @@ import org.hplr.location.core.usecases.port.dto.LocationSaveDto;
 
 import org.hplr.user.core.model.PlayerValidator;
 import org.hplr.user.core.usecases.port.out.query.SelectAllPlayerByIdListQueryInterface;
+import org.hplr.user.core.usecases.port.out.query.SelectPlayerByUserIdQueryInterface;
 import org.hplr.user.infrastructure.dbadapter.entities.PlayerEntity;
 import org.hplr.user.infrastructure.dbadapter.mappers.PlayerMapper;
 
@@ -29,6 +29,7 @@ import org.mockito.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -47,6 +48,8 @@ class SaveGameUseCaseServiceTests {
     static final String test_motto = "to play is play";
     static final Long test_score = 25L;
 
+    @Mock
+    SelectPlayerByUserIdQueryInterface mock_selectPlayerByUserIdQueryInterface;
     @Mock
     SelectAllPlayerByIdListQueryInterface mock_selectAllPlayerByIdListQueryInterface;
 
@@ -313,10 +316,10 @@ class SaveGameUseCaseServiceTests {
                     test_score
             );
 
-            when(mock_selectAllPlayerByIdListQueryInterface.selectAllPlayerByIdList(List.of(test_firstPlayerId)))
-                    .thenReturn(List.of(PlayerMapper.toDto(first_player)));
-            when(mock_selectAllPlayerByIdListQueryInterface.selectAllPlayerByIdList(List.of(test_secondPlayerId)))
-                    .thenReturn(List.of(PlayerMapper.toDto(second_player)));
+            when(mock_selectPlayerByUserIdQueryInterface.selectPlayerByUserId(test_firstPlayerId))
+                    .thenReturn(Optional.of(PlayerMapper.toDto(first_player)));
+            when(mock_selectPlayerByUserIdQueryInterface.selectPlayerByUserId(test_secondPlayerId))
+                    .thenReturn(Optional.of(PlayerMapper.toDto(second_player)));
             InitialGameSaveDataDto test_initialGameSaveDataDto = new InitialGameSaveDataDto(
                     new InitialGameSaveSideDto(
                             Allegiance.LOYALIST,
@@ -359,7 +362,7 @@ class SaveGameUseCaseServiceTests {
                     "TEST",
                     "TEST"
             );
-            Assertions.assertThrows(HPLRIllegalStateException.class,
+            Assertions.assertThrows(HPLRValidationException.class,
                     () -> saveGameUseCaseService.saveGame(test_initialGameSaveDataDto)
             );
 

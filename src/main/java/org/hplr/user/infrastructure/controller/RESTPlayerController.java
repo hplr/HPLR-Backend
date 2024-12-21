@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @RestController
@@ -45,7 +46,7 @@ public class RESTPlayerController {
     }
 
     @PostMapping(path="/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GetTokenResponseDto> loginPlayer(@RequestBody PlayerLoginDto playerLoginDto) {
+    public ResponseEntity<GetTokenResponseDto> loginPlayer(@RequestBody PlayerLoginDto playerLoginDto) throws NoSuchElementException {
         return new ResponseEntity<>(loginPlayerUseCaseInterface.loginPlayer(playerLoginDto), HttpStatus.OK);
     }
 }

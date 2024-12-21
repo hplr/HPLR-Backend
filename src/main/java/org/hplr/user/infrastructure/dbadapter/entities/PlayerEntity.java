@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name= ConstDatabaseNames.PLAYER_TABLE)
+@Table(name=ConstDatabaseNames.PLAYER_TABLE)
 public class PlayerEntity extends UserEntity {
 
    private String nickname;

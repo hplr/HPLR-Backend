@@ -52,9 +52,11 @@ public class GameSide {
     }
 
     public static GameSide fromTournamentDto(TournamentPlayer tournamentGameSideDto, Integer turnLength) {
+        List<GameSidePlayerData> gameSidePlayerDataList = new ArrayList<>();
+        gameSidePlayerDataList.add(tournamentGameSideDto.gameSidePlayerData());
         return new GameSide(
                 tournamentGameSideDto.allegiance(),
-                List.of(tournamentGameSideDto.gameSidePlayerData()),
+                gameSidePlayerDataList,
                 null,
                 turnLength
         );

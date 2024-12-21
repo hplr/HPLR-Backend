@@ -16,13 +16,13 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name= ConstDatabaseNames.TOURNAMENT_TABLE)
+@Table(name= ConstDatabaseNames.TOURNAMENT_ROUND_TABLE)
 
 public class TournamentRoundEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<GameEntity> gameEntityList;
 
     @Transient

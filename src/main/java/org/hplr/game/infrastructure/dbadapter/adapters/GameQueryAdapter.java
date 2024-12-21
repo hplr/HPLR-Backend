@@ -60,7 +60,7 @@ public class GameQueryAdapter implements
                 .stream()
                 .anyMatch(playerData -> Objects.equals(playerId, playerData.getPlayerEntity().getUserId())))
                 .toList();
-        List<GameEntity> gameEntityListSecondSide = gameEntityList.stream().filter(gameEntity -> gameEntity
+        List<GameEntity> gameEntityListSecondSide = gameEntityList.stream().filter(gameEntity -> Objects.nonNull(gameEntity.getSecondGameSide()) && gameEntity
                         .getSecondGameSide()
                         .getGamePlayerDataEntityList()
                         .stream()

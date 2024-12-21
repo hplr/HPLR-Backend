@@ -9,6 +9,7 @@ public record InitialTournamentSaveDto(
         LocalDateTime tournamentStart,
         Long pointLimit,
         Integer gameLength,
+        Integer gameTurnAmount,
         Integer maxPlayers,
         LocationSaveDto locationSaveDto
 ) {

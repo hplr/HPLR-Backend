@@ -3,6 +3,7 @@ package org.hplr.game.infrastructure.dbadapter.adapters;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.hplr.game.core.enums.Status;
 import org.hplr.game.core.model.GameSnapshot;
 import org.hplr.game.core.usecases.port.out.command.SaveGameSecondSideCommandInterface;
 import org.hplr.game.core.usecases.port.out.command.SaveScoreCommandInterface;
@@ -50,6 +51,7 @@ public class GameSideCommandAdapter implements SaveGameSecondSideCommandInterfac
         gameEntity.setSecondGameSide(GameSideDatabaseMapper.fromSnapshot(
                 gameSnapshot.secondGameSide()));
         gameEntity.getSecondGameSide().setGamePlayerDataEntityList( mapGamePlayerDataEntityList(gameSnapshot.secondGameSide(), allPlayerEntityList, armyTypeEntityList));
+        gameEntity.setStatus(Status.AWAITING);
         gameRepository.save(gameEntity);
     }
 

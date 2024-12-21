@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+
 public class PlayerQueryAdapter implements SelectPlayerByUserIdQueryInterface, SelectAllPlayerListQueryInterface, SelectAllPlayerByIdListQueryInterface, SelectPlayerByEmailQueryInterface {
     final PlayerQueryRepository playerQueryRepository;
 
@@ -43,7 +44,10 @@ public class PlayerQueryAdapter implements SelectPlayerByUserIdQueryInterface, S
 
     @Override
     public Optional<PlayerSelectDto> selectPlayerByEmail(String email) throws NoSuchElementException {
-        PlayerEntity playerEntity = playerQueryRepository.findByEmail(email).orElseThrow(NoSuchElementException::new);
-        return Optional.of(PlayerMapper.toDto(playerEntity));
+        Optional<PlayerEntity> playerEntity = playerQueryRepository.findByEmail(email);
+        if(playerEntity.isEmpty()){
+            throw new NoSuchElementException("Player not found!");
+        }
+        return Optional.of(PlayerMapper.toDto(playerEntity.get()));
     }
 }

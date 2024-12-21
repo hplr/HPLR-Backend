@@ -55,15 +55,6 @@ public class GameSideDatabaseMapper {
     }
 
     public static GameSideEntity fromSnapshot(GameSideSnapshot gameSideSnapshot){
-//        List<GameTurnScoreEntity> gameTurnScoreEntityList = new ArrayList<>();
-//        for(int i = 0; i< turnNumber; i++){
-//            gameTurnScoreEntityList.add(new GameTurnScoreEntity(
-//                    null,
-//                    (long) (i + 1),
-//                    0L,
-//                    false
-//            ));
-//        }
         return new GameSideEntity(
                 null,
                 gameSideSnapshot.sideId().sideId(),

@@ -26,7 +26,7 @@ public class Tournament {
     private TournamentData tournamentData;
     private TournamentLocation tournamentLocation;
     private List<TournamentRound> tournamentRoundList;
-    private List<TournamentPlayer> playerList;
+    private ArrayList<TournamentPlayer> playerList;
     private Boolean closed;
 
     public static Tournament fromInitialDto(InitialTournamentSaveDto initialTournamentSaveDto){
@@ -37,7 +37,7 @@ public class Tournament {
                         initialTournamentSaveDto.tournamentStart(),
                         initialTournamentSaveDto.pointLimit(),
                         initialTournamentSaveDto.gameLength(),
-                        null,
+                        initialTournamentSaveDto.gameTurnAmount(),
                         initialTournamentSaveDto.maxPlayers()
 
                 ),
@@ -71,11 +71,11 @@ public class Tournament {
                                         .toList()
                         ))
                         .toList(),
-                tournamentSelectDto.playerDtoList()
+                new ArrayList<>(tournamentSelectDto.playerDtoList()
                         .stream()
                         .map(gameSide -> GameSide.fromDto(gameSide, gameSide.gameSidePlayerDataList()))
                         .map(gameSide -> new TournamentPlayer(gameSide.getAllegiance(), gameSide.getGameSidePlayerDataList().getFirst()))
-                                .toList(),
+                                .toList()),
                 tournamentSelectDto.closed()
         );
         return tournament;

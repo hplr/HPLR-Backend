@@ -1,8 +1,6 @@
 package org.hplr.tournament.infrastructure.dbadapter.mappers;
 
 import org.hplr.game.core.model.Game;
-import org.hplr.game.core.model.GameSide;
-import org.hplr.game.core.model.vo.GameSideSnapshot;
 import org.hplr.game.infrastructure.dbadapter.mappers.GameDatabaseMapper;
 import org.hplr.game.infrastructure.dbadapter.mappers.GameSideDatabaseMapper;
 import org.hplr.location.infrastructure.dbadapter.mapper.LocationMapper;
@@ -12,11 +10,15 @@ import org.hplr.tournament.core.usecases.port.dto.TournamentSelectDto;
 import org.hplr.tournament.infrastructure.dbadapter.entities.TournamentEntity;
 import org.hplr.tournament.infrastructure.dbadapter.entities.TournamentRoundEntity;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 public class TournamentDatabaseMapper {
-
+    private TournamentDatabaseMapper(){
+        throw new IllegalStateException("Utility class");
+    }
     public static TournamentEntity fromSnapshot(TournamentSnapshot tournamentSnapshot) {
+
         return new TournamentEntity(
                 null,
                 tournamentSnapshot.tournamentId().tournamentId(),
@@ -31,15 +33,11 @@ public class TournamentDatabaseMapper {
                         .stream()
                         .map(tournamentRound -> new TournamentRoundEntity(
                                 null,
-                                tournamentRound.getGameList().stream().map(Game::toSnapshot).map(GameDatabaseMapper::fromSnapshot).toList(),
+                                new ArrayList<>(),
                                 tournamentRound.getGameList().stream().map(Game::toSnapshot).toList()
                         ))
                         .toList(),
-                tournamentSnapshot.playerList().stream().map(player -> GameSideDatabaseMapper.fromSnapshot(new GameSideSnapshot(GameSide.fromDto(
-                        player.allegiance(),
-                        List.of(player.gameSidePlayerData()),
-                        7
-                )))).toList(),
+                null,
                 tournamentSnapshot.closed()
         );
     }
@@ -57,11 +55,11 @@ public class TournamentDatabaseMapper {
                 tournamentEntity.getTournamentRoundEntityList()
                         .stream()
                         .map(tournamentRoundEntity ->
-                        new TournamentRoundSelectDto(tournamentRoundEntity.getGameEntityList()
-                                .stream()
-                                .map(GameDatabaseMapper::toDto)
-                                .toList()
-                        )).toList(),
+                                new TournamentRoundSelectDto(tournamentRoundEntity.getGameEntityList()
+                                        .stream()
+                                        .map(GameDatabaseMapper::toDto)
+                                        .toList()
+                                )).toList(),
                 tournamentEntity.getGameSideEntityList().stream().map(GameSideDatabaseMapper::fromEntity).toList(),
                 tournamentEntity.getClosed()
         );

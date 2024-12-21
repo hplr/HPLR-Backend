@@ -9,9 +9,11 @@ public class ConstValues {
     public static final UUID DEFAULT_PLAYER_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
     public static final int DEFAULT_CHECK_INTERVAL = 1000000000;
     public static final Long INITIAL_ELO_VALUE = 1400L;
-    public static final Long TOKEN_DURATION = 10L;
-    public static final Long INITIAL_WEIGHT = 800L;
+    public static final Long TOKEN_DURATION = 75L;
+    public static final Long INITIAL_WEIGHT = 400L;
     public static final String DATE_PATTERN = "yyyy-MM-dd HH:mm";
+    public static final int ELO_CONST = 30;
+    public static final int ELO_MULTIPLIER = 30;
 
     private ConstValues() {
         throw new IllegalStateException("Utility class");
