@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hplr.game.core.model.Game;
 import org.hplr.game.core.model.vo.GameArmy;
-import org.hplr.game.core.model.vo.GameArmyType;
 import org.hplr.game.core.model.vo.GameSidePlayerData;
 import org.hplr.game.core.usecases.port.dto.InitialGameSaveDataDto;
-import org.hplr.game.core.usecases.port.dto.InitialGameSidePlayerDataDto;
 import org.hplr.game.core.usecases.port.in.SaveGameUseCaseInterface;
 import org.hplr.game.core.usecases.port.out.command.SaveGameCommandInterface;
 

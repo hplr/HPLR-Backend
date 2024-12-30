@@ -19,6 +19,6 @@ public record PlayerRankingDto(UUID playerId, String playerName, Long score) imp
 
 
     public int compareTo(PlayerRankingDto o) {
-        return -(score.compareTo(o.score));
+        return (o.score()).compareTo(score);
     }
 }
