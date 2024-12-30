@@ -1,4 +1,4 @@
-package org.hplr.location.infrastructure.dbadapter.mapper;
+package org.hplr.location.infrastructure.dbadapter.mappers;
 
 import org.hplr.location.core.model.LocationSnapshot;
 import org.hplr.location.core.usecases.port.dto.LocationSelectDto;

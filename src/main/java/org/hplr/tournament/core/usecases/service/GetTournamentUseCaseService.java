@@ -21,7 +21,7 @@ public class GetTournamentUseCaseService implements GetTournamentUseCaseInterfac
     @Override
     public TournamentSnapshot getTournament(UUID tournamentId) {
         Optional<TournamentSelectDto> tournamentSelectDto = selectTournamentByTournamentIdQueryInterface
-                .selectTournamentByTournamentIdQueryInterface(tournamentId);
+                .selectTournamentByTournamentId(tournamentId);
         Tournament tournament = Tournament.fromSelectDto(tournamentSelectDto.orElseThrow(NoSuchElementException::new));
         return tournament.toSnapshot();
     }

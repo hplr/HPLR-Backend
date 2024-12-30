@@ -61,14 +61,14 @@ public class FinishGameManualUseCaseService implements FinishGameUseCaseInterfac
                 .stream()
                 .anyMatch(Score::tabled)
               ){
-            gameScore = 20L;
+            gameScore = -20L;
         }
         else if(
                 game.getSecondGameSide().getScorePerTurnList()
                         .stream()
                         .anyMatch(Score::tabled)
         ){
-            gameScore = -20L;
+            gameScore = 20L;
         }
         else {
             gameScore = calculateScoreForGameUseCaseInterface.calculateScoreForGame(

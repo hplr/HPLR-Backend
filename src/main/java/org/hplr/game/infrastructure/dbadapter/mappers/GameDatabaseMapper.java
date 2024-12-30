@@ -7,7 +7,7 @@ import org.hplr.game.core.model.vo.GameSideSnapshot;
 import org.hplr.game.core.usecases.port.dto.GameSelectDto;
 import org.hplr.game.core.usecases.port.dto.GameSideSelectDto;
 import org.hplr.game.infrastructure.dbadapter.entities.*;
-import org.hplr.location.infrastructure.dbadapter.mapper.LocationMapper;
+import org.hplr.location.infrastructure.dbadapter.mappers.LocationMapper;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,6 +5,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hplr.library.core.model.StringValidator;
 import org.hplr.library.core.util.ConstValues;
 import org.hplr.library.exception.HPLRIllegalStateException;
 import org.hplr.library.exception.HPLRValidationException;
@@ -38,6 +39,7 @@ public class LoginAdministratorUseCaseService implements LoginAdministratorUseCa
 
     @Override
     public GetTokenResponseDto loginAdministrator(AdministratorLoginDto administratorLoginDto) throws NoSuchElementException, HPLRValidationException, HPLRIllegalStateException {
+        StringValidator.validateString(secret);
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         Optional<AdministratorSelectDto> administratorSelectDtoOptional =
                 selectAdministratorByEmailQueryInterface.selectAdministratorByEmail(administratorLoginDto.email());

@@ -22,13 +22,13 @@ import java.util.*;
 @Getter
 public class Game {
     private final GameId gameId;
-    private GameLocation gameLocation;
-    private GameData gameData;
+    private final GameLocation gameLocation;
+    private final GameData gameData;
     @Setter
     private Long gameELOChangeValue;
     @Setter
     private Status gameStatus;
-    private GameSide firstGameSide;
+    private final GameSide firstGameSide;
     @Setter
     private GameSide secondGameSide;
 
@@ -124,7 +124,7 @@ public class Game {
                         tournamentGameDto.gameTurnLength(),
                         Duration.ofHours(tournamentGameDto.gameHoursDuration()),
                         LocalDateTime.parse(tournamentGameDto.gameStartTime(), DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
-                        LocalDateTime.parse(tournamentGameDto.gameStartTime(), DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
+                        LocalDateTime.parse(tournamentGameDto.gameEndTime(), DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
                         true
                 ),
                 Status.AWAITING,

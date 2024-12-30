@@ -11,9 +11,10 @@ import org.hplr.game.infrastructure.dbadapter.mappers.GameSideDatabaseMapper;
 import org.hplr.game.infrastructure.dbadapter.repositories.GameArmyTypeRepository;
 import org.hplr.game.infrastructure.dbadapter.repositories.GameDeploymentRepository;
 import org.hplr.game.infrastructure.dbadapter.repositories.GameMissionRepository;
+import org.hplr.library.core.util.ConstValues;
 import org.hplr.library.exception.HPLRIllegalStateException;
 import org.hplr.location.infrastructure.dbadapter.entities.LocationEntity;
-import org.hplr.location.infrastructure.dbadapter.mapper.LocationMapper;
+import org.hplr.location.infrastructure.dbadapter.mappers.LocationMapper;
 import org.hplr.location.infrastructure.dbadapter.repositories.LocationRepository;
 import org.hplr.tournament.core.model.TournamentSnapshot;
 import org.hplr.tournament.core.model.vo.TournamentPlayer;
@@ -145,7 +146,7 @@ public class TournamentCommandAdapter implements SaveTournamentCommandInterface,
         GameSideEntity gameSideEntity = GameSideDatabaseMapper.fromSnapshot(new GameSideSnapshot(GameSide.fromDto(
                 player.allegiance(),
                 gameSidePlayerDataList,
-                7
+                ConstValues.TURN_LENGTH
 
         )));
 

@@ -38,7 +38,7 @@ public class StartTournamentUseCaseService implements StartTournamentUseCaseInte
     public UUID startTournament(UUID tournamentId) {
         Optional<TournamentSelectDto> tournamentSelectDtoOptional
                 = selectTournamentByTournamentIdQueryInterface
-                .selectTournamentByTournamentIdQueryInterface(tournamentId);
+                .selectTournamentByTournamentId(tournamentId);
 
         Tournament tournament = Tournament.fromSelectDto(tournamentSelectDtoOptional
                 .orElseThrow(NoSuchElementException::new));
@@ -58,15 +58,16 @@ public class StartTournamentUseCaseService implements StartTournamentUseCaseInte
 
             List<GameMission> gameMissionList = selectAllGameMissionsQueryInterface.getAllGameMissions();
             List<GameDeployment> gameDeploymentList = selectAllGameDeploymentsQueryInterface.getAllGameDeployments();
-            int finalI = i;
+            long hoursToAddToStart = (long)  tournament.getTournamentData().gameLength() * i;
+            long hoursToAddToEnd = (long) tournament.getTournamentData().gameLength() * (1 + i) ;
             currentPairings.forEach(pairing ->{
                 TournamentGameDto tournamentGameDto = new TournamentGameDto(
                         pairing.firstPlayer(),
                         pairing.secondPlayer(),
                         tournament.getTournamentData().pointSize(),
                         tournament.getTournamentData().gameTurnAmount(),
-                        tournament.getTournamentData().tournamentStart().plusHours((long) finalI * tournament.getTournamentData().gameLength()).format(DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
-                        tournament.getTournamentData().tournamentStart().plusHours((long) (1 + finalI) * tournament.getTournamentData().gameLength()).format(DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
+                        tournament.getTournamentData().tournamentStart().plusHours(hoursToAddToStart).format(DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
+                        tournament.getTournamentData().tournamentStart().plusHours(hoursToAddToEnd).format(DateTimeFormatter.ofPattern(ConstValues.DATE_PATTERN)),
                         tournament.getTournamentData().gameLength(),
                         tournament.getTournamentLocation().location(),
                         gameMissionList.get(random.nextInt(gameMissionList.size())),
@@ -77,7 +78,8 @@ public class StartTournamentUseCaseService implements StartTournamentUseCaseInte
             roundList.add(tournamentRound);
         }
         tournament.setTournamentRoundList(roundList);
-        return startTournamentCommandInterface.startTournament(tournament.toSnapshot());
+        startTournamentCommandInterface.startTournament(tournament.toSnapshot());
+        return tournament.getTournamentId().tournamentId();
     }
 
     private static List<TournamentPairing> getTournamentPairings(List<TournamentPairing> usedParings, Tournament tournament) {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -33,7 +34,7 @@ public class GetAllPlayerListUseCaseService implements GetAllPlayerListUseCaseIn
                         log.error("Could not map player: {}",player.playerId());
                         return null;
                     }
-        }).toList();
+        }).filter(Objects::nonNull).toList();
 
         return playerList.stream().map(Player::toSnapshot).toList();
     }

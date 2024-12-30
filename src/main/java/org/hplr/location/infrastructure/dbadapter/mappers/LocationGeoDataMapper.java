@@ -1,4 +1,4 @@
-package org.hplr.location.infrastructure.dbadapter.mapper;
+package org.hplr.location.infrastructure.dbadapter.mappers;
 
 import org.hplr.location.core.model.vo.LocationGeoData;
 import org.hplr.location.infrastructure.dbadapter.entities.LocationGeoDataEntity;

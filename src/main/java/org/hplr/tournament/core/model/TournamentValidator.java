@@ -30,6 +30,9 @@ public class TournamentValidator {
         if(tournament.getTournamentData().pointSize()<tournamentPlayer.gameSidePlayerData().calculateTotalPointValue()){
             throw new HPLRIllegalStateException("Declared point size is over the limit!");
         }
+        if(0>=tournamentPlayer.gameSidePlayerData().calculateTotalPointValue()){
+            throw new HPLRIllegalStateException("Declared point size must be non-negative!");
+        }
     }
 
     public static void validateIfTournamentCanBeStarted(Tournament tournament){

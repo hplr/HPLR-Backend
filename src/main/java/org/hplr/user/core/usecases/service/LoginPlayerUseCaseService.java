@@ -5,6 +5,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hplr.library.core.model.StringValidator;
 import org.hplr.user.core.model.Player;
 import org.hplr.user.core.usecases.port.dto.GetTokenResponseDto;
 import org.hplr.user.core.usecases.port.dto.PlayerLoginDto;
@@ -39,6 +40,7 @@ public class LoginPlayerUseCaseService implements LoginPlayerUseCaseInterface {
 
     @Override
     public GetTokenResponseDto loginPlayer(PlayerLoginDto playerLoginDto) throws NoSuchElementException, HPLRValidationException, HPLRIllegalStateException {
+        StringValidator.validateString(secret);
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         Optional<PlayerSelectDto> playerSelectDtoOptional =
                 selectPlayerByEmailQueryInterface.selectPlayerByEmail(playerLoginDto.email());

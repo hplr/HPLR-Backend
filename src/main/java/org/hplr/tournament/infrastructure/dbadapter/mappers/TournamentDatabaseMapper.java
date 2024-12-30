@@ -3,7 +3,7 @@ package org.hplr.tournament.infrastructure.dbadapter.mappers;
 import org.hplr.game.core.model.Game;
 import org.hplr.game.infrastructure.dbadapter.mappers.GameDatabaseMapper;
 import org.hplr.game.infrastructure.dbadapter.mappers.GameSideDatabaseMapper;
-import org.hplr.location.infrastructure.dbadapter.mapper.LocationMapper;
+import org.hplr.location.infrastructure.dbadapter.mappers.LocationMapper;
 import org.hplr.tournament.core.model.TournamentSnapshot;
 import org.hplr.tournament.core.usecases.port.dto.TournamentRoundSelectDto;
 import org.hplr.tournament.core.usecases.port.dto.TournamentSelectDto;

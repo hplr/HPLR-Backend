@@ -6,5 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface SelectTournamentByTournamentIdQueryInterface {
-    Optional<TournamentSelectDto> selectTournamentByTournamentIdQueryInterface(UUID tournamentId);
+    Optional<TournamentSelectDto> selectTournamentByTournamentId(UUID tournamentId);
 }

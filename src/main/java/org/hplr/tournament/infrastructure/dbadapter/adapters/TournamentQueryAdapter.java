@@ -24,7 +24,7 @@ public class TournamentQueryAdapter implements SelectTournamentByTournamentIdQue
     private final TournamentRepository tournamentRepository;
 
     @Override
-    public Optional<TournamentSelectDto> selectTournamentByTournamentIdQueryInterface(UUID tournamentId) {
+    public Optional<TournamentSelectDto> selectTournamentByTournamentId(UUID tournamentId) {
         TournamentEntity tournamentEntity = tournamentRepository.findByTournamentId(tournamentId).orElseThrow(NoSuchElementException::new);
         return Optional.of(TournamentDatabaseMapper.fromEntity(tournamentEntity));
     }

@@ -36,7 +36,7 @@ public class AddPlayerToTournamentUseCaseService implements AddPlayerToTournamen
                         addPlayerToTournamentDto.playerId()).orElseThrow(NoSuchElementException::new)
         );
         Tournament tournament = Tournament.fromSelectDto(selectTournamentByTournamentId
-                .selectTournamentByTournamentIdQueryInterface(addPlayerToTournamentDto.tournamentId())
+                .selectTournamentByTournamentId(addPlayerToTournamentDto.tournamentId())
                 .orElseThrow(NoSuchElementException::new)
         );
         try {

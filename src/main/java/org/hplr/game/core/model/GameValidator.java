@@ -94,6 +94,9 @@ public class GameValidator {
                 }
 
             }
+            if (pointsSum <= 0) {
+                throw new HPLRIllegalStateException("No correct armies declared");
+            }
             if (pointsSum > game.getGameData().gamePointSize()) {
                 throw new HPLRIllegalStateException("Side has exceeded points limit");
             }
@@ -111,7 +114,7 @@ public class GameValidator {
         Boolean emptyScore = gameSide.getScorePerTurnList()
                 .stream()
                 .anyMatch(
-                        score -> Objects.isNull(score.turnScore())
+                        score -> Objects.isNull(score.turnScore()) || score.turnScore().equals(0L)
                 );
         if (Boolean.TRUE.equals(emptyScore)) {
             throw new HPLRIllegalStateException("Side does not have points for every turn");
@@ -140,13 +143,24 @@ public class GameValidator {
     }
 
     public static void validateSecondSide(Game game){
-        validateSideHasCorrectAmountOfPoints(game, game.getSecondGameSide());
+        try{
+            validateSideHasCorrectAmountOfPoints(game, game.getSecondGameSide());
+        }
+        catch (HPLRIllegalStateException ex){
+            throw new HPLRValidationException(ex.getMessage());
+        }
     }
 
     public static void validateFinishedGame(Game game){
-        validateMandatoryGameInfo(game);
-        validateSideHasFilledTurnPoints(game.getFirstGameSide());
-        validateSideHasFilledTurnPoints(game.getSecondGameSide());
+        try{
+            validateMandatoryGameInfo(game);
+            validateSideHasFilledTurnPoints(game.getFirstGameSide());
+            validateSideHasFilledTurnPoints(game.getSecondGameSide());
+        }
+        catch (HPLRIllegalStateException | HPLRIllegalArgumentException ex){
+            throw new HPLRValidationException(ex.getMessage());
+        }
+
     }
 
     private GameValidator() {
