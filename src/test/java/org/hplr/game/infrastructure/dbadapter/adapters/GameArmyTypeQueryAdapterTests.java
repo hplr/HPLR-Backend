@@ -21,8 +21,8 @@ import static org.mockito.MockitoAnnotations.openMocks;
 class GameArmyTypeQueryAdapterTests {
 
     private AutoCloseable closeable;
-    final static GameArmyTypeEntity test_army_first = new GameArmyTypeEntity(null,"test_1");
-    final static GameArmyTypeEntity test_army_second = new GameArmyTypeEntity(null,"test_2");
+    static final GameArmyTypeEntity test_army_first = new GameArmyTypeEntity(null, "test_1");
+    static final GameArmyTypeEntity test_army_second = new GameArmyTypeEntity(null, "test_2");
 
     @Mock
     private GameArmyTypeRepository gameArmyTypeRepository;
@@ -41,7 +41,7 @@ class GameArmyTypeQueryAdapterTests {
     }
 
     @Test
-    void fetch_no_armies_and_return_empty_collection(){
+    void fetch_no_armies_and_return_empty_collection() {
         when(gameArmyTypeRepository.findAll()).thenReturn(new ArrayList<>());
         List<GameArmyType> gameArmyList = gameArmyTypeQueryAdapter.getAllGameArmyTypes();
         Assertions.assertNotNull(gameArmyList);
@@ -50,7 +50,7 @@ class GameArmyTypeQueryAdapterTests {
     }
 
     @Test
-    void fetch_two_armies_and_succeed(){
+    void fetch_two_armies_and_succeed() {
         when(gameArmyTypeRepository.findAll()).thenReturn(
                 List.of(test_army_first, test_army_second)
         );

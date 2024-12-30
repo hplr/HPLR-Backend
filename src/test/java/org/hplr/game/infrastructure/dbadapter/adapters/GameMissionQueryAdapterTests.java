@@ -21,8 +21,8 @@ import static org.mockito.MockitoAnnotations.openMocks;
 @RequiredArgsConstructor
 class GameMissionQueryAdapterTests {
     private AutoCloseable closeable;
-    final static GameMissionEntity test_mission_first = new GameMissionEntity(null,"test_1");
-    final static GameMissionEntity test_mission_second = new GameMissionEntity(null,"test_2");
+    static final GameMissionEntity test_mission_first = new GameMissionEntity(null, "test_1");
+    static final GameMissionEntity test_mission_second = new GameMissionEntity(null, "test_2");
 
     @Mock
     private GameMissionRepository gameMissionRepository;
@@ -41,7 +41,7 @@ class GameMissionQueryAdapterTests {
     }
 
     @Test
-    void fetch_no_armies_and_return_empty_collection(){
+    void fetch_no_armies_and_return_empty_collection() {
         when(gameMissionRepository.findAll()).thenReturn(new ArrayList<>());
         List<GameMission> gameArmyList = gameMissionQueryAdapter.getAllGameMissions();
         Assertions.assertNotNull(gameArmyList);
@@ -50,7 +50,7 @@ class GameMissionQueryAdapterTests {
     }
 
     @Test
-    void fetch_two_armies_and_succeed(){
+    void fetch_two_armies_and_succeed() {
         when(gameMissionRepository.findAll()).thenReturn(
                 List.of(test_mission_first, test_mission_second)
         );

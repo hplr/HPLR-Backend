@@ -21,8 +21,8 @@ import static org.mockito.MockitoAnnotations.openMocks;
 @RequiredArgsConstructor
 class GameDeploymentQueryAdapterTests {
     private AutoCloseable closeable;
-    final static GameDeploymentEntity test_deployment_first = new GameDeploymentEntity(null,"test_1");
-    final static GameDeploymentEntity test_deployment_second = new GameDeploymentEntity(null,"test_2");
+    static final GameDeploymentEntity test_deployment_first = new GameDeploymentEntity(null, "test_1");
+    static final GameDeploymentEntity test_deployment_second = new GameDeploymentEntity(null, "test_2");
 
     @Mock
     private GameDeploymentRepository gameDeploymentRepository;
@@ -41,7 +41,7 @@ class GameDeploymentQueryAdapterTests {
     }
 
     @Test
-    void fetch_no_armies_and_return_empty_collection(){
+    void fetch_no_armies_and_return_empty_collection() {
         when(gameDeploymentRepository.findAll()).thenReturn(new ArrayList<>());
         List<GameDeployment> gameArmyList = gameDeploymentQueryAdapter.getAllGameDeployments();
         Assertions.assertNotNull(gameArmyList);
@@ -50,7 +50,7 @@ class GameDeploymentQueryAdapterTests {
     }
 
     @Test
-    void fetch_two_armies_and_succeed(){
+    void fetch_two_armies_and_succeed() {
         when(gameDeploymentRepository.findAll()).thenReturn(
                 List.of(test_deployment_first, test_deployment_second)
         );
