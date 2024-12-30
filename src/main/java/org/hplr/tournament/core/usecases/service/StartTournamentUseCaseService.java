@@ -22,6 +22,7 @@ import org.hplr.tournament.core.usecases.port.out.command.StartTournamentCommand
 import org.hplr.tournament.core.usecases.port.out.query.SelectTournamentByTournamentIdQueryInterface;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -33,7 +34,7 @@ public class StartTournamentUseCaseService implements StartTournamentUseCaseInte
     private final SelectAllGameDeploymentsQueryInterface selectAllGameDeploymentsQueryInterface;
     private final SelectAllGameMissionsQueryInterface selectAllGameMissionsQueryInterface;
     private final StartTournamentCommandInterface startTournamentCommandInterface;
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
     @Override
     public UUID startTournament(UUID tournamentId) {
         Optional<TournamentSelectDto> tournamentSelectDtoOptional
