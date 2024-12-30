@@ -28,6 +28,7 @@ import org.mockito.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -102,6 +103,10 @@ class SaveGameUseCaseServiceTests {
                 .thenReturn(List.of(PlayerMapper.toDto(first_player)));
         when(mock_selectAllPlayerByIdListQueryInterface.selectAllPlayerByIdList(List.of(test_secondPlayerId)))
                 .thenReturn(List.of(PlayerMapper.toDto(second_player)));
+        when(mock_selectPlayerByUserIdQueryInterface.selectPlayerByUserId(test_firstPlayerId))
+                .thenReturn(Optional.of(PlayerMapper.toDto(first_player)));
+        when(mock_selectPlayerByUserIdQueryInterface.selectPlayerByUserId(test_secondPlayerId))
+                .thenReturn(Optional.of(PlayerMapper.toDto(second_player)));
         InitialGameSaveDataDto test_initialGameSaveDataDto = new InitialGameSaveDataDto(
                 new InitialGameSaveSideDto(
                         Allegiance.LOYALIST,
@@ -112,7 +117,7 @@ class SaveGameUseCaseServiceTests {
                                         "TEST",
                                         1250L
                                 ),
-                                null
+                                new ArrayList<>()
                         ))
                 ),
                 new InitialGameSaveSideDto(
@@ -124,7 +129,7 @@ class SaveGameUseCaseServiceTests {
                                         "TEST",
                                         1250L
                                 ),
-                                null
+                                new ArrayList<>()
                         ))
                 ),
                 false,
@@ -153,7 +158,6 @@ class SaveGameUseCaseServiceTests {
         verify(mock_saveGameCommandInterface, times(1)).saveGame(any());
     }
 
-    //todo: possibly parametrize to check all options for validation error
     @Test
     void save_game_and_throw_HPLRValidationException() {
         UUID test_firstPlayerId = UUID.randomUUID();

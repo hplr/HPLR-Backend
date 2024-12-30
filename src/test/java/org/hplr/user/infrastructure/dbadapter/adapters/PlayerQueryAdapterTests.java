@@ -125,5 +125,38 @@ class PlayerQueryAdapterTests {
         Assertions.assertEquals(1, playerSelectDtoList.size());
     }
 
+    @Test
+    void get_nonexistent_player_by_email_and_throw_NoSuchElementException() {
+        String failedUserEmail = "noEmail@email.com";
+        when(playerQueryRepository.findByEmail(failedUserEmail))
+                .thenReturn(Optional.empty());
+        Assertions.assertThrows(NoSuchElementException.class,
+                () -> playerQueryAdapter.selectPlayerByEmail(failedUserEmail));
+        verify(playerQueryRepository,atLeastOnce()).findByEmail(any());
+    }
 
+    @Test
+    void get_existent_player_by_email_and_succeed() {
+        PlayerEntity player = new PlayerEntity(
+                test_playerId,
+                test_name,
+                test_email,
+                test_pwHash,
+                test_registrationTime,
+                test_lastLogin,
+                test_nickname,
+                test_motto,
+                test_score);
+
+        when(playerQueryRepository.findByEmail(test_email))
+                .thenReturn(Optional.of(player));
+        Assertions.assertDoesNotThrow(
+                () -> {
+                    Optional<PlayerSelectDto> playerSelectDto;
+                    playerSelectDto = playerQueryAdapter.selectPlayerByEmail(test_email);
+                    Assertions.assertTrue(playerSelectDto.isPresent());
+                });
+        verify(playerQueryRepository,atLeastOnce()).findByEmail(test_email);
+
+    }
 }
