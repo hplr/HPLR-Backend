@@ -6,7 +6,7 @@ COPY pom.xml .
 
 RUN mvn dependency:resolve-plugins
 
-COPY src/main bootstrap/src/main
+COPY src/main src/main
 
 RUN mvn package -DskipUnitTests -DskipIT -DskipPitest -DskipPi=true
 
@@ -14,10 +14,10 @@ FROM eclipse-temurin:22-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build /target/ranking-0.1.war .
+COPY --from=build /app/target/ranking-0.1.jar .
 
 RUN apk --no-cache add curl
 
 EXPOSE 8082
 
-CMD ["java", "-jar", "bootstrap-0.1.war"]
+CMD ["java", "-jar", "ranking-0.1.jar"]
