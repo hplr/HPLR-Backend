@@ -14,7 +14,7 @@ FROM eclipse-temurin:22-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build /app/bootstrap/target/bootstrap-0.1.war .
+COPY --from=build /target/ranking-0.1.war .
 
 RUN apk --no-cache add curl
 
