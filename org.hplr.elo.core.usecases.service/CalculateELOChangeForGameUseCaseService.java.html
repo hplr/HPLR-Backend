@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>CalculateELOChangeForGameUseCaseService.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package org.hplr.elo.core.usecases.service;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.hplr.elo.core.usecases.port.in.CalculateELOChangeForGameUseCaseInterface;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.hplr.library.core.util.ConstValues;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.hplr.library.exception.HPLRIllegalStateException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.springframework.stereotype.Service;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.HashMap;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Map;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>@Service</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>public class CalculateELOChangeForGameUseCaseService implements CalculateELOChangeForGameUseCaseInterface {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Map&#60;Integer, Long&#62; calculateChangeForGame(Long firstElo, Long secondElo, Long gameScore) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_17'/>
+17
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_17'>4</a>
+<span>
+1. calculateChangeForGame : Replaced long subtraction with addition &rarr; KILLED<br/>
+2. calculateChangeForGame : Replaced double division with multiplication &rarr; KILLED<br/>
+3. calculateChangeForGame : Replaced double division with multiplication &rarr; KILLED<br/>
+4. calculateChangeForGame : Replaced double addition with subtraction &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        double firstPlayerWinProbability = (1 / (1 + Math.pow(10, ((double) (secondElo - firstElo) / (ConstValues.INITIAL_WEIGHT)))));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_18'/>
+18
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_18'>4</a>
+<span>
+1. calculateChangeForGame : Replaced long subtraction with addition &rarr; KILLED<br/>
+2. calculateChangeForGame : Replaced double division with multiplication &rarr; KILLED<br/>
+3. calculateChangeForGame : Replaced double addition with subtraction &rarr; KILLED<br/>
+4. calculateChangeForGame : Replaced double division with multiplication &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        double secondPlayerWinProbability = (1 / (1 + Math.pow(10, ((double) (firstElo - secondElo) / (ConstValues.INITIAL_WEIGHT)))));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        Map&#60;Integer, Long&#62; eloChangeForGame = new HashMap&#60;&#62;();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_20'/>
+20
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_20'>1</a>
+<span>
+1. calculateChangeForGame : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (gameScore == 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_21'/>
+21
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_21'>3</a>
+<span>
+1. calculateChangeForGame : Replaced double subtraction with addition &rarr; SURVIVED<br/>
+2. calculateChangeForGame : Replaced double multiplication with division &rarr; SURVIVED<br/>
+3. calculateChangeForGame : Replaced long multiplication with division &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            eloChangeForGame.put(1, (long) (ConstValues.ELO_CONST * gameScore * (0.5 - firstPlayerWinProbability)));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_22'/>
+22
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_22'>3</a>
+<span>
+1. calculateChangeForGame : Replaced double subtraction with addition &rarr; SURVIVED<br/>
+2. calculateChangeForGame : Replaced double multiplication with division &rarr; SURVIVED<br/>
+3. calculateChangeForGame : Replaced long multiplication with division &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>            eloChangeForGame.put(2, (long) (ConstValues.ELO_CONST * gameScore * (0.5 - secondPlayerWinProbability)));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_23'/>
+23
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_23'>1</a>
+<span>
+1. calculateChangeForGame : replaced return value with Collections.emptyMap for org/hplr/elo/core/usecases/service/CalculateELOChangeForGameUseCaseService::calculateChangeForGame &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return eloChangeForGame;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_25'/>
+25
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_25'>4</a>
+<span>
+1. calculateChangeForGame : changed conditional boundary &rarr; SURVIVED<br/>
+2. calculateChangeForGame : changed conditional boundary &rarr; KILLED<br/>
+3. calculateChangeForGame : negated conditional &rarr; KILLED<br/>
+4. calculateChangeForGame : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        if (gameScore &#62;= -20 &#38;&#38; gameScore &#60; 0) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_26'/>
+26
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_26'>1</a>
+<span>
+1. calculateChangeForGame : removed negation &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            gameScore = -gameScore;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_27'/>
+27
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_27'>3</a>
+<span>
+1. calculateChangeForGame : Replaced double subtraction with addition &rarr; KILLED<br/>
+2. calculateChangeForGame : Replaced long multiplication with division &rarr; KILLED<br/>
+3. calculateChangeForGame : Replaced double multiplication with division &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            eloChangeForGame.put(1, (long) (ConstValues.ELO_CONST * gameScore * (0 - firstPlayerWinProbability)));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_28'/>
+28
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_28'>3</a>
+<span>
+1. calculateChangeForGame : Replaced double subtraction with addition &rarr; KILLED<br/>
+2. calculateChangeForGame : Replaced long multiplication with division &rarr; KILLED<br/>
+3. calculateChangeForGame : Replaced double multiplication with division &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            eloChangeForGame.put(2, (long) (ConstValues.ELO_CONST * gameScore * (1 - secondPlayerWinProbability)));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_29'/>
+29
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_29'>1</a>
+<span>
+1. calculateChangeForGame : replaced return value with Collections.emptyMap for org/hplr/elo/core/usecases/service/CalculateELOChangeForGameUseCaseService::calculateChangeForGame &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return eloChangeForGame;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_30'/>
+30
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_30'>4</a>
+<span>
+1. calculateChangeForGame : changed conditional boundary &rarr; SURVIVED<br/>
+2. calculateChangeForGame : negated conditional &rarr; KILLED<br/>
+3. calculateChangeForGame : changed conditional boundary &rarr; KILLED<br/>
+4. calculateChangeForGame : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        } else if (gameScore &#62; 0 &#38;&#38; gameScore &#60;= 20) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_31'/>
+31
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_31'>3</a>
+<span>
+1. calculateChangeForGame : Replaced long multiplication with division &rarr; KILLED<br/>
+2. calculateChangeForGame : Replaced double subtraction with addition &rarr; KILLED<br/>
+3. calculateChangeForGame : Replaced double multiplication with division &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            eloChangeForGame.put(1, (long) (ConstValues.ELO_CONST * gameScore * (1 - firstPlayerWinProbability)));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_32'/>
+32
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_32'>3</a>
+<span>
+1. calculateChangeForGame : Replaced double multiplication with division &rarr; KILLED<br/>
+2. calculateChangeForGame : Replaced long multiplication with division &rarr; KILLED<br/>
+3. calculateChangeForGame : Replaced double subtraction with addition &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            eloChangeForGame.put(2, (long) (ConstValues.ELO_CONST * gameScore * (0 - secondPlayerWinProbability)));</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_33'/>
+33
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_33'>1</a>
+<span>
+1. calculateChangeForGame : replaced return value with Collections.emptyMap for org/hplr/elo/core/usecases/service/CalculateELOChangeForGameUseCaseService::calculateChangeForGame &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return eloChangeForGame;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        } else {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            throw new HPLRIllegalStateException(&#34;Wrong score!&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@20c4564e_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_17'>17</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_17'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#20]</span></span> Replaced long subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#20]</span></span> Replaced double division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#20]</span></span> Replaced double division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#20]</span></span> Replaced double addition with subtraction &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_18'>18</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_18'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#20]</span></span> Replaced long subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#20]</span></span> Replaced double division with multiplication &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#20]</span></span> Replaced double addition with subtraction &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#20]</span></span> Replaced double division with multiplication &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_20'>20</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_20'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[method:get_game_wrong_score_and_throw_HPLRIllegalStateException()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_21'>21</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_21'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[method:get_game_draw_and_check_probabilities()]</span></span> Replaced long multiplication with division &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>none</span></span> Replaced double subtraction with addition &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>none</span></span> Replaced double multiplication with division &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_22'>22</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_22'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[method:get_game_draw_and_check_probabilities()]</span></span> Replaced long multiplication with division &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>none</span></span> Replaced double subtraction with addition &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>none</span></span> Replaced double multiplication with division &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_23'>23</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_23'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[method:get_game_draw_and_check_probabilities()]</span></span> replaced return value with Collections.emptyMap for org/hplr/elo/core/usecases/service/CalculateELOChangeForGameUseCaseService::calculateChangeForGame &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_25'>25</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_25'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#20]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#20]</span></span> negated conditional &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[method:get_game_wrong_score_and_throw_HPLRIllegalStateException()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_26'>26</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_26'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#8]</span></span> removed negation &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_27'>27</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_27'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#8]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#8]</span></span> Replaced long multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#8]</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_28'>28</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_28'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#8]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#8]</span></span> Replaced long multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#8]</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_29'>29</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_29'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#8]</span></span> replaced return value with Collections.emptyMap for org/hplr/elo/core/usecases/service/CalculateELOChangeForGameUseCaseService::calculateChangeForGame &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_30'>30</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_30'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>none</span></span> changed conditional boundary &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#13]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#1]</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[method:get_game_wrong_score_and_throw_HPLRIllegalStateException()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_31'>31</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_31'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#13]</span></span> Replaced long multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#13]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#13]</span></span> Replaced double multiplication with division &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_32'>32</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_32'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#13]</span></span> Replaced double multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#13]</span></span> Replaced long multiplication with division &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#13]</span></span> Replaced double subtraction with addition &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@20c4564e_33'>33</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@20c4564e_33'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>calculateChangeForGame<br/><b>Killed by : </b>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#13]</span></span> replaced return value with Collections.emptyMap for org/hplr/elo/core/usecases/service/CalculateELOChangeForGameUseCaseService::calculateChangeForGame &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+<li class='mutator'>EMPTY_RETURNS</li>
+<li class='mutator'>FALSE_RETURNS</li>
+<li class='mutator'>INCREMENTS</li>
+<li class='mutator'>INVERT_NEGS</li>
+<li class='mutator'>MATH</li>
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+<li class='mutator'>NULL_RETURNS</li>
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+<li class='mutator'>TRUE_RETURNS</li>
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[method:get_game_wrong_score_and_throw_HPLRIllegalStateException()] (3 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[method:get_game_draw_and_check_probabilities()] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#20] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#20] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#8] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#7] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#6] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#5] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#4] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#3] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#2] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#12] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#13] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#13] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#12] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#10] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#11] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#14] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#18] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#19] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#16] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#17] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#14] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#19] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#15] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#18] (1 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#9] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#8] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#7] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#9] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#2] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#5] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#4] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_lost_for_first_side_and_check_probabilities()]/[test-template-invocation:#1] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#3] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#11] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#17] (2 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#15] (3 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#16] (3 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#10] (5 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#6] (6 ms)</li><li>org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseServiceTests]/[test-template:get_game_won_for_first_side_and_check_probabilities(java.lang.Long)]/[test-template-invocation:#1] (15 ms)</li><li>org.hplr.game.core.usecases.service.FinishGameManualUseCaseServiceTests.[engine:junit-jupiter]/[class:org.hplr.game.core.usecases.service.FinishGameManualUseCaseServiceTests]/[method:finish_game_find_game_and_succeed()] (19 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='https://pitest.org'>PIT</a> 1.16.1
+
+</body>
+</html>
