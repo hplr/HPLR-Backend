@@ -57,7 +57,8 @@ public class FinishGameManualUseCaseService implements FinishGameUseCaseInterfac
                         .toList()
         );
         Long gameScore;
-        if(game.getFirstGameSide().getScorePerTurnList()
+        if(game.getFirstGameSide()
+                .getScorePerTurnList()
                 .stream()
                 .anyMatch(Score::tabled)
               ){
