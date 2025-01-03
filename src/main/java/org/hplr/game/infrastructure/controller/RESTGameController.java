@@ -1,6 +1,7 @@
 package org.hplr.game.infrastructure.controller;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.hplr.game.core.enums.Status;
@@ -31,6 +32,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/game")
+@Tag(name = "Game")
 public class RESTGameController {
     private final GetAllAvailableGamesUseCaseService getAllAvailableGamesUseCaseService;
     SaveGameUseCaseInterface saveGameUseCaseInterface;

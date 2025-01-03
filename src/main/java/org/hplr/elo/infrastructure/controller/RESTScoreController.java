@@ -1,5 +1,6 @@
 package org.hplr.elo.infrastructure.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.hplr.elo.core.usecases.port.dto.PlayerRankingDto;
 import org.hplr.elo.core.usecases.port.in.GetAllPlayersWithRankingUseCaseInterface;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/score")
+@Tag(name = "Ranking")
 public class RESTScoreController {
 
     private final GetAllPlayersWithRankingUseCaseInterface getAllPlayersWithRankingUseCaseInterface;

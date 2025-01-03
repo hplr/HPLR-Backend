@@ -1,5 +1,6 @@
 package org.hplr.user.infrastructure.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.hplr.user.core.usecases.port.dto.*;
 import org.hplr.user.core.usecases.port.in.*;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/administrator")
+@Tag(name = "Administrator")
 public class RESTAdministratorController {
 
     final RegisterAdministratorUseCaseInterface administratorUseCase;
