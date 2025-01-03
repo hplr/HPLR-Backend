@@ -2,7 +2,6 @@ package org.hplr.bootstrap.config.openapi;
 
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.Components;
@@ -25,11 +24,9 @@ public class OpenAPI30Configuration {
                         addList("Bearer Authentication"))
                 .components(new Components().addSecuritySchemes
                         ("Bearer Authentication", createAPIKeyScheme()))
-                .info(new Info().title("My REST API")
-                        .description("Some custom description of API.")
-                        .version("1.0").contact(new Contact().name("Sallo Szrajbman")
-                                .email( "www.baeldung.com").url("salloszraj@gmail.com"))
-                        .license(new License().name("License of API")
-                                .url("API license URL")));
+                .info(new Info().title("HPLR")
+                        .description("API for HPLR application")
+                        .version("1.0").contact(new Contact().name("Jakub Kalinowski")
+                                .email( "jakubkalinowski1234@gmail.com")));
     }
 }

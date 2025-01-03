@@ -1,6 +1,7 @@
 package org.hplr.tournament.infrastructure.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.hplr.library.exception.HPLRAccessDeniedException;
@@ -21,6 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/tournament")
+@Tag(name = "Tournament")
 public class RESTTournamentController {
 
     private final AddPlayerToTournamentUseCaseInterface addPlayerToTournamentUseCase;

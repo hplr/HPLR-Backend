@@ -1,5 +1,6 @@
 package org.hplr.user.infrastructure.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.hplr.user.core.model.PlayerSnapshot;
 import org.hplr.user.core.usecases.port.dto.GetTokenResponseDto;
@@ -21,6 +22,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/player")
+@Tag(name = "Player")
 public class RESTPlayerController {
 
     final GetPlayerUseCaseService getPlayerUseCaseInterface;
