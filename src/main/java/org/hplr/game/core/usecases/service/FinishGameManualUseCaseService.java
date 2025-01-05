@@ -1,5 +1,6 @@
 package org.hplr.game.core.usecases.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 import org.hplr.elo.core.model.vo.Elo;
@@ -12,6 +13,8 @@ import org.hplr.game.core.usecases.port.in.FinishGameUseCaseInterface;
 import org.hplr.game.core.usecases.port.out.command.SaveFinishedGameCommandInterface;
 import org.hplr.game.core.usecases.port.out.query.SelectGameByGameIdQueryInterface;
 
+import org.hplr.library.exception.HPLRAccessDeniedException;
+import org.hplr.library.infrastructure.controller.AccessValidator;
 import org.hplr.user.core.model.vo.PlayerRanking;
 
 import org.hplr.elo.core.model.vo.Score;
@@ -25,6 +28,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RequiredArgsConstructor
 @Service
@@ -35,15 +39,34 @@ public class FinishGameManualUseCaseService implements FinishGameUseCaseInterfac
     final CalculateELOChangeForGameUseCaseInterface calculateELOChangeForGameUseCaseInterface;
     final CalculateAverageELOForGameSideUseCaseInterface calculateAverageELOForGameSideUseCaseInterface;
     final CalculateScoreForGameUseCaseInterface calculateScoreForGameUseCaseInterface;
+    final AccessValidator accessValidator;
 
     @Override
-    public UUID finishGame(UUID gameId) {
+    public UUID finishGame(HttpServletRequest httpServletRequest, UUID gameId) {
+        AtomicReference<Boolean> firstSidePresent = new AtomicReference<>(false);
+        AtomicReference<Boolean> secondSidePresent = new AtomicReference<>(false);
         Optional<GameSelectDto> gameSelectDtoOptional =
                 selectGameByGameIdQueryInterface.selectGameByGameId(gameId);
 
         Game game = Game.fromDto(gameSelectDtoOptional.orElseThrow(NoSuchElementException::new));
+        game.getFirstGameSide().getGameSidePlayerDataList().forEach(player->{
+            if(Boolean.TRUE.equals(accessValidator.validateUserAccess(httpServletRequest,player.player().getUserId().id()))){
+                firstSidePresent.set(true);
+            }
+        });
+        game.getSecondGameSide().getGameSidePlayerDataList().forEach(player->{
+            if(Boolean.TRUE.equals(accessValidator.validateUserAccess(httpServletRequest,player.player().getUserId().id()))){
+                secondSidePresent.set(true);
+            }
+        });
+
+        if(!(firstSidePresent.get() || secondSidePresent.get())){
+            throw new HPLRAccessDeniedException("Player cannot end this game!");
+        }
+
         GameValidator.validateFinishedGame(game);
         game.setGameStatus(Status.FINISHED);
+
         Long firstElo = calculateAverageELOForGameSideUseCaseInterface.calculateAverageELO(
                 game.getFirstGameSide().getGameSidePlayerDataList()
                         .stream()

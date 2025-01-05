@@ -1,5 +1,6 @@
 package org.hplr.game.core.usecases.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.hplr.elo.core.usecases.service.CalculateAverageELOForGameSideUseCaseService;
 import org.hplr.elo.core.usecases.service.CalculateELOChangeForGameUseCaseService;
@@ -13,6 +14,7 @@ import org.hplr.game.core.usecases.port.out.query.SelectGameByGameIdQueryInterfa
 import org.hplr.game.infrastructure.dbadapter.entities.*;
 import org.hplr.game.infrastructure.dbadapter.mappers.GameDatabaseMapper;
 import org.hplr.library.exception.HPLRValidationException;
+import org.hplr.library.infrastructure.controller.AccessValidator;
 import org.hplr.location.infrastructure.dbadapter.entities.LocationEntity;
 import org.hplr.location.infrastructure.dbadapter.entities.LocationGeoDataEntity;
 import org.hplr.user.infrastructure.dbadapter.entities.PlayerEntity;
@@ -21,6 +23,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
+import org.springframework.mock.web.MockHttpServletRequest;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -65,6 +68,12 @@ class FinishGameManualUseCaseServiceTests {
 
     @Mock
     private SaveFinishedGameCommandInterface saveFinishedGameCommandInterface;
+
+    @Mock
+    private AccessValidator mock_accessValidator;
+
+    @Mock
+    private HttpServletRequest mock_httpServletRequest;
 
     @Spy
     private final CalculateELOChangeForGameUseCaseService calculateELOChangeForGameUseCaseService
@@ -209,6 +218,8 @@ class FinishGameManualUseCaseServiceTests {
                         )
                 )
         ));
+        mock_httpServletRequest = new MockHttpServletRequest();
+        when(mock_accessValidator.validateUserAccess(eq(mock_httpServletRequest), any())).thenReturn(true);
     }
 
     @AfterEach
@@ -221,7 +232,7 @@ class FinishGameManualUseCaseServiceTests {
         when(selectGameByGameIdQueryInterface.selectGameByGameId(test_gameId))
                 .thenReturn(Optional.empty());
         Assertions.assertThrows(NoSuchElementException.class,
-                ()-> finishGameManualUseCaseService.finishGame(test_gameId)
+                ()-> finishGameManualUseCaseService.finishGame(mock_httpServletRequest,test_gameId)
                 );
         verify(calculateAverageELOForGameSideUseCaseService, times(0)).calculateAverageELO(any());
         verify(calculateScoreForGameUseCaseService, times(0)).calculateScoreForGame(anyList(), anyList());
@@ -233,7 +244,7 @@ class FinishGameManualUseCaseServiceTests {
         when(selectGameByGameIdQueryInterface.selectGameByGameId(test_gameId))
                 .thenReturn(Optional.of(mock_gameSelectDto));
         Assertions.assertThrows(HPLRValidationException.class,
-                ()-> finishGameManualUseCaseService.finishGame(test_gameId)
+                ()-> finishGameManualUseCaseService.finishGame(mock_httpServletRequest, test_gameId)
         );
         verify(calculateAverageELOForGameSideUseCaseService, times(0)).calculateAverageELO(any());
         verify(calculateScoreForGameUseCaseService, times(0)).calculateScoreForGame(anyList(), anyList());
@@ -374,7 +385,7 @@ class FinishGameManualUseCaseServiceTests {
                 .thenReturn(Optional.of(mock_gameSelectDto));
         Assertions.assertDoesNotThrow(
                 ()-> {
-                    UUID result = finishGameManualUseCaseService.finishGame(test_gameId);
+                    UUID result = finishGameManualUseCaseService.finishGame(mock_httpServletRequest, test_gameId);
                     Assertions.assertNotNull(result);
                     Assertions.assertEquals(test_gameId, result);
                 }
