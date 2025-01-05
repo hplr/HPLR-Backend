@@ -26,7 +26,9 @@ public class OpenAPI30Configuration {
                         ("Bearer Authentication", createAPIKeyScheme()))
                 .info(new Info().title("HPLR")
                         .description("API for HPLR application")
-                        .version("1.0").contact(new Contact().name("Jakub Kalinowski")
-                                .email( "jakubkalinowski1234@gmail.com")));
+                        .version("1.0").contact(new Contact()
+                                .name("Jakub Kalinowski")
+                                .email( "jakubkalinowski1234@gmail.com")
+                        ));
     }
 }
