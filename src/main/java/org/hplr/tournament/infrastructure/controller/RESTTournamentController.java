@@ -51,7 +51,7 @@ public class RESTTournamentController {
     }
 
     @GetMapping(path="/tournamentList", produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Fetches list of tournament ids", description = "Tournament ids list is returned to the requesting body")
+    @Operation(summary = "Fetches list of tournaments", description = "Tournament list is returned to the requesting body")
     public ResponseEntity<List<TournamentSnapshot>> getTournamentList(@RequestParam boolean closed) {
         return new ResponseEntity<>(getAllTournamentsUseCase.getAllTournamentsList(closed), HttpStatus.OK);
     }

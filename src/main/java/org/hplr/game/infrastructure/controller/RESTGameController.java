@@ -128,8 +128,8 @@ public class RESTGameController {
     }
 
     @PostMapping(path="/finish")
-    public ResponseEntity<UUID> finishGame(@RequestParam UUID gameId){
-        return new ResponseEntity<>(finishGameUseCaseInterface.finishGame(gameId), HttpStatus.OK);
+    public ResponseEntity<UUID> finishGame(HttpServletRequest httpServletRequest, @RequestParam UUID gameId){
+        return new ResponseEntity<>(finishGameUseCaseInterface.finishGame(httpServletRequest, gameId), HttpStatus.OK);
     }
 
 
