@@ -81,6 +81,12 @@ public class TournamentValidator {
         }
     }
 
+    public static void validateIfTournamentSizeIsNotReached(Tournament tournament){
+        if(Objects.equals(tournament.getPlayerList().size(), tournament.getTournamentData().maxPlayers())){
+            throw new HPLRValidationException("Location must be provided!");
+        }
+    }
+
     public static void validateInitialTournament(Tournament tournament){
         validateIfNameIsCorrect(tournament);
         validateIfStartDateIsCorrect(tournament);

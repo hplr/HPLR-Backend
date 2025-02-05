@@ -51,7 +51,6 @@ class GetTournamentUseCaseServiceTests {
     public void setUp() {
         closeable = openMocks(this);
         mock_tournamentEntity = new TournamentEntity(
-                null,
                 test_tournamentId,
                 test_name,
                 test_tournamentStart,

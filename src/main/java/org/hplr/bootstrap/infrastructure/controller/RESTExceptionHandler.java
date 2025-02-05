@@ -2,10 +2,12 @@ package org.hplr.bootstrap.infrastructure.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hplr.library.exception.HPLRAccessDeniedException;
+import org.hplr.library.exception.HPLRUnauthorizedException;
 import org.hplr.library.exception.HPLRValidationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -46,14 +48,14 @@ public class RESTExceptionHandler
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(value
             = { HPLRValidationException.class })
     protected ResponseEntity<Object> handleIllegalState(
             HPLRValidationException ex, WebRequest request) {
         String bodyOfResponse = ex.getMessage();
         return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+                new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -74,5 +76,25 @@ public class RESTExceptionHandler
         String bodyOfResponse = ex.getMessage();
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(value
+            = { HPLRUnauthorizedException.class })
+    protected ResponseEntity<Object> handleHPLRUnauthorizedException(
+            HPLRUnauthorizedException ex, WebRequest request) {
+        String bodyOfResponse = ex.getMessage();
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(value
+            = { ObjectOptimisticLockingFailureException.class })
+    protected ResponseEntity<Object> handleVersionConflict(
+            ObjectOptimisticLockingFailureException ex, WebRequest request) {
+        String bodyOfResponse = ex.getMessage();
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 }

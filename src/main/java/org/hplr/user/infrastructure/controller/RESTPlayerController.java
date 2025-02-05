@@ -2,6 +2,8 @@ package org.hplr.user.infrastructure.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.hplr.library.exception.HPLRUnauthorizedException;
+import org.hplr.library.exception.HPLRValidationException;
 import org.hplr.user.core.model.PlayerSnapshot;
 import org.hplr.user.core.usecases.port.dto.GetTokenResponseDto;
 import org.hplr.user.core.usecases.port.dto.InitialPlayerSaveDataDto;
@@ -48,7 +50,13 @@ public class RESTPlayerController {
     }
 
     @PostMapping(path="/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GetTokenResponseDto> loginPlayer(@RequestBody PlayerLoginDto playerLoginDto) throws NoSuchElementException {
+    public ResponseEntity<GetTokenResponseDto> loginPlayer(@RequestBody PlayerLoginDto playerLoginDto) throws NoSuchElementException, HPLRUnauthorizedException {
+        try{
+            loginPlayerUseCaseInterface.loginPlayer(playerLoginDto);
+        }
+        catch(HPLRValidationException ex){
+            throw new HPLRUnauthorizedException(ex.getMessage());
+        }
         return new ResponseEntity<>(loginPlayerUseCaseInterface.loginPlayer(playerLoginDto), HttpStatus.OK);
     }
 }

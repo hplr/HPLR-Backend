@@ -16,8 +16,6 @@ WORKDIR /app
 
 COPY --from=build /app/target/ranking-0.1.jar .
 
-RUN apk --no-cache add curl
-
 EXPOSE 8082
 
 CMD ["java", "-jar", "ranking-0.1.jar"]
