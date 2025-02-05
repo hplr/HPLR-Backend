@@ -55,6 +55,9 @@ public class TournamentCommandAdapter implements SaveTournamentCommandInterface,
         Optional<TournamentEntity> tournamentEntityOptional = tournamentRepository.findByTournamentId(
                 tournamentSnapshot.tournamentId().tournamentId());
         if(tournamentEntityOptional.isPresent()){
+            if(Objects.equals(tournamentEntityOptional.get().getCurrentPlayers(), tournamentEntityOptional.get().getMaxPlayers())){
+                throw new HPLRIllegalStateException("Player limit achieved");
+            }
             List<GameSidePlayerData> gameSidePlayerDataList = new ArrayList<>();
             List<GameSideEntity> gameSideEntityList = new ArrayList<>();
             tournamentSnapshot.playerList().forEach(
@@ -63,6 +66,7 @@ public class TournamentCommandAdapter implements SaveTournamentCommandInterface,
 
             TournamentEntity tournamentEntity = tournamentEntityOptional.get();
             tournamentEntity.setGameSideEntityList(gameSideEntityList);
+
             tournamentRepository.save(tournamentEntity);
 
         }

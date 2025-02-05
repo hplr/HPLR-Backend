@@ -121,5 +121,4 @@ class CalculateELOChangeForGameUseCaseServiceTests {
                         calculateELOChangeForGameUseCaseService.calculateChangeForGame(test_first_elo, test_second_elo, test_game_score_wrong)
                 );
     }
-
 }

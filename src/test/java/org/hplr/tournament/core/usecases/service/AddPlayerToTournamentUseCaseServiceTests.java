@@ -109,7 +109,6 @@ class AddPlayerToTournamentUseCaseServiceTests {
                 test_registrationTime,
                 test_lastLogin);
         mock_tournamentEntity = new TournamentEntity(
-                null,
                 test_tournamentId,
                 test_name,
                 test_tournamentStart,
@@ -166,7 +165,6 @@ class AddPlayerToTournamentUseCaseServiceTests {
         when(selectPlayerByUserIdQueryInterface.selectPlayerByUserId(test_playerId))
                 .thenReturn(Optional.of(mock_playerSelectDto));
         mock_tournamentEntity = new TournamentEntity(
-                null,
                 test_tournamentId,
                 test_name,
                 test_tournamentStart,

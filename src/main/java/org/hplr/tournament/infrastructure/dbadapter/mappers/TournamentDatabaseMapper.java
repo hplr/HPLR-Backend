@@ -20,7 +20,6 @@ public class TournamentDatabaseMapper {
     public static TournamentEntity fromSnapshot(TournamentSnapshot tournamentSnapshot) {
 
         return new TournamentEntity(
-                null,
                 tournamentSnapshot.tournamentId().tournamentId(),
                 tournamentSnapshot.tournamentData().name(),
                 tournamentSnapshot.tournamentData().tournamentStart(),

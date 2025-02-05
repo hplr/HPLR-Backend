@@ -41,6 +41,7 @@ public class AddPlayerToTournamentUseCaseService implements AddPlayerToTournamen
         );
         try {
             TournamentValidator.validateIfPlayerIsNotInTheTournament(tournament, player);
+            TournamentValidator.validateIfTournamentSizeIsNotReached(tournament);
         } catch (HPLRIllegalArgumentException ex) {
             throw new HPLRValidationException(ex.getMessage());
         }
